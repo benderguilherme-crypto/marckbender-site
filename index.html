@@ -76,7 +76,8 @@
 
   /* HERO VISUAL — Terminal Claude Code animé */
   .hero-visual { position: relative; }
-  .terminal { background: var(--bg-dark); border-radius: 16px; box-shadow: 0 30px 80px -20px rgba(10,22,40,0.4), 0 0 0 1px rgba(255,255,255,0.04); overflow: hidden; position: relative; }
+  .terminal { background: var(--bg-dark); border-radius: 16px; box-shadow: 0 30px 80px -20px rgba(10,22,40,0.4), 0 0 0 1px rgba(255,255,255,0.04); overflow: hidden; position: relative; transform: scale(0.95); opacity: 0; will-change: transform, opacity; }
+  .terminal.anim-in { transform: scale(1); opacity: 1; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
   .terminal-header { background: var(--bg-dark-alt); padding: 14px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
   .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
   .terminal-dot.red { background: #ff5f57; }
@@ -84,15 +85,8 @@
   .terminal-dot.green { background: #28c840; }
   .terminal-title { margin-left: 12px; font-size: 12px; color: rgba(255,255,255,0.4); font-family: 'SF Mono', Monaco, monospace; font-weight: 500; }
   .terminal-body { padding: 24px 22px; font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 13px; line-height: 1.85; min-height: 380px; color: rgba(255,255,255,0.85); }
-  .term-line { display: flex; gap: 8px; opacity: 0; animation: termIn 0.4s forwards; }
-  .term-line.l1 { animation-delay: 0.3s; }
-  .term-line.l2 { animation-delay: 1.0s; }
-  .term-line.l3 { animation-delay: 1.7s; }
-  .term-line.l4 { animation-delay: 2.5s; }
-  .term-line.l5 { animation-delay: 3.3s; }
-  .term-line.l6 { animation-delay: 4.0s; }
-  .term-line.l7 { animation-delay: 4.7s; }
-  @keyframes termIn { from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:translateY(0)} }
+  .term-line { display: flex; gap: 8px; opacity: 0; }
+  .term-line.anim-in { opacity: 1; transition: opacity 0.3s; }
   .term-prompt { color: var(--teal); font-weight: 600; }
   .term-cmd { color: white; }
   .term-comment { color: rgba(255,255,255,0.4); font-style: italic; }
@@ -101,10 +95,10 @@
   .term-cursor { display: inline-block; width: 8px; height: 16px; background: var(--teal); animation: blink 1s steps(2) infinite; vertical-align: text-bottom; margin-left: 4px; }
   @keyframes blink { 50% { opacity: 0; } }
 
-  .term-floating { position: absolute; background: white; border-radius: 12px; padding: 12px 16px; box-shadow: 0 12px 32px -8px rgba(10,22,40,0.25); display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; opacity: 0; animation: floatIn 0.5s forwards; }
-  .term-floating.tag1 { top: -16px; right: -20px; animation-delay: 2.5s; }
-  .term-floating.tag2 { bottom: -20px; left: -30px; animation-delay: 4.5s; }
-  @keyframes floatIn { from{opacity:0; transform:scale(0.85) translateY(8px)} to{opacity:1; transform:scale(1) translateY(0)} }
+  .term-floating { position: absolute; background: white; border-radius: 12px; padding: 12px 16px; box-shadow: 0 12px 32px -8px rgba(10,22,40,0.25); display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; opacity: 0; transform: scale(0.85) translateY(8px); will-change: transform, opacity; }
+  .term-floating.tag1 { top: -16px; right: -20px; }
+  .term-floating.tag2 { bottom: -20px; left: -30px; }
+  .term-floating.anim-in { opacity: 1; transform: scale(1) translateY(0); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
   .term-floating .icon { width: 28px; height: 28px; border-radius: 8px; background: rgba(37,99,184,0.12); color: var(--teal-soft); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
   .term-floating .icon.marine { background: rgba(10,22,40,0.08); color: var(--marine); }
 
@@ -167,7 +161,8 @@
   .mock-vision-tag { display: inline-flex; padding: 4px 10px; background: rgba(37,99,184,0.15); color: var(--teal); border-radius: 6px; font-size: 10px; font-weight: 600; width: fit-content; letter-spacing: 0.05em; text-transform: uppercase; }
   .mock-vision-title { font-family: var(--font-body); font-size: 16px; font-weight: 700; color: white; }
   .mock-vision-graph { display: flex; gap: 4px; align-items: flex-end; height: 80px; margin-top: 8px; }
-  .mock-vision-bar { flex: 1; background: linear-gradient(to top, var(--teal), rgba(37,99,184,0.3)); border-radius: 3px; }
+  .mock-vision-bar { flex: 1; background: linear-gradient(to top, var(--teal), rgba(37,99,184,0.3)); border-radius: 3px; height: 0 !important; transition: height 0.6s cubic-bezier(0.33, 1, 0.68, 1); }
+  .mock-vision-bar.anim-in { /* height set by JS via data attribute */ }
   .mock-vision-meta { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); font-size: 11px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); }
 
   /* Mock 2 — Claude Code */
@@ -178,15 +173,23 @@
   .mock-cc-cursor { display: inline-block; width: 7px; height: 14px; background: var(--teal); animation: blink 1s steps(2) infinite; }
 
   /* Mock 3 — Architecture */
-  .mock-arch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 100%; }
-  .mock-arch-cell { background: rgba(255,255,255,0.04); border: 1px solid rgba(37,99,184,0.15); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .mock-arch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 100%; position: relative; }
+  .mock-arch-cell { background: rgba(255,255,255,0.04); border: 1px solid rgba(37,99,184,0.15); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 6px; opacity: 0; transform: scale(0.9); will-change: transform, opacity; }
+  .mock-arch-cell.anim-in { opacity: 1; transform: scale(1); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes statusPulse { 0%,100%{ opacity:1 } 50%{ opacity:0.4 } }
+  .mock-arch-status.pulse { animation: statusPulse 2s ease infinite; }
+  .mock-arch-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+  .arch-flow-dot { fill: var(--teal); filter: drop-shadow(0 0 4px var(--teal)); }
   .mock-arch-cell.active { background: rgba(37,99,184,0.08); border-color: var(--teal); }
   .mock-arch-label { font-size: 9px; color: var(--teal); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
   .mock-arch-name { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: white; }
   .mock-arch-status { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: auto; }
 
   /* Mock 4 — Back-End */
-  .mock-be-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .mock-be-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); opacity: 0; transform: translateX(-20px); will-change: transform, opacity; }
+  .mock-be-row.anim-in { opacity: 1; transform: translateX(0); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes badgePulse { 0%,100%{ opacity:1 } 50%{ opacity:0.6 } }
+  .mock-be-badge.pulse { animation: badgePulse 1.5s ease infinite; }
   .mock-be-row:last-child { border-bottom: none; }
   .mock-be-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--teal); color: var(--marine); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; font-family: var(--font-body); flex-shrink: 0; }
   .mock-be-info { flex: 1; min-width: 0; }
@@ -373,6 +376,18 @@
     .trust-logos { gap: 32px; }
     .term-floating.tag1, .term-floating.tag2 { display: none; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .term-line, .term-floating, .terminal, .mock-arch-cell, .mock-be-row, .mock-vision-bar,
+    .mock-arch-status, .mock-be-badge {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .terminal { opacity: 1 !important; transform: none !important; }
+    .mock-vision-bar { height: var(--bar-h) !important; }
+  }
 </style>
 </head>
 <body>
@@ -522,14 +537,14 @@
         <div class="mock-vision-tag">Vision système · Audit</div>
         <div class="mock-vision-title">Cartographie des leviers IA</div>
         <div class="mock-vision-graph">
-          <div class="mock-vision-bar" style="height:35%"></div>
-          <div class="mock-vision-bar" style="height:62%"></div>
-          <div class="mock-vision-bar" style="height:48%"></div>
-          <div class="mock-vision-bar" style="height:88%"></div>
-          <div class="mock-vision-bar" style="height:71%"></div>
-          <div class="mock-vision-bar" style="height:55%"></div>
-          <div class="mock-vision-bar" style="height:92%"></div>
-          <div class="mock-vision-bar" style="height:68%"></div>
+          <div class="mock-vision-bar" data-height="35%"></div>
+          <div class="mock-vision-bar" data-height="62%"></div>
+          <div class="mock-vision-bar" data-height="48%"></div>
+          <div class="mock-vision-bar" data-height="88%"></div>
+          <div class="mock-vision-bar" data-height="71%"></div>
+          <div class="mock-vision-bar" data-height="55%"></div>
+          <div class="mock-vision-bar" data-height="92%"></div>
+          <div class="mock-vision-bar" data-height="68%"></div>
         </div>
         <div class="mock-vision-meta">
           <span>8 leviers identifiés</span>
@@ -614,6 +629,13 @@
             <div class="mock-arch-name">Vision système</div>
             <div class="mock-arch-status" style="color:var(--teal)">● Sync</div>
           </div>
+          <svg class="mock-arch-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line class="arch-line" x1="75" y1="25" x2="25" y2="25" stroke="rgba(37,99,184,0.3)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0"/>
+            <line class="arch-line" x1="25" y1="25" x2="25" y2="75" stroke="rgba(37,99,184,0.3)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0"/>
+            <line class="arch-line" x1="25" y1="75" x2="75" y2="75" stroke="rgba(37,99,184,0.3)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0"/>
+            <line class="arch-line" x1="75" y1="75" x2="75" y2="25" stroke="rgba(37,99,184,0.3)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0"/>
+            <circle class="arch-flow-dot" r="1.5" opacity="0"><animateMotion dur="3s" repeatCount="indefinite" path="M75,25 L25,25 L25,75 L75,75 Z"/></circle>
+          </svg>
         </div>
       </div>
     </div>
@@ -1074,6 +1096,367 @@
     nlBtn.disabled = false;
     nlBtn.textContent = "Je m'inscris";
   });
+</script>
+
+<script>
+// === ANIMATIONS — Intersection Observer + boucles infinies ===
+(function() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  // --- UTILITAIRE ---
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  // --- ANIMATION 1 : TERMINAL HERO ---
+  async function animateTerminal() {
+    const terminal = document.querySelector('.terminal');
+    const termBody = document.querySelector('.terminal-body');
+    const tag1 = document.querySelector('.term-floating.tag1');
+    const tag2 = document.querySelector('.term-floating.tag2');
+    if (!terminal || !termBody) return;
+
+    const lines = termBody.querySelectorAll('.term-line');
+
+    // Données de chaque ligne : {text, type, charSpeed}
+    const lineData = [
+      { type: 'command', text: 'claude "construis un agent qui qualifie mes leads"', charSpeed: 50 },
+      { type: 'comment', text: '→ Analyse du contexte business...', fadeIn: true },
+      { type: 'result', text: '✓ Architecture définie : 3 agents, 1 orchestrateur', fadeIn: true },
+      { type: 'result', text: '✓ Skills attribuées : qualification, scoring, routing', fadeIn: true },
+      { type: 'result', text: '✓ Connexion Notion + WhatsApp configurée', fadeIn: true },
+      { type: 'success', text: '● Agent opérationnel — 2 min 14s', fadeIn: true },
+      { type: 'cursor' }
+    ];
+
+    while (true) {
+      // Reset
+      terminal.classList.remove('anim-in');
+      lines.forEach(l => { l.classList.remove('anim-in'); l.style.opacity = '0'; });
+      if (tag1) tag1.classList.remove('anim-in');
+      if (tag2) tag2.classList.remove('anim-in');
+
+      // Vider le contenu des spans de texte
+      const cmdSpan = lines[0]?.querySelector('.term-cmd');
+      if (cmdSpan) cmdSpan.textContent = '';
+
+      await wait(100);
+      terminal.classList.add('anim-in');
+      await wait(400);
+
+      // Ligne 1 : machine à écrire
+      if (lines[0]) {
+        lines[0].style.opacity = '1';
+        if (cmdSpan) {
+          const prompt = lines[0].querySelector('.term-prompt');
+          if (prompt) prompt.style.opacity = '1';
+          for (let i = 0; i < lineData[0].text.length; i++) {
+            cmdSpan.textContent += lineData[0].text[i];
+            await wait(50);
+          }
+        }
+        await wait(200);
+      }
+
+      // Lignes 2-6 : fade-in progressif
+      for (let i = 1; i <= 5; i++) {
+        if (!lines[i]) continue;
+        lines[i].style.opacity = '1';
+        lines[i].classList.add('anim-in');
+        // Floating tag1 après ligne 4
+        if (i === 3 && tag1) tag1.classList.add('anim-in');
+        // Floating tag2 après ligne 6
+        if (i === 5 && tag2) tag2.classList.add('anim-in');
+        await wait(400);
+      }
+
+      // Ligne 7 : curseur clignotant
+      if (lines[6]) {
+        lines[6].style.opacity = '1';
+      }
+
+      // Pause 3s puis fade-out
+      await wait(3000);
+      terminal.style.transition = 'opacity 0.3s';
+      terminal.style.opacity = '0';
+      await wait(400);
+      terminal.style.transition = '';
+      terminal.style.opacity = '';
+    }
+  }
+
+  // --- ANIMATION 2 : MOCK VISION (barres) ---
+  async function animateVision(mockWindow) {
+    const bars = mockWindow.querySelectorAll('.mock-vision-bar');
+    const tag = mockWindow.querySelector('.mock-vision-tag');
+    const title = mockWindow.querySelector('.mock-vision-title');
+    const meta = mockWindow.querySelector('.mock-vision-meta');
+
+    while (true) {
+      // Reset
+      bars.forEach(b => { b.style.height = '0'; b.classList.remove('anim-in'); });
+      if (tag) { tag.style.opacity = '0'; tag.style.transition = 'opacity 0.3s'; }
+      if (title) { title.style.opacity = '0'; title.style.transition = 'opacity 0.3s'; }
+      if (meta) { meta.style.opacity = '0'; meta.style.transition = 'opacity 0.3s'; }
+
+      await wait(200);
+
+      // Fade-in titre + tag
+      if (tag) tag.style.opacity = '1';
+      if (title) title.style.opacity = '1';
+      await wait(300);
+
+      // Barres poussent une par une
+      for (let i = 0; i < bars.length; i++) {
+        const h = bars[i].getAttribute('data-height');
+        bars[i].style.height = h;
+        await wait(100);
+      }
+
+      if (meta) meta.style.opacity = '1';
+
+      // Pause 4s
+      await wait(4000);
+
+      // Rétracte
+      bars.forEach(b => { b.style.height = '0'; });
+      if (tag) tag.style.opacity = '0';
+      if (title) title.style.opacity = '0';
+      if (meta) meta.style.opacity = '0';
+      await wait(300);
+    }
+  }
+
+  // --- ANIMATION 3 : MOCK CLAUDE CODE (typewriter) ---
+  async function animateClaudeCode(mockWindow) {
+    const lineEls = mockWindow.querySelectorAll('.mock-cc-line');
+
+    const lineTexts = [
+      { prefix: '$ ', text: 'claude "crée mon site portfolio"', hasCheck: false, charSpeed: 40 },
+      { prefix: '', text: '→ Génération en cours...', isComment: true, fadeIn: true },
+      { prefix: '', text: ' index.html créé', hasCheck: true, fadeIn: true },
+      { prefix: '', text: ' styles configurés', hasCheck: true, fadeIn: true },
+      { prefix: '', text: ' animations ajoutées', hasCheck: true, fadeIn: true },
+      { prefix: '', text: ' Site déployé en 4 min', hasCheck: false, isFinal: true, fadeIn: true }
+    ];
+
+    while (true) {
+      // Reset
+      lineEls.forEach(el => { el.style.opacity = '0'; el.classList.remove('anim-in'); });
+      // Vider les textes
+      lineEls.forEach((el, i) => {
+        const spans = el.querySelectorAll('span');
+        const prompt = el.querySelector('.mock-cc-prompt');
+        if (prompt) prompt.nextSibling.textContent = '';
+      });
+
+      await wait(200);
+
+      // Ligne 1 : typewriter
+      if (lineEls[0]) {
+        lineEls[0].style.opacity = '1';
+        const textNode = lineEls[0].childNodes[lineEls[0].childNodes.length - 1];
+        const promptSpan = lineEls[0].querySelector('.mock-cc-prompt');
+        if (promptSpan) promptSpan.style.opacity = '1';
+
+        const fullText = lineTexts[0].text;
+        // Reset text content after the prompt span
+        lineEls[0].textContent = '';
+        const p = document.createElement('span');
+        p.className = 'mock-cc-prompt'; p.textContent = '$';
+        lineEls[0].appendChild(p);
+        const txt = document.createTextNode(' ');
+        lineEls[0].appendChild(txt);
+
+        for (let c = 0; c < fullText.length; c++) {
+          txt.textContent += fullText[c];
+          await wait(40);
+        }
+        await wait(300);
+      }
+
+      // Lignes 2-6 : fade-in
+      for (let i = 1; i < lineTexts.length; i++) {
+        if (!lineEls[i]) continue;
+        lineEls[i].style.opacity = '1';
+        lineEls[i].classList.add('anim-in');
+        await wait(300);
+      }
+
+      // Curseur visible 2s
+      await wait(2000);
+
+      // Fade-out tout
+      lineEls.forEach(el => {
+        el.style.transition = 'opacity 0.3s';
+        el.style.opacity = '0';
+      });
+      await wait(400);
+      lineEls.forEach(el => { el.style.transition = ''; el.style.opacity = '0'; });
+    }
+  }
+
+  // --- ANIMATION 4 : MOCK ARCHITECTURE (cells + connections) ---
+  async function animateArchitecture(mockWindow) {
+    const cells = mockWindow.querySelectorAll('.mock-arch-cell');
+    const archSvg = mockWindow.querySelector('.mock-arch-svg');
+    const archLines = archSvg ? archSvg.querySelectorAll('.arch-line') : [];
+    const flowDot = archSvg ? archSvg.querySelector('.arch-flow-dot') : null;
+    const statuses = mockWindow.querySelectorAll('.mock-arch-status');
+
+    while (true) {
+      // Reset cells
+      cells.forEach(c => { c.classList.remove('anim-in'); });
+      if (archSvg) {
+        archLines.forEach(l => l.setAttribute('opacity', '0'));
+        if (flowDot) flowDot.setAttribute('opacity', '0');
+      }
+
+      await wait(200);
+
+      // Cells apparaissent dans le sens horaire : haut-gauche, haut-droite, bas-gauche, bas-droite
+      const order = [0, 1, 2, 3];
+      for (const idx of order) {
+        if (cells[idx]) cells[idx].classList.add('anim-in');
+        await wait(200);
+      }
+
+      // Pulse les statuts
+      statuses.forEach(s => s.classList.add('pulse'));
+
+      // Lignes de connexion apparaissent
+      if (archSvg) {
+        for (const line of archLines) {
+          line.setAttribute('opacity', '0.6');
+          await wait(150);
+        }
+        // Point qui voyage
+        if (flowDot) flowDot.setAttribute('opacity', '1');
+      }
+
+      // Pause
+      await wait(5000);
+
+      // Reset
+      statuses.forEach(s => s.classList.remove('pulse'));
+      cells.forEach(c => c.classList.remove('anim-in'));
+      if (archSvg) {
+        archLines.forEach(l => l.setAttribute('opacity', '0'));
+        if (flowDot) flowDot.setAttribute('opacity', '0');
+      }
+      await wait(300);
+    }
+  }
+
+  // --- ANIMATION 5 : MOCK BACK-END (progression) ---
+  async function animateBackEnd(mockWindow) {
+    const rows = mockWindow.querySelectorAll('.mock-be-row');
+    const badges = mockWindow.querySelectorAll('.mock-be-badge');
+    if (rows.length < 4 || badges.length < 4) return;
+
+    while (true) {
+      // Reset
+      rows.forEach(r => { r.classList.remove('anim-in'); });
+      // Badges initiaux
+      badges[0].textContent = '✓ Fait';
+      badges[0].style.background = '';
+      badges[0].style.color = '';
+      badges[1].textContent = 'En cours';
+      badges[1].style.background = '';
+      badges[1].style.color = '';
+      badges[2].textContent = 'À venir';
+      badges[2].style.background = 'rgba(255,255,255,0.05)';
+      badges[2].style.color = 'rgba(255,255,255,0.5)';
+      badges[3].textContent = 'À venir';
+      badges[3].style.background = 'rgba(255,255,255,0.05)';
+      badges[3].style.color = 'rgba(255,255,255,0.5)';
+      badges.forEach(b => b.classList.remove('pulse'));
+
+      await wait(200);
+
+      // Cascade slide-in
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].classList.add('anim-in');
+        await wait(200);
+      }
+
+      // Pulse badge "En cours" étape 02
+      badges[1].classList.add('pulse');
+      await wait(1500);
+
+      // Étape 03 → "En cours"
+      badges[1].classList.remove('pulse');
+      badges[2].textContent = 'En cours';
+      badges[2].style.background = '';
+      badges[2].style.color = '';
+      badges[2].classList.add('pulse');
+      await wait(1500);
+
+      // Étape 03 → "✓ Fait", 04 → "En cours"
+      badges[2].textContent = '✓ Fait';
+      badges[2].style.background = '';
+      badges[2].style.color = '';
+      badges[2].classList.remove('pulse');
+      badges[3].textContent = 'En cours';
+      badges[3].style.background = '';
+      badges[3].style.color = '';
+      badges[3].classList.add('pulse');
+      await wait(1500);
+
+      // Étape 04 → "✓ Fait"
+      badges[3].textContent = '✓ Fait';
+      badges[3].classList.remove('pulse');
+      await wait(2000);
+
+      // Fade-out reset
+      rows.forEach(r => {
+        r.style.transition = 'opacity 0.3s';
+        r.style.opacity = '0';
+      });
+      await wait(400);
+      rows.forEach(r => { r.style.transition = ''; r.classList.remove('anim-in'); });
+    }
+  }
+
+  // --- INTERSECTION OBSERVER ---
+  const animated = new Set();
+
+  function startAnimation(el) {
+    if (animated.has(el)) return;
+    animated.add(el);
+
+    const id = el.id || el.closest('[id]')?.id || '';
+
+    if (el.classList.contains('terminal')) {
+      animateTerminal();
+    } else if (el.querySelector('.mock-vision-bar')) {
+      animateVision(el);
+    } else if (el.querySelector('.mock-cc-line')) {
+      animateClaudeCode(el);
+    } else if (el.querySelector('.mock-arch-cell')) {
+      animateArchitecture(el);
+    } else if (el.querySelector('.mock-be-row')) {
+      animateBackEnd(el);
+    }
+  }
+
+  // Observer le terminal hero
+  const terminal = document.querySelector('.terminal');
+  if (terminal) {
+    const tObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { startAnimation(terminal); tObs.disconnect(); } });
+    }, { threshold: 0.3 });
+    tObs.observe(terminal);
+  }
+
+  // Observer les mocks solutions
+  const mockWindows = document.querySelectorAll('.sol-mock-window');
+  mockWindows.forEach(mw => {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { startAnimation(mw); obs.disconnect(); } });
+    }, { threshold: 0.3 });
+    obs.observe(mw);
+  });
+})();
 </script>
 
 </body>
