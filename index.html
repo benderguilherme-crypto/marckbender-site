@@ -287,6 +287,28 @@
   .yt-card-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
   .yt-card-meta { font-size: 12px; color: rgba(255,255,255,0.5); }
 
+  /* === NEWSLETTER === */
+  .newsletter-sec { padding: 80px 6% 100px; }
+  .newsletter-box { max-width: 680px; margin: 0 auto; text-align: center; }
+  .newsletter-box .sec-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+  .newsletter-box .sec-eyebrow svg { width: 18px; height: 18px; }
+  .newsletter-box h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+  .newsletter-box h2 em { font-family: var(--font-display); font-style: italic; font-weight: 400; color: var(--teal); }
+  .newsletter-box p { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+  .newsletter-form input[type="email"] { flex: 1; padding: 14px 20px; border: 2px solid var(--border-strong); border-radius: 100px; font-size: 15px; font-family: var(--font-body); background: white; outline: none; transition: border-color 0.2s; }
+  .newsletter-form input[type="email"]:focus { border-color: var(--teal); }
+  .newsletter-form button { background: var(--marine); color: white; font-weight: 700; padding: 14px 28px; border-radius: 100px; border: none; font-size: 15px; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .newsletter-form button:hover { background: var(--marine-soft); transform: translateY(-1px); }
+  .newsletter-form button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .newsletter-msg { margin-top: 16px; font-size: 14px; font-weight: 500; }
+  .newsletter-msg.success { color: #16a34a; }
+  .newsletter-msg.error { color: #dc2626; }
+  @media (max-width: 600px) {
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form button { width: 100%; }
+  }
+
   /* === CONTACT === */
   .contact { padding: 120px 6%; background: white; border-top: 1px solid var(--border); }
   .contact-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
@@ -811,6 +833,23 @@
   </div>
 </section>
 
+<!-- ============== NEWSLETTER ============== -->
+<section class="newsletter-sec" id="newsletter">
+  <div class="newsletter-box">
+    <div class="sec-eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Newsletter
+    </div>
+    <h2>Reçois la <em>vision</em><br>chaque semaine.</h2>
+    <p>Stratégies IA, cas concrets, décisions structurantes. Un email par semaine, pas de spam. Désinscription en un clic.</p>
+    <form class="newsletter-form" id="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="ton@email.com" required>
+      <button type="submit" id="newsletter-btn">Je m'inscris</button>
+    </form>
+    <div class="newsletter-msg" id="newsletter-msg"></div>
+  </div>
+</section>
+
 <!-- ============== CONTACT ============== -->
 <section class="contact" id="contact">
   <div class="contact-grid">
@@ -997,6 +1036,44 @@
       console.log('Vidéo YouTube : utilisation du fallback', err);
     }
   })();
+
+  // === NEWSLETTER ===
+  const nlForm = document.getElementById('newsletter-form');
+  const nlEmail = document.getElementById('newsletter-email');
+  const nlBtn = document.getElementById('newsletter-btn');
+  const nlMsg = document.getElementById('newsletter-msg');
+
+  nlForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    nlMsg.textContent = '';
+    nlMsg.className = 'newsletter-msg';
+    nlBtn.disabled = true;
+    nlBtn.textContent = 'Inscription...';
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: nlEmail.value }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        nlMsg.textContent = 'Bienvenue ! Vérifie ta boîte mail pour confirmer.';
+        nlMsg.className = 'newsletter-msg success';
+        nlEmail.value = '';
+      } else {
+        nlMsg.textContent = data.error || 'Erreur, réessaie dans un instant.';
+        nlMsg.className = 'newsletter-msg error';
+      }
+    } catch (err) {
+      nlMsg.textContent = 'Erreur de connexion. Réessaie.';
+      nlMsg.className = 'newsletter-msg error';
+    }
+
+    nlBtn.disabled = false;
+    nlBtn.textContent = "Je m'inscris";
+  });
 </script>
 
 </body>
