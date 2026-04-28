@@ -110,7 +110,7 @@
   .sec-fade-dark-light { height: 80px; background: linear-gradient(180deg, var(--marine) 0%, var(--bg) 100%); pointer-events: none; }
 
   /* === TRUST BAR DARK === */
-  .trust { padding: 80px 6%; background: var(--marine); border: none; }
+  .trust { padding: 80px 6%; background: var(--marine); border: none; box-shadow: none; }
   .trust-title-big { text-align: center; font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: white; letter-spacing: -0.03em; margin-bottom: 48px; line-height: 1.2; }
   .trust-cards { display: flex; justify-content: center; gap: 48px; max-width: 900px; margin: 0 auto; }
   .trust-card { flex: 1; text-align: center; padding: 32px 24px; }
@@ -120,7 +120,7 @@
 
   /* === METHODE — PILIERS ENHANCED === */
   .piliers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 1100px; margin: 64px auto 0; }
-  .pilier-card { text-align: center; padding: 32px 20px; }
+  .pilier-card { text-align: center; padding: 32px 20px; background: none; border: none; box-shadow: none; }
   .pilier-card:hover { transform: none; }
   .pilier-card .numero-chrome { margin-bottom: 12px; }
   .pilier-card h3 { font-size: 18px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--marine); margin-bottom: 12px; }
@@ -129,11 +129,9 @@
   /* === BIO GRID — texte dominant === */
   .bio-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 3fr; gap: 80px; align-items: center; }
 
-  /* === YOUTUBE DARK SECTION === */
-  .youtube-sec { padding: 100px 6% 120px; }
-  .yt-box { max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, var(--marine) 0%, var(--marine-soft) 100%); border-radius: 24px; padding: 70px 60px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center; position: relative; overflow: hidden; color: white; }
-  .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.15) 0%, transparent 70%); pointer-events: none; }
-  .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.12) 0%, transparent 70%); pointer-events: none; }
+  /* === YOUTUBE — fond clair === */
+  .youtube-sec { padding: 100px 6% 120px; background: var(--bg); }
+  .yt-box { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center; }
 
   /* === SECTION PADDING RHYTHM === */
   .probleme { padding: 120px 6%; }
@@ -159,7 +157,7 @@
   .probleme-card:hover { transform: translateY(-2px); }
   
   /* === PRINCIPE CARD HOVER === */
-  .principe-card { padding: 32px 24px; }
+  .principe-card { padding: 32px 24px; background: none; border: none; box-shadow: none; }
   
   /* === VIRTUAL CURSOR === */
   .virtual-cursor { position: absolute; width: 16px; height: 20px; z-index: 10; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
@@ -217,7 +215,7 @@
 
   /* === BIG IDEA === */
   .bigidea { padding: 100px 6%; }
-  .bigidea-box { max-width: 1100px; margin: 0 auto; background: radial-gradient(ellipse at 50% 50%, #0f1f3a 0%, var(--marine) 70%); color: white; border-radius: 24px; padding: 80px 60px; position: relative; overflow: hidden; border: none; }
+  .bigidea-box { max-width: 1100px; margin: 0 auto; background: radial-gradient(ellipse at 50% 50%, #0f1f3a 0%, var(--marine) 70%); color: white; border-radius: 24px; padding: 80px 60px; position: relative; overflow: hidden; border: none; box-shadow: none; outline: none; }
   .bigidea-box::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(37,99,184,0.18) 0%, transparent 70%); }
   .bigidea-box::after { content: '"'; position: absolute; top: 20px; left: 40px; font-family: var(--font-display); font-size: 240px; line-height: 1; color: rgba(37,99,184,0.18); pointer-events: none; }
   .bigidea-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 2; }
@@ -292,7 +290,7 @@
 
   /* === STATS === */
   .stats { background: var(--marine); color: white; padding: 100px 6%; position: relative; overflow: hidden; }
-  .stats::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 1px; background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+  
   .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
   .stats-eyebrow { text-align: center; max-width: 600px; margin: 0 auto 60px; }
   .stats-eyebrow .sec-eyebrow { color: var(--teal); }
@@ -367,22 +365,22 @@
   .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.15) 0%, transparent 70%); pointer-events: none; }
   .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.15) 0%, transparent 70%); pointer-events: none; }
   .yt-text { position: relative; z-index: 2; }
-  .yt-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 24px; }
+  .yt-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--teal-soft); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 24px; }
   .yt-eyebrow svg { width: 18px; height: 18px; }
-  .yt-text h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+  .yt-text h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; color: var(--marine); }
   .yt-text h2 em { font-family: var(--font-display); font-style: italic; font-weight: 400; color: var(--teal); }
-  .yt-text p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 32px; max-width: 460px; }
-  .yt-cta { background: var(--steel-gradient); color: white; font-weight: 700; padding: 14px 24px; border-radius: 100px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; transition: all 0.2s; box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 4px 12px rgba(37,99,184,0.3); }
-  .yt-cta:hover { transform: translateY(-1px); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 10px 24px rgba(37,99,184,0.5); }
+  .yt-text p { font-size: 17px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; max-width: 460px; }
+  .yt-cta { background: var(--marine); color: white; font-weight: 700; padding: 14px 24px; border-radius: 100px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; transition: all 0.2s; }
+  .yt-cta:hover { background: var(--marine-soft); transform: translateY(-1px); }
   .yt-visual { position: relative; z-index: 2; }
-  .yt-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; backdrop-filter: blur(10px); }
-  .yt-thumb { aspect-ratio: 16/9; background: var(--bg-dark); border-radius: 10px; margin-bottom: 16px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .yt-play { width: 56px; height: 56px; border-radius: 50%; background: var(--steel-gradient); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; box-shadow: inset 0 -4px 8px rgba(0,0,0,0.4), inset 0 4px 5px rgba(255,255,255,0.5), 0 8px 24px rgba(37,99,184,0.4); }
-  .yt-play:hover { transform: scale(1.05); }
+  .yt-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 20px 50px -20px rgba(10,22,40,0.12); }
+  .yt-thumb { aspect-ratio: 16/9; background: var(--marine); border-radius: 10px; margin-bottom: 16px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .yt-play { width: 56px; height: 56px; border-radius: 50%; background: var(--steel-gradient); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; box-shadow: 0 8px 24px rgba(37,99,184,0.4); }
+  .yt-play:hover { transform: scale(1.08); box-shadow: 0 12px 32px rgba(37,99,184,0.5); }
   .yt-play svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
-  .yt-thumb-label { position: absolute; bottom: 10px; right: 10px; background: rgba(10,22,40,0.85); color: white; font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 500; }
-  .yt-card-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
-  .yt-card-meta { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .yt-thumb-label { position: absolute; bottom: 10px; right: 10px; background: rgba(10,22,40,0.8); color: white; font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 500; }
+  .yt-card-title { font-size: 14px; font-weight: 600; color: var(--marine); margin-bottom: 6px; }
+  .yt-card-meta { font-size: 12px; color: var(--text-muted); }
 
   /* === NEWSLETTER === */
   .newsletter-sec { padding: 80px 6% 100px; }
@@ -466,7 +464,6 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.03em;
-    filter: drop-shadow(0 1px 0 rgba(255,255,255,0.4));
   }
   .numero-chrome.sol-num-chrome { font-size: 100px; }
   .numero-chrome.section-num-chrome { font-size: 80px; }
@@ -481,11 +478,11 @@
   .probleme-card .numero-chrome { margin-bottom: 16px; }
   .probleme-card h3 { font-size: 18px; font-weight: 800; color: var(--marine); margin-bottom: 12px; letter-spacing: -0.01em; line-height: 1.3; }
   .probleme-card p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
-  .probleme-transition { font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--teal-soft); max-width: 600px; margin: 48px auto 0; }
+  .probleme-transition { font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--teal-soft); max-width: 600px; margin: 60px auto 0; }
 
   /* === PILIERS METHODE === */
   .piliers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1100px; margin: 60px auto 0; }
-  .pilier-card { text-align: center; padding: 32px 20px; }
+  .pilier-card { text-align: center; padding: 32px 20px; background: none; border: none; box-shadow: none; }
   .pilier-card .numero-chrome { margin-bottom: 12px; }
   .pilier-card h3 { font-size: 16px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--marine); margin-bottom: 12px; }
   .pilier-card p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
@@ -531,7 +528,7 @@
     .bio-grid, .contact-grid, .yt-box { grid-template-columns: 1fr; }
     .trust-cards { flex-direction: column; gap: 0; }
     .trust-card:not(:last-child)::after { display: none; }
-    .yt-box { padding: 50px 36px; }
+    .yt-box { grid-template-columns: 1fr; gap: 40px; }
     .offres-grid { grid-template-columns: 1fr; max-width: 480px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
     .stats-grid { gap: 30px; }
@@ -936,7 +933,7 @@
       </div>
       <h2>Un nouveau cours,<br>chaque <em>mercredi</em> à 15h.</h2>
       <p>Méthode IA, cas concrets et applications réelles. Pour penser, structurer et décider, avant d'exécuter.</p>
-      <p style="font-size:15px; color:rgba(255,255,255,0.6); margin-bottom:24px;">Pour ne rien perdre, abonne-toi :</p>
+      <p style="font-size:15px; color:var(--text-muted); margin-bottom:24px;">Pour ne rien perdre, abonne-toi :</p>
       <form class="newsletter-form" id="yt-newsletter-form" style="margin-bottom:24px;">
         <input type="email" id="yt-newsletter-email" placeholder="ton@email.com" required>
         <button type="submit" id="yt-newsletter-btn">Je m'inscris</button>
