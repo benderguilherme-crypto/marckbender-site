@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marck Bender — La vision derrière chaque décision IA</title>
-<meta name="description" content="L'IA sans vision, c'est de l'exécution aveugle. Apprenez à penser, structurer et décider avec l'IA — pas juste à prompter.">
+<title>Marck Bender | Méthode IA appliquée au business</title>
+<meta name="description" content="L'IA sans méthode, c'est du bruit. Apprenez à penser, structurer et décider avec l'IA, pas juste à prompter.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -40,7 +40,6 @@
   /* === NAV === */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,245,247,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; transition: all 0.3s; }
   .nav-logo { font-family: var(--font-body); font-weight: 800; font-size: 18px; letter-spacing: -0.03em; color: var(--marine); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-  .nav-logo-mark { width: 32px; height: 32px; background: var(--steel-gradient); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 14px; box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.45), 0 4px 12px rgba(37,99,184,0.3); }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover { color: var(--marine); }
@@ -105,12 +104,107 @@
   /* Background gradient blob */
   .hero-blob { position: absolute; top: 10%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%); pointer-events: none; z-index: 1; filter: blur(40px); }
 
-  /* === MARQUEE LOGOS === */
-  .trust { padding: 60px 6%; background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .trust-title { text-align: center; font-size: 14px; color: var(--text-light); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 36px; }
-  .trust-logos { display: flex; justify-content: center; align-items: center; gap: 64px; flex-wrap: wrap; opacity: 0.6; }
-  .trust-logo { font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--marine); font-weight: 400; letter-spacing: -0.02em; }
-  .trust-logo-sans { font-family: var(--font-body); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; color: var(--marine); }
+
+  /* === SECTION TRANSITIONS === */
+  .sec-fade-light-dark { height: 50px; background: linear-gradient(180deg, var(--bg) 0%, var(--marine) 100%); pointer-events: none; }
+  .sec-fade-dark-light { height: 80px; background: linear-gradient(180deg, var(--marine) 0%, var(--bg) 100%); pointer-events: none; }
+
+  /* === TRUST BAR DARK === */
+  .trust { padding: 80px 6%; background: var(--marine); border: none; }
+  .trust-title-big { text-align: center; font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: white; letter-spacing: -0.03em; margin-bottom: 48px; line-height: 1.2; }
+  .trust-cards { display: flex; justify-content: center; gap: 48px; max-width: 900px; margin: 0 auto; }
+  .trust-card { flex: 1; text-align: center; padding: 32px 24px; }
+  .trust-card-num { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: white; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .trust-card-num span { color: var(--teal); }
+  .trust-card-label { font-size: 14px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+
+  /* === METHODE — PILIERS ENHANCED === */
+  .piliers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 1100px; margin: 64px auto 0; }
+  .pilier-card { text-align: center; padding: 32px 20px; }
+  .pilier-card:hover { transform: none; }
+  .pilier-card .numero-chrome { margin-bottom: 12px; }
+  .pilier-card h3 { font-size: 18px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--marine); margin-bottom: 12px; }
+  .pilier-card p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+
+  /* === BIO GRID — texte dominant === */
+  .bio-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 3fr; gap: 80px; align-items: center; }
+
+  /* === YOUTUBE DARK SECTION === */
+  .youtube-sec { padding: 100px 6% 120px; }
+  .yt-box { max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, var(--marine) 0%, var(--marine-soft) 100%); border-radius: 24px; padding: 70px 60px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center; position: relative; overflow: hidden; color: white; }
+  .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.15) 0%, transparent 70%); pointer-events: none; }
+  .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.12) 0%, transparent 70%); pointer-events: none; }
+
+  /* === SECTION PADDING RHYTHM === */
+  .probleme { padding: 120px 6%; }
+  .contact { padding: 80px 6%; background: white; }
+
+  /* === SHIMMER HOVER FOR BUTTONS === */
+  .btn-primary { position: relative; overflow: hidden; }
+  .btn-primary::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%); transition: left 0.6s ease; }
+  .btn-primary:hover::after { left: 120%; }
+
+  /* === NAV LINK UNDERLINE ANIMATION === */
+  .nav-links a { position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--steel-gradient); border-radius: 1px; transition: width 0.3s ease; }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* === CARD HOVER — SOLUTIONS === */
+  .sol-text { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .sol-mock { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .sol-row:hover .sol-mock { box-shadow: 0 40px 100px -30px rgba(10,22,40,0.35); }
+
+  /* === PROBLÈME CARD HOVER === */
+  .probleme-card { padding: 32px 24px; }
+  .probleme-card:hover { transform: translateY(-2px); }
+  
+  /* === PRINCIPE CARD HOVER === */
+  .principe-card { padding: 32px 24px; }
+  
+  /* === VIRTUAL CURSOR === */
+  .virtual-cursor { position: absolute; width: 16px; height: 20px; z-index: 10; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
+  .virtual-cursor.visible { opacity: 1; }
+  .virtual-cursor svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+
+  /* === SCAN LINE === */
+  .scan-line { position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(180deg, transparent 0%, var(--teal) 20%, var(--teal) 80%, transparent 100%); opacity: 0; z-index: 4; pointer-events: none; box-shadow: 0 0 12px var(--teal); transition: left 1.5s cubic-bezier(0.33, 1, 0.68, 1); }
+
+  /* === MOCK TOOLTIP === */
+  .mock-tooltip { position: absolute; background: white; color: var(--marine); font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 6px; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.3); z-index: 10; opacity: 0; transform: translateY(4px); transition: all 0.3s; pointer-events: none; white-space: nowrap; }
+  .mock-tooltip.show { opacity: 1; transform: translateY(0); }
+
+  /* === CONNECTION LINES === */
+  .mock-connection { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, var(--teal), transparent); opacity: 0; z-index: 3; pointer-events: none; transition: opacity 0.6s; }
+
+  /* === ACTIVITY MINI-GRAPH === */
+  .mini-graph { display: flex; gap: 2px; align-items: flex-end; height: 16px; margin-top: 4px; }
+  .mini-graph-bar { width: 3px; border-radius: 1px; background: var(--teal); transition: height 0.3s ease; }
+
+  /* === FILE TREE === */
+  .file-tree { font-size: 10px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .file-tree-item { opacity: 0; transform: translateX(-8px); transition: all 0.3s ease; }
+  .file-tree-item.show { opacity: 1; transform: translateX(0); }
+
+  /* === THINKING DOTS === */
+  .thinking-dots { display: inline-flex; gap: 4px; }
+  .thinking-dots span { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5); animation: thinkPulse 1.2s ease infinite; }
+  .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes thinkPulse { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+  /* === CHECKMARK RELIEF === */
+  .check-relief { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; background: var(--steel-gradient); box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), inset 0 2px 3px rgba(255,255,255,0.5), 0 4px 12px rgba(37,99,184,0.3); align-items: center; justify-content: center; opacity: 0; transform: scale(0); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .check-relief.show { opacity: 1; transform: scale(1); }
+  .check-relief svg { width: 10px; height: 10px; stroke: white; fill: none; stroke-width: 2; }
+
+  /* === PROGRESS BAR === */
+  .term-progress { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 12px; overflow: hidden; opacity: 0; transition: opacity 0.3s; }
+  .term-progress.show { opacity: 1; }
+  .term-progress-bar { height: 100%; background: var(--steel-gradient); border-radius: 2px; width: 0; transition: width 1.5s ease; }
+
+  /* === DATA FLOW DOT === */
+  @keyframes dataFlowPulse { 0%,100% { r: 2; opacity: 0.8; } 50% { r: 3.5; opacity: 1; } }
+
 
   /* === SECTIONS === */
   section.sec { padding: 120px 6%; max-width: 1400px; margin: 0 auto; }
@@ -123,7 +217,7 @@
 
   /* === BIG IDEA === */
   .bigidea { padding: 100px 6%; }
-  .bigidea-box { max-width: 1100px; margin: 0 auto; background: var(--marine); color: white; border-radius: 24px; padding: 80px 60px; position: relative; overflow: hidden; }
+  .bigidea-box { max-width: 1100px; margin: 0 auto; background: radial-gradient(ellipse at 50% 50%, #0f1f3a 0%, var(--marine) 70%); color: white; border-radius: 24px; padding: 80px 60px; position: relative; overflow: hidden; border: none; }
   .bigidea-box::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(37,99,184,0.18) 0%, transparent 70%); }
   .bigidea-box::after { content: '"'; position: absolute; top: 20px; left: 40px; font-family: var(--font-display); font-size: 240px; line-height: 1; color: rgba(37,99,184,0.18); pointer-events: none; }
   .bigidea-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 2; }
@@ -212,7 +306,7 @@
 
   /* === BIO === */
   .bio { padding: 120px 6%; }
-  .bio-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: center; }
+  .bio-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 3fr; gap: 80px; align-items: center; }
   .bio-image-wrap { position: relative; }
   .bio-image { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, var(--marine) 0%, var(--marine-soft) 100%); border-radius: 20px; position: relative; overflow: hidden; }
   .bio-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%) contrast(1.05); }
@@ -271,6 +365,7 @@
   .youtube-sec { padding: 100px 6% 120px; }
   .yt-box { max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, var(--marine) 0%, var(--marine-soft) 100%); border-radius: 24px; padding: 70px 60px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center; position: relative; overflow: hidden; color: white; }
   .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.15) 0%, transparent 70%); pointer-events: none; }
+  .yt-box::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,184,0.15) 0%, transparent 70%); pointer-events: none; }
   .yt-text { position: relative; z-index: 2; }
   .yt-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 24px; }
   .yt-eyebrow svg { width: 18px; height: 18px; }
@@ -312,7 +407,7 @@
   }
 
   /* === CONTACT === */
-  .contact { padding: 120px 6%; background: white; border-top: 1px solid var(--border); }
+  .contact { padding: 80px 6%; background: white; }
   .contact-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
   .contact-text .sec-eyebrow { margin-bottom: 20px; }
   .contact-text h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: var(--marine); margin-bottom: 24px; }
@@ -350,6 +445,83 @@
   .footer-legal a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
   .footer-legal a:hover { color: white; }
 
+
+  /* === CHROME LIQUIDE NUMBERS === */
+  .numero-chrome {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 0.95;
+    background: linear-gradient(180deg,
+      #e8f1fb 0%,
+      #a8d4f5 15%,
+      #5a9fdb 30%,
+      #2563b8 50%,
+      #1a4d8c 70%,
+      #0d2b52 85%,
+      #4a6da3 95%,
+      #6b8cc7 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,0.4));
+  }
+  .numero-chrome.sol-num-chrome { font-size: 100px; }
+  .numero-chrome.section-num-chrome { font-size: 80px; }
+
+  /* === SECTION PROBLÈME === */
+  .probleme { padding: 100px 6%; background: var(--bg); }
+  .probleme-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .probleme h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; color: var(--marine); margin-bottom: 20px; }
+  .probleme .sec-sub { margin-bottom: 60px; }
+  .probleme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: left; margin-bottom: 48px; }
+  .probleme-card { padding: 32px 24px; }
+  .probleme-card .numero-chrome { margin-bottom: 16px; }
+  .probleme-card h3 { font-size: 18px; font-weight: 800; color: var(--marine); margin-bottom: 12px; letter-spacing: -0.01em; line-height: 1.3; }
+  .probleme-card p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+  .probleme-transition { font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--teal-soft); max-width: 600px; margin: 48px auto 0; }
+
+  /* === PILIERS METHODE === */
+  .piliers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1100px; margin: 60px auto 0; }
+  .pilier-card { text-align: center; padding: 32px 20px; }
+  .pilier-card .numero-chrome { margin-bottom: 12px; }
+  .pilier-card h3 { font-size: 16px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--marine); margin-bottom: 12px; }
+  .pilier-card p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+
+  /* === PRINCIPES EXPERTISE === */
+  .principes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 48px auto 0; }
+  .principe-card .numero-chrome { margin-bottom: 12px; }
+  .principe-card h3 { font-size: 16px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: white; margin-bottom: 12px; line-height: 1.4; }
+  .principe-card p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+  /* === NEWSLETTER DARK === */
+  .newsletter-dark { padding: 100px 6%; background: linear-gradient(180deg, #0d1e36 0%, #0a1628 100%); }
+  .newsletter-dark .newsletter-box { max-width: 800px; margin: 0 auto; text-align: center; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 60px 48px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 60px rgba(0,0,0,0.3); }
+  .newsletter-dark .sec-eyebrow { color: var(--teal); }
+  .newsletter-dark .sec-eyebrow::before { background: var(--teal); }
+  .newsletter-dark h2 { color: white; font-size: clamp(32px, 5vw, 56px); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+  .newsletter-dark h2 em { color: var(--teal); }
+  .newsletter-dark p { color: rgba(255,255,255,0.7); }
+  .newsletter-dark .newsletter-form input[type="email"] { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: white; padding: 16px 24px; font-size: 16px; }
+  .newsletter-dark .newsletter-form input[type="email"]::placeholder { color: rgba(255,255,255,0.4); }
+  .newsletter-dark .newsletter-form input[type="email"]:focus { border-color: var(--teal); }
+  .newsletter-dark .newsletter-form button { background: var(--steel-gradient); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 4px 12px rgba(37,99,184,0.3); padding: 16px 32px; font-size: 16px; }
+  .newsletter-dark .newsletter-msg.success { color: #4ade80; }
+  .newsletter-dark .newsletter-msg.error { color: #f87171; }
+
+  /* === RESPONSIVE ADDITIONS === */
+  @media (max-width: 1024px) {
+    .probleme-grid { grid-template-columns: 1fr; gap: 20px; }
+    .piliers-grid { grid-template-columns: 1fr; gap: 20px; }
+    .principes-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+  @media (max-width: 700px) {
+    .probleme, .newsletter-dark { padding-left: 5%; padding-right: 5%; }
+  }
+
+
   /* === RESPONSIVE === */
   @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; gap: 60px; }
@@ -357,6 +529,8 @@
     .sol-row { grid-template-columns: 1fr; gap: 40px; margin-bottom: 80px; }
     .sol-row:nth-child(even) .sol-text { order: 0; }
     .bio-grid, .contact-grid, .yt-box { grid-template-columns: 1fr; }
+    .trust-cards { flex-direction: column; gap: 0; }
+    .trust-card:not(:last-child)::after { display: none; }
     .yt-box { padding: 50px 36px; }
     .offres-grid { grid-template-columns: 1fr; max-width: 480px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -390,19 +564,16 @@
 
 <!-- ============== NAV ============== -->
 <nav>
-  <a href="#" class="nav-logo">
-    <span class="nav-logo-mark">M</span>
-    Marck Bender
-  </a>
+  <a href="#" class="nav-logo">Marck Bender</a>
   <ul class="nav-links">
+    <li><a href="#methode">Méthode</a></li>
     <li><a href="#solutions">Solutions</a></li>
-    <li><a href="#offres">Offres</a></li>
+    <li><a href="/blog">Blog</a></li>
     <li><a href="#youtube">YouTube</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <a href="#youtube" class="nav-link-secondary">Cours gratuits</a>
-    <a href="#contact" class="nav-cta">Prendre contact <span>→</span></a>
+    <a href="#newsletter" class="nav-cta">S'inscrire <span>→</span></a>
   </div>
 </nav>
 
@@ -411,117 +582,128 @@
   <div class="hero-blob"></div>
   <div class="hero-grid">
     <div class="hero-content">
-      <div class="hero-badge">
+      <a href="#youtube" class="hero-badge" style="text-decoration:none; cursor:pointer;">
         <span class="dot"></span>
         Nouveau cours chaque mercredi · Gratuit
-      </div>
+      </a>
       <h1>L'IA sans <em>vision</em>,<br>c'est de l'exécution<br>aveugle.</h1>
-      <p class="hero-sub">Pour avoir de vrais résultats avec l'IA, il te faut de la vision derrière chaque décision — pas des prompts. L'IA exécute le mauvais plan aussi bien que le bon.</p>
+      <p class="hero-sub">Tout part d'une idée simple : l'outil change, la méthode reste. C'est cette discipline que je partage ici, semaine après semaine.</p>
       <div class="hero-actions">
-        <a href="#offres" class="btn-primary">Découvrir l'approche <span class="arrow">→</span></a>
-        <a href="#youtube" class="btn-text">Voir les cours gratuits →</a>
+        <a href="#youtube" class="btn-primary">Voir les cours gratuits <span class="arrow">→</span></a>
+        <a href="#newsletter" class="btn-text">S'inscrire à la newsletter →</a>
       </div>
-      <div class="hero-trust">
-        <span class="hero-trust-stars">★★★★★</span>
-        <span>Plus de 500 entrepreneurs déjà formés</span>
-      </div>
+
     </div>
 
     <div class="hero-visual">
-      <div class="terminal">
-        <div class="terminal-header">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
-          <span class="terminal-title">claude-code · ~/projet-vision</span>
-        </div>
-        <div class="terminal-body">
-          <div class="term-line l1">
-            <span class="term-prompt">$</span>
-            <span class="term-cmd">claude "construis un agent qui qualifie mes leads"</span>
-          </div>
-          <div class="term-line l2">
-            <span class="term-comment">→ Analyse du contexte business...</span>
-          </div>
-          <div class="term-line l3">
-            <span class="term-out">✓ Architecture définie : 3 agents, 1 orchestrateur</span>
-          </div>
-          <div class="term-line l4">
-            <span class="term-out">✓ Skills attribuées : qualification, scoring, routing</span>
-          </div>
-          <div class="term-line l5">
-            <span class="term-out">✓ Connexion Notion + WhatsApp configurée</span>
-          </div>
-          <div class="term-line l6">
-            <span class="term-success">● Agent opérationnel — 2 min 14s</span>
-          </div>
-          <div class="term-line l7">
-            <span class="term-prompt">$</span>
-            <span class="term-cursor"></span>
-          </div>
-        </div>
-      </div>
-      <div class="term-floating tag1">
-        <div class="icon">✓</div>
-        <div>
-          <div style="font-weight:700; font-size:13px; color:var(--marine)">Sans coder</div>
-          <div style="font-size:11px; color:var(--text-muted)">2 min 14s</div>
-        </div>
-      </div>
-      <div class="term-floating tag2">
-        <div class="icon marine">⚡</div>
-        <div>
-          <div style="font-weight:700; font-size:13px; color:var(--marine)">Vision système</div>
-          <div style="font-size:11px; color:var(--text-muted)">Pas un prompt isolé</div>
-        </div>
-      </div>
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        poster="public/videos/hero-demo.mp4#t=0.1"
+        style="width:100%; border-radius:16px; display:block; box-shadow: 0 30px 80px -20px rgba(10,22,40,0.4), 0 0 0 1px rgba(255,255,255,0.04);"
+      >
+        <source src="public/videos/hero-demo.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
 
 <!-- ============== TRUST ============== -->
+<div class="sec-fade-light-dark"></div>
 <section class="trust">
-  <p class="trust-title">Diplômé d'HEC Montréal · 11+ ans en consulting · Founder Agence Telos</p>
-  <div class="trust-logos">
-    <span class="trust-logo">HEC Montréal</span>
-    <span class="trust-logo-sans">Agence Telos</span>
-    <span class="trust-logo">Méthode Kairos</span>
-    <span class="trust-logo-sans">Claude Code</span>
-    <span class="trust-logo">YouTube</span>
+  <p class="trust-title-big">19 ans à orchestrer des décisions stratégiques</p>
+  <div class="trust-cards">
+    <div class="trust-card">
+      <div class="trust-card-num">150<span>M€</span></div>
+      <div class="trust-card-label">d'économies en consulting</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-num">30<span>M€</span></div>
+      <div class="trust-card-label">pilotés en media buying</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-num">8<span>M€</span></div>
+      <div class="trust-card-label">en lancements digitaux</div>
+    </div>
+  </div>
+</section>
+<div class="sec-fade-dark-light"></div>
+
+
+<!-- ============== LE PROBLÈME ============== -->
+<section class="probleme" id="probleme">
+  <div class="probleme-inner">
+    <div class="sec-eyebrow">━ Le constat</div>
+    <h2>Tu sais que l'IA va tout changer.<br>Mais tu ne sais pas par où commencer.</h2>
+    <p class="sec-sub">Tu n'es pas seul. Voici les trois murs que rencontrent 90% de ceux qui veulent vraiment se mettre à l'IA.</p>
+    <div class="probleme-grid">
+      <div class="probleme-card">
+        <div class="numero-chrome section-num-chrome">01</div>
+        <h3>La paralysie informationnelle</h3>
+        <p>Trop de tutoriels, trop d'outils, trop d'avis. Tu scrolles depuis des semaines et tu n'as encore rien construit.</p>
+      </div>
+      <div class="probleme-card">
+        <div class="numero-chrome section-num-chrome">02</div>
+        <h3>Le mur technique</h3>
+        <p>Tu butes sur le terminal, les API, la configuration. Tu te dis qu'il te manque une compétence secrète.</p>
+      </div>
+      <div class="probleme-card">
+        <div class="numero-chrome section-num-chrome">03</div>
+        <h3>Le syndrome du collectionneur</h3>
+        <p>Tu accumules des prompts dans des dossiers. Tu testes des outils. Mais rien ne se transforme en vrai résultat.</p>
+      </div>
+    </div>
+    <p class="probleme-transition">Ce n'est pas une question d'outil. C'est une question de méthode.</p>
   </div>
 </section>
 
-<!-- ============== BIG IDEA ============== -->
-<section class="bigidea">
+<!-- ============== BIG IDEA (MÉTHODE) ============== -->
+<section class="bigidea" id="methode">
   <div class="bigidea-box">
-    <div class="bigidea-eyebrow">Le fondement</div>
-    <p class="bigidea-quote">La plupart cherchent les meilleurs <em>prompts</em>. C'est structurellement faux. Sans vision, tu exécutes parfaitement le <em>mauvais plan</em>.</p>
-    <p class="bigidea-cite">— Blueprint v4.0 · Avril 2026</p>
+    <p class="bigidea-quote" style="margin-bottom:0;">L'IA n'est pas un raccourci, c'est un amplificateur.<br>Sans méthode, elle amplifie le chaos.<br>Avec une <em>vision</em> claire, elle accélère les résultats.</p>
+  </div>
+  <div class="piliers-grid">
+    <div class="pilier-card">
+      <div class="numero-chrome section-num-chrome">01</div>
+      <h3>Vision</h3>
+      <p>Comprendre le contexte avant de prompter.</p>
+    </div>
+    <div class="pilier-card">
+      <div class="numero-chrome section-num-chrome">02</div>
+      <h3>Méthode</h3>
+      <p>Une discipline transposable d'un terrain à l'autre.</p>
+    </div>
+    <div class="pilier-card">
+      <div class="numero-chrome section-num-chrome">03</div>
+      <h3>Exécution</h3>
+      <p>Tout est modulable. Avec la bonne méthode, tu construis et tu réajustes à l'infini.</p>
+    </div>
   </div>
 </section>
 
 <!-- ============== SOLUTIONS ============== -->
 <section class="sec solutions" id="solutions">
   <div class="sec-header">
-    <div class="sec-eyebrow">Nos solutions</div>
-    <h2 class="sec-title">Ce que tu construis<br>avec la <em>bonne vision</em></h2>
-    <p class="sec-sub">Quatre solutions pour quatre niveaux de maturité — du premier projet au système IA autonome.</p>
+    <div class="sec-eyebrow">Les solutions</div>
+    <h2 class="sec-title">Ce que tu construis<br>avec la bonne <em>méthode</em></h2>
+    <p class="sec-sub">Quatre angles d'intervention pour quatre niveaux de maturité.</p>
   </div>
 
   <!-- 01 — Vision -->
   <div class="sol-row">
     <div class="sol-text">
-      <div class="sol-num">01</div>
-      <div class="sol-tag">━━ Stratégie</div>
-      <h3>Vision & <em>Stratégie</em> IA</h3>
-      <p>Avant de prompter, il faut comprendre. Construire la vision qui gouverne chaque décision — c'est la seule chose que les concurrents ne peuvent pas copier.</p>
+      <div class="numero-chrome sol-num-chrome">01</div>
+      <div class="sol-tag">━ Vision</div>
+      <h3>Penser avant d'exécuter</h3>
+      <p>Avant de prompter, il faut comprendre. Construire la vision qui gouverne chaque décision, c'est la seule chose que les concurrents ne peuvent pas copier.</p>
       <ul class="sol-features">
         <li>Diagnostic complet de ton business et de tes opérations</li>
-        <li>Identification des points où l'IA crée vraiment de la valeur</li>
-        <li>Roadmap personnalisée — pas de solution générique</li>
-        <li>Décisions fondées sur le contexte, pas sur les modes</li>
+        <li>Identification des leviers IA à fort impact</li>
+        <li>Roadmap personnalisée, pas de solution générique</li>
+        <li>Décisions fondées sur le contexte réel</li>
       </ul>
-      <a href="#contact" class="sol-cta">Découvrir l'approche</a>
     </div>
     <div class="sol-mock">
       <div class="sol-mock-header">
@@ -553,17 +735,16 @@
   <!-- 02 — Claude Code -->
   <div class="sol-row">
     <div class="sol-text">
-      <div class="sol-num">02</div>
-      <div class="sol-tag">━━ Exécution</div>
-      <h3>Claude Code & <em>Agents</em></h3>
-      <p>Le terminal n'a rien de compliqué. Tu n'avais jamais codé, tu construis maintenant tes propres outils — sans dépendre d'un freelance, sans attendre 3 mois.</p>
+      <div class="numero-chrome sol-num-chrome">02</div>
+      <div class="sol-tag">━ Claude Code</div>
+      <h3>Construire sans coder</h3>
+      <p>Le terminal n'a rien de compliqué. Tu n'avais jamais codé, tu construis maintenant tes propres outils, sans dépendre d'un freelance ni attendre 3 mois. Et tout reste modulable, à l'infini.</p>
       <ul class="sol-features">
-        <li>Premier site + tunnel de vente avec Claude Code</li>
-        <li>56 skills prêtes à copier-coller pour tes agents</li>
+        <li>Site web, tunnel, intégration CRM</li>
+        <li>Premières automatisations</li>
         <li>Agents IA opérationnels dès aujourd'hui</li>
-        <li>Approche sans background technique requis</li>
+        <li>Approche sans aucun background technique</li>
       </ul>
-      <a href="#offres" class="sol-cta">Voir les ressources</a>
     </div>
     <div class="sol-mock">
       <div class="sol-mock-header">
@@ -585,17 +766,16 @@
   <!-- 03 — Architecture -->
   <div class="sol-row">
     <div class="sol-text">
-      <div class="sol-num">03</div>
-      <div class="sol-tag">━━ Système</div>
-      <h3>Systèmes & <em>Architecture</em></h3>
-      <p>Plus d'outils ≠ plus de productivité. C'est l'inverse. Un système IA cohérent, c'est ce qui sépare ceux qui scalent de ceux qui s'épuisent.</p>
+      <div class="numero-chrome sol-num-chrome">03</div>
+      <div class="sol-tag">━ Architecture</div>
+      <h3>Système & Architecture</h3>
+      <p>Plus d'outils ne veut pas dire plus de productivité. C'est l'inverse. Un système IA cohérent, c'est ce qui sépare ceux qui scalent de ceux qui s'épuisent.</p>
       <ul class="sol-features">
-        <li>Construire un CRM / SaaS sur mesure avec l'IA</li>
         <li>Architecture d'agents autonomes complète</li>
-        <li>Automatiser sans dépendre de freelances</li>
-        <li>Systèmes qui travaillent 24h/24</li>
+        <li>Orchestration multi-outils (Notion, WhatsApp, Slack, etc.)</li>
+        <li>Workflows automatisés qui tournent 24h sur 24</li>
+        <li>Approche système, pas accumulation d'outils</li>
       </ul>
-      <a href="#offres" class="sol-cta">Explorer le système</a>
     </div>
     <div class="sol-mock">
       <div class="sol-mock-header">
@@ -640,17 +820,16 @@
   <!-- 04 — Back-End -->
   <div class="sol-row">
     <div class="sol-text">
-      <div class="sol-num">04</div>
-      <div class="sol-tag">━━ Accompagnement</div>
-      <h3>Back-End & <em>Roadmap</em></h3>
-      <p>Pour entrepreneurs établis qui veulent dupliquer leurs processus dans des agents autonomes. Architecture personnalisée, accompagnement direct.</p>
+      <div class="numero-chrome sol-num-chrome">04</div>
+      <div class="sol-tag">━ Vision système</div>
+      <h3>Architecturer pour scaler</h3>
+      <p>Pour ceux qui ont déjà construit. Tu ne veux plus apprendre à utiliser l'IA, tu veux dupliquer tes processus dans des agents autonomes qui prennent les décisions à ta place.</p>
       <ul class="sol-features">
-        <li>Formation complète + sessions mensuelles</li>
-        <li>Audit business + roadmap IA personnalisée</li>
-        <li>Architecture pour entrepreneurs établis</li>
-        <li>WhatsApp direct + suivi rapproché</li>
+        <li>Cartographie complète de tes processus décisionnels</li>
+        <li>Architecture personnalisée selon ton contexte business</li>
+        <li>Agents autonomes qui exécutent dans ton cadre</li>
+        <li>Méthode appliquée à ton terrain, pas une recette générique</li>
       </ul>
-      <a href="#contact" class="sol-cta">Demander un audit</a>
     </div>
     <div class="sol-mock">
       <div class="sol-mock-header">
@@ -698,27 +877,34 @@
 
 </section>
 
-<!-- ============== STATS ============== -->
-<section class="stats">
+<!-- ============== EXPERTISE / MANIFESTE ============== -->
+<section class="stats" id="expertise">
   <div class="stats-eyebrow">
     <div class="sec-eyebrow">L'expertise derrière la méthode</div>
-    <h2>Une <em>discipline</em> de réflexion,<br>pas une mode passagère.</h2>
+    <h2>Une <em>discipline</em> de réflexion,<br>pas un effet de mode.</h2>
   </div>
-  <div class="stats-grid">
-    <div>
-      <div class="stat-num">11<em>+</em></div>
-      <div class="stat-label">Années en consulting<br>international</div>
+  <div class="principes-grid">
+    <div class="principe-card">
+      <div class="numero-chrome section-num-chrome">01</div>
+      <h3>Diagnostiquer avant d'exécuter</h3>
+      <p>Tu peux passer 50 heures sur des tutoriels sans avancer. Une heure de diagnostic clair t'évite trois mois d'erreurs.</p>
     </div>
-    <div>
-      <div class="stat-num">500<em>+</em></div>
-      <div class="stat-label">Entrepreneurs formés<br>chaque semaine</div>
+    <div class="principe-card">
+      <div class="numero-chrome section-num-chrome">02</div>
+      <h3>Tester, mesurer, itérer</h3>
+      <p>Collectionner des prompts ne construit rien. Trois tests bien lus valent mille intuitions.</p>
     </div>
-    <div>
-      <div class="stat-num">HEC</div>
-      <div class="stat-label">Diplômé Montréal<br>finance & marketing</div>
+    <div class="principe-card">
+      <div class="numero-chrome section-num-chrome">03</div>
+      <h3>Construire pour scaler</h3>
+      <p>Refaire un système coûte dix fois plus que bien le penser. La planification est plus importante que l'implantation.</p>
+    </div>
+    <div class="principe-card">
+      <div class="numero-chrome section-num-chrome">04</div>
+      <h3>La méthode prime sur l'outil</h3>
+      <p>Les outils changent tous les six mois. La logique qui les pilote, jamais.</p>
     </div>
   </div>
-  <p class="stat-divider">— Approche transposée du consulting au domaine de l'IA —</p>
 </section>
 
 <!-- ============== BIO ============== -->
@@ -730,92 +916,14 @@
       </div>
     </div>
     <div class="bio-text">
-      <div class="sec-eyebrow">À propos</div>
-      <h2>Onze ans à transformer<br>la donnée en <em>décisions</em>.</h2>
-      <p>Diplômé d'<strong>HEC Montréal</strong> en finance et marketing, j'ai plus de onze ans d'expérience en tant que consultant en gestion — accompagnant des entreprises à l'international sur des problématiques de performance, d'efficacité et de prise de décision fondée sur les données.</p>
-      <p>Ce parcours m'a apporté une <strong>vision analytique et structurée</strong>, orientée compréhension des systèmes, lecture des chiffres et responsabilité des décisions. Une approche que j'applique aujourd'hui à l'intelligence artificielle.</p>
-      <p>À travers mes formations et ma chaîne YouTube, j'enseigne cette approche de l'IA : une discipline de <strong>réflexion, de structure et de vision</strong> — où l'intelligence artificielle est un levier, jamais un substitut à la pensée humaine.</p>
+      <div class="sec-eyebrow">Qui suis-je</div>
+      <h2>Dix-neuf ans à transformer<br>les données en <em>décisions</em>.</h2>
+      <p>Diplômé d'<strong>HEC Montréal</strong> en finance, marketing et technologies de l'information, j'ai bâti onze ans d'expérience en consulting de gestion à l'international. Performance, efficacité, décisions orientées résultats.</p>
+      <p>Les huit dernières années, j'ai opéré au Brésil, l'un des marchés les plus avancés au monde en marketing digital. C'est là que j'ai pris en main media buying et lancements orchestrés, avec plus de <strong>8M€ générés en infoproduits</strong> et géré <strong>30M€ en trafic payant</strong>.</p>
+      <p>Aujourd'hui, j'apporte cette méthodologie à l'intelligence artificielle. Pas pour surfer une mode, mais pour transmettre ce que l'IA a de vraiment puissant quand elle est pilotée par une discipline solide. La technologie change, la méthode ne change pas. C'est cette discipline que je transmets aux entreprises, à travers mes formations et ma chaîne YouTube.</p>
+      <p>L'IA est un levier, jamais un substitut à la pensée humaine.</p>
     </div>
   </div>
-</section>
-
-<!-- ============== PHILOSOPHIE ============== -->
-<section class="philo">
-  <div class="sec-header">
-    <div class="sec-eyebrow">Ma philosophie</div>
-    <h2 class="sec-title">Comment je pense l'<em>IA</em></h2>
-  </div>
-  <div class="philo-grid">
-    <div class="philo-item">
-      <div class="philo-num">01</div>
-      <h3>Vision avant <em>exécution</em></h3>
-      <p>Je considère l'IA comme une discipline de réflexion, de structure et de décision — pas comme un outil d'exécution aveugle. Avant les prompts, il faut comprendre le contexte, structurer le système et prendre les bonnes décisions au bon moment. La performance est une conséquence, jamais un point de départ.</p>
-    </div>
-    <div class="philo-item">
-      <div class="philo-num">02</div>
-      <h3>Clarté & <em>responsabilité</em></h3>
-      <p>Je crois en des stratégies claires, lisibles et assumées. L'IA n'est ni une promesse, ni un pari — c'est une suite de décisions responsables, prises à partir d'une vision comprise, pas subie. L'objectif n'est pas d'automatiser partout, mais de savoir quoi automatiser, quand, et pourquoi.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============== OFFRES ============== -->
-<section class="offres" id="offres">
-  <div class="sec-header">
-    <div class="sec-eyebrow">Escalier d'offres</div>
-    <h2 class="sec-title">Une offre pour<br>chaque <em>niveau</em></h2>
-    <p class="sec-sub">Chaque offre résout le problème du niveau précédent et révèle le suivant. La progression est logique et intentionnelle.</p>
-  </div>
-  <div class="offres-grid">
-
-    <div class="offre">
-      <div class="offre-name">Low-Ticket B</div>
-      <h3>1<sup>er</sup> Site + <em>Funnel</em></h3>
-      <div class="offre-price">27–47 €</div>
-      <div class="offre-price-sub">Livrable immédiat</div>
-      <p class="offre-desc">Ton premier site + tunnel de vente avec Claude Code. Du zéro au déployé, sans coder une ligne.</p>
-      <ul class="offre-features">
-        <li>Méthode pas-à-pas anticipant tes blocages</li>
-        <li>Site en ligne en quelques heures</li>
-        <li>Funnel de vente prêt à recevoir des leads</li>
-      </ul>
-      <a href="#contact" class="offre-cta">Commencer</a>
-      <div class="offre-icp">Pour : Bloqués dans l'exécution</div>
-    </div>
-
-    <div class="offre featured">
-      <div class="offre-name">Front-End</div>
-      <h3>Mini-<em>Formation</em></h3>
-      <div class="offre-price">197–297 €</div>
-      <div class="offre-price-sub">Du zéro à l'opérationnel</div>
-      <p class="offre-desc">Installer Claude Code, créer tes premiers agents, construire ton premier CRM personnalisé.</p>
-      <ul class="offre-features">
-        <li>56 skills prêtes à copier-coller</li>
-        <li>Premiers agents opérationnels</li>
-        <li>CRM ou SaaS personnalisé</li>
-        <li>Architecture système expliquée</li>
-      </ul>
-      <a href="#contact" class="offre-cta">Démarrer la formation</a>
-      <div class="offre-icp">Pour : Solopreneurs actifs</div>
-    </div>
-
-    <div class="offre">
-      <div class="offre-name">Back-End</div>
-      <h3>Architecture <em>complète</em></h3>
-      <div class="offre-price">1 500–3 000 €</div>
-      <div class="offre-price-sub">Accompagnement personnalisé</div>
-      <p class="offre-desc">Formation complète + accès WhatsApp + une session mensuelle. Pour ceux qui veulent vraiment scaler.</p>
-      <ul class="offre-features">
-        <li>Audit & roadmap personnalisée</li>
-        <li>Sessions mensuelles 1-on-1</li>
-        <li>WhatsApp direct pour les blocages</li>
-      </ul>
-      <a href="#contact" class="offre-cta">Demander un appel</a>
-      <div class="offre-icp">Pour : Entrepreneurs établis</div>
-    </div>
-
-  </div>
-  <p style="text-align:center; margin-top:48px; font-size:14px; color:var(--text-light);">Audit High-End disponible sur demande · 500–1 500 € / session</p>
 </section>
 
 <!-- ============== YOUTUBE ============== -->
@@ -824,14 +932,16 @@
     <div class="yt-text">
       <div class="yt-eyebrow">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2c-.3-1-1.1-1.8-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5c-1 .3-1.8 1.1-2.1 2.1C0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1 1.1 1.8 2.1 2.1 1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5c1-.3 1.8-1.1 2.1-2.1.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
-        Cours gratuits hebdomadaires
+        Cours hebdomadaires
       </div>
-      <h2>Progresser<br>chaque <em>mercredi</em>.</h2>
-      <p>Claude Code, agents IA, vision système. Des cas concrets et des résultats réels — pas de la théorie. Rejoins plus de 500 entrepreneurs qui se forment chaque semaine, gratuitement.</p>
-      <a href="https://www.youtube.com/@MarckBender" target="_blank" rel="noopener" class="yt-cta">
-        S'abonner maintenant
-        <span>→</span>
-      </a>
+      <h2>Un nouveau cours,<br>chaque <em>mercredi</em> à 15h.</h2>
+      <p>Méthode IA, cas concrets et applications réelles. Pour penser, structurer et décider, avant d'exécuter.</p>
+      <p style="font-size:15px; color:rgba(255,255,255,0.6); margin-bottom:24px;">Pour ne rien perdre, abonne-toi :</p>
+      <form class="newsletter-form" id="yt-newsletter-form" style="margin-bottom:24px;">
+        <input type="email" id="yt-newsletter-email" placeholder="ton@email.com" required>
+        <button type="submit" id="yt-newsletter-btn">Je m'inscris</button>
+      </form>
+      <div class="newsletter-msg" id="yt-newsletter-msg"></div>
     </div>
     <div class="yt-visual">
       <div class="yt-card">
@@ -852,14 +962,14 @@
 </section>
 
 <!-- ============== NEWSLETTER ============== -->
-<section class="newsletter-sec" id="newsletter">
+<section class="newsletter-dark" id="newsletter">
   <div class="newsletter-box">
     <div class="sec-eyebrow">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Newsletter
     </div>
-    <h2>Reçois la <em>vision</em><br>chaque semaine.</h2>
-    <p>Stratégies IA, cas concrets, décisions structurantes. Un email par semaine, pas de spam. Désinscription en un clic.</p>
+    <h2>L'IA est simple quand la méthode est <em>cohérente</em>.</h2>
+    <p>Reçois chaque samedi mes tests, mes erreurs et mes découvertes sur l'IA appliquée au business. Sans hype, sans recettes, juste ma méthode.</p>
     <form class="newsletter-form" id="newsletter-form">
       <input type="email" id="newsletter-email" placeholder="ton@email.com" required>
       <button type="submit" id="newsletter-btn">Je m'inscris</button>
@@ -868,13 +978,14 @@
   </div>
 </section>
 
+<div class="sec-fade-dark-light"></div>
 <!-- ============== CONTACT ============== -->
 <section class="contact" id="contact">
   <div class="contact-grid">
     <div class="contact-text">
       <div class="sec-eyebrow">Contact</div>
-      <h2>Prêt à construire avec <em>vision</em> ?</h2>
-      <p>Dis-moi où tu en es. Je t'oriente vers la bonne solution selon ton niveau et tes objectifs. Pas de pitch automatique — réponse personnelle sous 24h.</p>
+      <h2>Tu diriges déjà<br>un business <em>établi</em> ?</h2>
+      <p>Si tu veux qu'on regarde ensemble comment intégrer l'IA dans tes opérations, écris-moi. Réponse personnelle sous 48h.</p>
       <div class="contact-meta">
         <div class="contact-meta-row">
           <div class="contact-meta-icon">
@@ -886,35 +997,23 @@
           <div class="contact-meta-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
-          <span>Réponse sous 24h ouvrées</span>
+          <span>Réponse sous 48h</span>
         </div>
       </div>
     </div>
 
     <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulaire à connecter à ton backend (Formspree, Netlify Forms, etc.)');">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Prénom</label>
-          <input type="text" placeholder="Ton prénom" required>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="ton@email.com" required>
-        </div>
+      <div class="form-group">
+        <label>Prénom</label>
+        <input type="text" placeholder="Ton prénom" required>
       </div>
       <div class="form-group">
-        <label>Où en es-tu ?</label>
-        <select required>
-          <option value="">Sélectionne ton profil</option>
-          <option>Je débute — pas encore de projet structuré</option>
-          <option>J'ai un projet mais je bloque sur le technique</option>
-          <option>J'ai mes premières ventes mais ça dépend de moi</option>
-          <option>Business établi — je veux architecturer avec l'IA</option>
-        </select>
+        <label>Email</label>
+        <input type="email" placeholder="ton@email.com" required>
       </div>
       <div class="form-group">
-        <label>Message (optionnel)</label>
-        <textarea placeholder="Décris ta situation en quelques mots..."></textarea>
+        <label>Message</label>
+        <textarea placeholder="Décris ta situation en quelques mots..." style="min-height:120px;"></textarea>
       </div>
       <button type="submit" class="form-submit">
         Envoyer le message <span>→</span>
@@ -923,33 +1022,30 @@
   </div>
 </section>
 
+<div class="sec-fade-light-dark" style="height:1px;"></div>
 <!-- ============== FOOTER ============== -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="footer-logo">
-          <span style="width:32px; height:32px; background: linear-gradient(135deg, #a8d4f5 0%, #5a9fdb 25%, #2563b8 60%, #1a4d8c 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-weight:900; font-size:14px; box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.45), 0 4px 12px rgba(37,99,184,0.4);">M</span>
-          Marck Bender
-        </div>
-        <p>L'IA comme discipline de réflexion, de structure et de décision. Une approche fondée sur la vision, pas sur les outils.</p>
+        <div class="footer-logo">Marck Bender</div>
+        <p>L'IA comme discipline de réflexion, de structure et de décision. Une approche fondée sur la méthode, pas sur les outils.</p>
       </div>
       <div class="footer-col">
-        <h4>Solutions</h4>
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="#solutions">Vision & Stratégie</a></li>
-          <li><a href="#solutions">Claude Code</a></li>
-          <li><a href="#solutions">Architecture</a></li>
-          <li><a href="#solutions">Back-End</a></li>
+          <li><a href="#methode">Méthode</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="#youtube">YouTube</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
         <ul>
-          <li><a href="#youtube">YouTube</a></li>
-          <li><a href="#offres">Offres</a></li>
-          <li><a href="#contact">Audit gratuit</a></li>
-          <li><a href="https://agencetelos.com/" target="_blank" rel="noopener">Agence Telos</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://www.youtube.com/@MarckBender" target="_blank" rel="noopener">YouTube</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -957,13 +1053,12 @@
         <ul>
           <li><a href="mailto:contact@marckbender.com">Email</a></li>
           <li><a href="#">LinkedIn</a></li>
-          <li><a href="https://www.youtube.com/@MarckBender" target="_blank" rel="noopener">YouTube</a></li>
           <li><a href="#">Instagram</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Marck Bender — Tous droits réservés</span>
+      <span class="footer-copy">© 2026 Marck Bender. Tous droits réservés.</span>
       <div class="footer-legal">
         <a href="#">Mentions légales</a>
         <a href="#">Politique de confidentialité</a>
@@ -973,7 +1068,8 @@
 </footer>
 
 <script>
-  // Reveal on scroll — léger, pas envahissant
+// === MAIN SCRIPTS (scroll reveal, youtube, newsletter, nav) ===
+  // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -983,402 +1079,82 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
 
-  document.querySelectorAll('.sol-row, .stats-grid > div, .offre, .philo-item').forEach(el => {
+  document.querySelectorAll('.sol-row, .principe-card, .probleme-card, .pilier-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
     io.observe(el);
   });
 
-  // Nav scroll effect
-  let lastScroll = 0;
+  // Nav scroll
   window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
-    const scroll = window.pageYOffset;
-    if (scroll > 50) {
-      nav.style.boxShadow = '0 1px 20px rgba(10,22,40,0.06)';
-    } else {
-      nav.style.boxShadow = 'none';
-    }
-    lastScroll = scroll;
+    nav.style.boxShadow = window.pageYOffset > 50 ? '0 1px 20px rgba(10,22,40,0.06)' : 'none';
   });
 
-  // ============== DERNIÈRE VIDÉO YOUTUBE — récupération automatique ==============
-  // Va chercher la dernière vidéo de ta chaîne via le flux RSS public
-  // Aucune clé API requise. Fonctionne pour toutes les chaînes publiques.
-  (async function loadLatestVideo() {
-    const CHANNEL_ID = 'UChr9025RH4nsikjZLS800Jw'; // Ton ID de chaîne
+  // YouTube latest video
+  (async function() {
+    const CHANNEL_ID = 'UChr9025RH4nsikjZLS800Jw';
     const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
-    // Service proxy public gratuit qui contourne la limitation CORS de YouTube
     const PROXY_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
-
     try {
       const response = await fetch(PROXY_URL);
       if (!response.ok) throw new Error('RSS unreachable');
       const data = await response.json();
-      
       if (data.items && data.items.length > 0) {
         const latest = data.items[0];
-        // Extraire l'ID vidéo de l'URL
         const videoIdMatch = latest.link.match(/v=([^&]+)/);
         if (!videoIdMatch) throw new Error('Video ID not found');
         const videoId = videoIdMatch[1];
-
-        // Remplacer le carré par un vrai iframe YouTube
         const thumbEl = document.getElementById('yt-latest-video');
         const titleEl = document.getElementById('yt-latest-title');
-        
         if (thumbEl && titleEl) {
-          // Méthode robuste : miniature + bouton play qui ouvre YouTube
-          // Marche à 100% dans tous les contextes (file://, http://, https://)
-          thumbEl.innerHTML = `
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" style="display:block; position:absolute; top:0; left:0; width:100%; height:100%; border-radius:10px; overflow:hidden; cursor:pointer;">
-              <img 
-                src="https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg" 
-                alt="${latest.title}"
-                onerror="this.src='https://i.ytimg.com/vi/${videoId}/hqdefault.jpg'"
-                style="width:100%; height:100%; object-fit:cover; display:block;">
-              <div style="position:absolute; inset:0; background: linear-gradient(180deg, transparent 50%, rgba(10,22,40,0.5) 100%); display:flex; align-items:center; justify-content:center; transition: background 0.2s;" onmouseover="this.style.background='rgba(10,22,40,0.4)'" onmouseout="this.style.background='linear-gradient(180deg, transparent 50%, rgba(10,22,40,0.5) 100%)'">
-                <div style="width:64px; height:64px; border-radius:50%; background: linear-gradient(135deg, #a8d4f5 0%, #5a9fdb 25%, #2563b8 60%, #1a4d8c 100%); display:flex; align-items:center; justify-content:center; box-shadow: inset 0 -4px 8px rgba(0,0,0,0.4), inset 0 4px 5px rgba(255,255,255,0.5), 0 8px 24px rgba(37,99,184,0.5);">
-                  <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:white; margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-              </div>
-              <span style="position:absolute; bottom:10px; right:10px; background:rgba(10,22,40,0.85); color:white; font-size:11px; padding:3px 8px; border-radius:4px; font-weight:500;">Mercredi · 15h</span>
-            </a>
-          `;
+          thumbEl.innerHTML = `<a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" style="display:block;position:absolute;top:0;left:0;width:100%;height:100%;border-radius:10px;overflow:hidden;cursor:pointer;"><img src="https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg" alt="${latest.title}" onerror="this.src='https://i.ytimg.com/vi/${videoId}/hqdefault.jpg'" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,22,40,0.5) 100%);display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(10,22,40,0.4)'" onmouseout="this.style.background='linear-gradient(180deg,transparent 50%,rgba(10,22,40,0.5) 100%)'"><div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#a8d4f5 0%,#5a9fdb 25%,#2563b8 60%,#1a4d8c 100%);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -4px 8px rgba(0,0,0,0.4),inset 0 4px 5px rgba(255,255,255,0.5),0 8px 24px rgba(37,99,184,0.5);"><svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:white;margin-left:3px;"><path d="M8 5v14l11-7z"/></svg></div></div><span style="position:absolute;bottom:10px;right:10px;background:rgba(10,22,40,0.85);color:white;font-size:11px;padding:3px 8px;border-radius:4px;font-weight:500;">Mercredi · 15h</span></a>`;
           titleEl.textContent = latest.title;
         }
       }
-    } catch (err) {
-      // Si erreur, on garde le fallback (bouton play vers la chaîne)
-      console.log('Vidéo YouTube : utilisation du fallback', err);
-    }
+    } catch (err) { console.log('YouTube fallback', err); }
   })();
 
-  // === NEWSLETTER ===
+  // Newsletter form
   const nlForm = document.getElementById('newsletter-form');
   const nlEmail = document.getElementById('newsletter-email');
   const nlBtn = document.getElementById('newsletter-btn');
   const nlMsg = document.getElementById('newsletter-msg');
-
-  nlForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    nlMsg.textContent = '';
-    nlMsg.className = 'newsletter-msg';
-    nlBtn.disabled = true;
-    nlBtn.textContent = 'Inscription...';
-
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: nlEmail.value }),
-      });
-      const data = await res.json();
-
-      if (res.ok) {
-        nlMsg.textContent = 'Bienvenue ! Vérifie ta boîte mail pour confirmer.';
-        nlMsg.className = 'newsletter-msg success';
-        nlEmail.value = '';
-      } else {
-        nlMsg.textContent = data.error || 'Erreur, réessaie dans un instant.';
-        nlMsg.className = 'newsletter-msg error';
-      }
-    } catch (err) {
-      nlMsg.textContent = 'Erreur de connexion. Réessaie.';
-      nlMsg.className = 'newsletter-msg error';
-    }
-
-    nlBtn.disabled = false;
-    nlBtn.textContent = "Je m'inscris";
-  });
-</script>
-
-<script>
-// === ANIMATIONS ===
-(function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  // --- TERMINAL HERO ---
-  async function animateTerminal() {
-    const terminal = document.querySelector('.terminal');
-    const body = document.querySelector('.terminal-body');
-    const tag1 = document.querySelector('.term-floating.tag1');
-    const tag2 = document.querySelector('.term-floating.tag2');
-    if (!terminal || !body) return;
-
-    const lines = body.querySelectorAll('.term-line');
-    const lineConfigs = [
-      { delay: 0, fade: false },    // l1: commande
-      { delay: 800, fade: true },   // l2: commentaire
-      { delay: 1400, fade: true },  // l3: resultat
-      { delay: 2000, fade: true },  // l4: resultat
-      { delay: 2600, fade: true },  // l5: resultat
-      { delay: 3200, fade: true },  // l6: succes
-      { delay: 3800, fade: false }, // l7: curseur
-    ];
-
-    // Sauvegarder le HTML original
-    const originalHTML = body.innerHTML;
-
-    while (true) {
-      // Reset complet
-      body.innerHTML = originalHTML;
-      const freshLines = body.querySelectorAll('.term-line');
-      freshLines.forEach(l => l.style.opacity = '0');
-      if (tag1) { tag1.style.opacity = '0'; tag1.style.transform = 'scale(0.85) translateY(8px)'; }
-      if (tag2) { tag2.style.opacity = '0'; tag2.style.transform = 'scale(0.85) translateY(8px)'; }
-
-      // Terminal entre en scale
-      terminal.style.transform = 'scale(0.95)';
-      terminal.style.opacity = '0';
-      terminal.offsetHeight; // force reflow
-      terminal.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      terminal.style.transform = 'scale(1)';
-      terminal.style.opacity = '1';
-
-      await wait(400);
-
-      // Animer chaque ligne
-      for (let i = 0; i < freshLines.length && i < lineConfigs.length; i++) {
-        await wait(i === 0 ? 200 : 400);
-        freshLines[i].style.transition = 'opacity 0.3s';
-        freshLines[i].style.opacity = '1';
-
-        // Tag1 apres ligne 4 (index 3)
-        if (i === 3 && tag1) {
-          tag1.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-          tag1.style.opacity = '1';
-          tag1.style.transform = 'scale(1) translateY(0)';
-        }
-        // Tag2 apres ligne 6 (index 5)
-        if (i === 5 && tag2) {
-          tag2.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-          tag2.style.opacity = '1';
-          tag2.style.transform = 'scale(1) translateY(0)';
-        }
-      }
-
-      // Pause puis fade-out
-      await wait(3000);
-      terminal.style.transition = 'opacity 0.3s';
-      terminal.style.opacity = '0';
-      await wait(500);
-      terminal.style.transition = '';
-    }
+  if (nlForm) {
+    nlForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      nlMsg.textContent = ''; nlMsg.className = 'newsletter-msg';
+      nlBtn.disabled = true; nlBtn.textContent = 'Inscription...';
+      try {
+        const res = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: nlEmail.value }) });
+        const data = await res.json();
+        if (res.ok) { nlMsg.textContent = 'Bienvenue ! Vérifie ta boîte mail.'; nlMsg.className = 'newsletter-msg success'; nlEmail.value = ''; }
+        else { nlMsg.textContent = data.error || 'Erreur, réessaie.'; nlMsg.className = 'newsletter-msg error'; }
+      } catch { nlMsg.textContent = 'Erreur de connexion.'; nlMsg.className = 'newsletter-msg error'; }
+      nlBtn.disabled = false; nlBtn.textContent = "Je m'inscris";
+    });
   }
 
-  // --- MOCK VISION ---
-  async function animateVision(mw) {
-    const bars = mw.querySelectorAll('.mock-vision-bar');
-    const tag = mw.querySelector('.mock-vision-tag');
-    const title = mw.querySelector('.mock-vision-title');
-    const meta = mw.querySelector('.mock-vision-meta');
-
-    while (true) {
-      // Reset
-      bars.forEach(b => { b.style.height = '0'; });
-      [tag, title, meta].forEach(el => { if(el) { el.style.opacity = '0'; el.style.transition = 'opacity 0.3s'; }});
-      await wait(300);
-
-      // Titre + tag
-      if (tag) tag.style.opacity = '1';
-      if (title) title.style.opacity = '1';
-      await wait(300);
-
-      // Barres
-      bars.forEach((b, i) => {
-        setTimeout(() => { b.style.height = b.dataset.height; }, i * 100);
-      });
-      await wait(bars.length * 100 + 600);
-
-      if (meta) meta.style.opacity = '1';
-
-      await wait(4000);
-
-      // Retracte
-      bars.forEach(b => { b.style.height = '0'; });
-      [tag, title, meta].forEach(el => { if(el) el.style.opacity = '0'; });
-      await wait(400);
-    }
+  // YouTube newsletter form
+  const ytForm = document.getElementById('yt-newsletter-form');
+  const ytEmail = document.getElementById('yt-newsletter-email');
+  const ytBtn = document.getElementById('yt-newsletter-btn');
+  const ytMsg = document.getElementById('yt-newsletter-msg');
+  if (ytForm) {
+    ytForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ytMsg.textContent = ''; ytMsg.className = 'newsletter-msg';
+      ytBtn.disabled = true; ytBtn.textContent = 'Inscription...';
+      try {
+        const res = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: ytEmail.value }) });
+        const data = await res.json();
+        if (res.ok) { ytMsg.textContent = 'Bienvenue !'; ytMsg.className = 'newsletter-msg success'; ytEmail.value = ''; }
+        else { ytMsg.textContent = data.error || 'Erreur.'; ytMsg.className = 'newsletter-msg error'; }
+      } catch { ytMsg.textContent = 'Erreur de connexion.'; ytMsg.className = 'newsletter-msg error'; }
+      ytBtn.disabled = false; ytBtn.textContent = "Je m'inscris";
+    });
   }
-
-  // --- MOCK CLAUDE CODE ---
-  async function animateClaudeCode(mw) {
-    const lineEls = mw.querySelectorAll('.mock-cc-line');
-    const originalHTML = mw.innerHTML;
-
-    while (true) {
-      mw.innerHTML = originalHTML;
-      const freshLines = mw.querySelectorAll('.mock-cc-line');
-      freshLines.forEach(l => l.style.opacity = '0');
-
-      await wait(300);
-
-      // Cascade fade-in
-      for (let i = 0; i < freshLines.length; i++) {
-        freshLines[i].style.transition = 'opacity 0.3s';
-        freshLines[i].style.opacity = '1';
-        await wait(300);
-      }
-
-      // Curseur visible 2s
-      await wait(2000);
-
-      // Fade-out
-      freshLines.forEach(l => {
-        l.style.transition = 'opacity 0.3s';
-        l.style.opacity = '0';
-      });
-      await wait(400);
-    }
-  }
-
-  // --- MOCK ARCHITECTURE ---
-  async function animateArchitecture(mw) {
-    const cells = mw.querySelectorAll('.mock-arch-cell');
-    const svg = mw.querySelector('.mock-arch-svg');
-    const archLines = svg ? svg.querySelectorAll('.arch-line') : [];
-    const flowDot = svg ? svg.querySelector('.arch-flow-dot') : null;
-    const statuses = mw.querySelectorAll('.mock-arch-status');
-
-    while (true) {
-      // Reset
-      cells.forEach(c => { c.style.opacity = '0'; c.style.transform = 'scale(0.9)'; });
-      statuses.forEach(s => s.classList.remove('pulse'));
-      if (svg) {
-        archLines.forEach(l => l.setAttribute('opacity', '0'));
-        if (flowDot) flowDot.setAttribute('opacity', '0');
-      }
-      await wait(300);
-
-      // Cells horaire
-      const order = [0, 1, 2, 3];
-      for (const idx of order) {
-        if (cells[idx]) {
-          cells[idx].style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-          cells[idx].style.opacity = '1';
-          cells[idx].style.transform = 'scale(1)';
-        }
-        await wait(200);
-      }
-
-      statuses.forEach(s => s.classList.add('pulse'));
-
-      // Lignes SVG
-      if (svg) {
-        for (const line of archLines) {
-          line.setAttribute('opacity', '0.5');
-          await wait(150);
-        }
-        if (flowDot) flowDot.setAttribute('opacity', '1');
-      }
-
-      await wait(5000);
-
-      // Reset
-      cells.forEach(c => { c.style.opacity = '0'; c.style.transform = 'scale(0.9)'; });
-      statuses.forEach(s => s.classList.remove('pulse'));
-      if (svg) {
-        archLines.forEach(l => l.setAttribute('opacity', '0'));
-        if (flowDot) flowDot.setAttribute('opacity', '0');
-      }
-      await wait(400);
-    }
-  }
-
-  // --- MOCK BACK-END ---
-  async function animateBackEnd(mw) {
-    const rows = mw.querySelectorAll('.mock-be-row');
-    const badges = mw.querySelectorAll('.mock-be-badge');
-    if (rows.length < 4 || badges.length < 4) return;
-
-    while (true) {
-      // Reset
-      rows.forEach(r => { r.style.opacity = '0'; r.style.transform = 'translateX(-20px)'; });
-      badges.forEach(b => b.classList.remove('pulse'));
-      badges[0].textContent = '\u2713 Fait';
-      badges[0].style.cssText = '';
-      badges[1].textContent = 'En cours';
-      badges[1].style.cssText = '';
-      badges[2].textContent = '\u00C0 venir';
-      badges[2].style.cssText = 'background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5)';
-      badges[3].textContent = '\u00C0 venir';
-      badges[3].style.cssText = 'background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5)';
-
-      await wait(300);
-
-      // Cascade slide-in
-      for (let i = 0; i < rows.length; i++) {
-        rows[i].style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-        rows[i].style.opacity = '1';
-        rows[i].style.transform = 'translateX(0)';
-        await wait(200);
-      }
-
-      badges[1].classList.add('pulse');
-      await wait(1500);
-      badges[1].classList.remove('pulse');
-
-      // 03 -> En cours
-      badges[2].textContent = 'En cours';
-      badges[2].style.cssText = '';
-      badges[2].classList.add('pulse');
-      await wait(1500);
-      badges[2].classList.remove('pulse');
-
-      // 03 -> Fait, 04 -> En cours
-      badges[2].textContent = '\u2713 Fait';
-      badges[2].style.cssText = '';
-      badges[3].textContent = 'En cours';
-      badges[3].style.cssText = '';
-      badges[3].classList.add('pulse');
-      await wait(1500);
-
-      // 04 -> Fait
-      badges[3].textContent = '\u2713 Fait';
-      badges[3].classList.remove('pulse');
-      await wait(2000);
-
-      // Fade-out
-      rows.forEach(r => {
-        r.style.transition = 'opacity 0.3s';
-        r.style.opacity = '0';
-      });
-      await wait(400);
-    }
-  }
-
-  // --- INTERSECTION OBSERVER ---
-  const animated = new Set();
-
-  function startAnimation(el) {
-    if (animated.has(el)) return;
-    animated.add(el);
-    if (el.classList.contains('terminal')) return animateTerminal();
-    if (el.querySelector('.mock-vision-bar')) return animateVision(el);
-    if (el.querySelector('.mock-cc-line')) return animateClaudeCode(el);
-    if (el.querySelector('.mock-arch-cell')) return animateArchitecture(el);
-    if (el.querySelector('.mock-be-row')) return animateBackEnd(el);
-  }
-
-  const terminal = document.querySelector('.terminal');
-  if (terminal) {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { startAnimation(terminal); obs.disconnect(); } });
-    }, { threshold: 0.2 });
-    obs.observe(terminal);
-  }
-
-  document.querySelectorAll('.sol-mock-window').forEach(mw => {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { startAnimation(mw); obs.disconnect(); } });
-    }, { threshold: 0.2 });
-    obs.observe(mw);
-  });
-})();
 </script>
 
 </body>
