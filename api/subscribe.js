@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
     let contactId;
 
-    if (contactRes.status === 409) {
+    if (contactRes.status === 409 || contactRes.status === 422) {
       // Contact existe déjà — on le récupère
       const searchRes = await fetch(
         `${API_BASE}/contacts?email=${encodeURIComponent(email.trim().toLowerCase())}`,
