@@ -1146,5 +1146,354 @@
   }
 </script>
 
+<script>
+// === SOLUTION MOCK ANIMATIONS ===
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function animateVision(mw) {
+    const bars = mw.querySelectorAll('.mock-vision-bar');
+    const meta = mw.querySelector('.mock-vision-meta');
+    const tag = mw.querySelector('.mock-vision-tag');
+    const title = mw.querySelector('.mock-vision-title');
+    const graph = mw.querySelector('.mock-vision-graph');
+    if (!bars.length || !graph) return;
+
+    const heights = Array.from(bars).map(b => b.getAttribute('data-height') || '50%');
+    const labels = ['Levier #1', 'Levier #2', 'Levier #3', 'Levier #4', 'Levier #5', 'Levier #6', 'Levrier #7', 'Levier #8'];
+    const rois = ['+12%', '+34%', '+47%', '+89%', '+63%', '+28%', '+91%', '+55%'];
+
+    // Add scan line
+    let scanLine = graph.querySelector('.scan-line');
+    if (!scanLine) {
+      scanLine = document.createElement('div');
+      scanLine.className = 'scan-line';
+      graph.style.position = 'relative';
+      graph.appendChild(scanLine);
+    }
+
+    // Add tooltip
+    let tooltip = mw.querySelector('.mock-tooltip');
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.className = 'mock-tooltip';
+      mw.style.position = 'relative';
+      mw.appendChild(tooltip);
+    }
+
+    while (true) {
+      // Reset
+      bars.forEach(b => { b.style.height = '0'; });
+      if (tag) { tag.style.opacity = '0'; tag.style.transform = 'translateY(8px)'; tag.style.transition = 'all 0.4s'; }
+      if (title) { title.style.opacity = '0'; title.style.transform = 'translateY(8px)'; title.style.transition = 'all 0.4s'; }
+      if (meta) { meta.style.opacity = '0'; meta.style.transition = 'opacity 0.3s'; }
+
+      // Scan line sweep
+      scanLine.style.opacity = '0.6';
+      scanLine.style.left = '0';
+      await wait(100);
+      scanLine.style.transition = 'left 1.2s cubic-bezier(0.33, 1, 0.68, 1)';
+      scanLine.style.left = '100%';
+      await wait(1300);
+      scanLine.style.opacity = '0';
+      scanLine.style.transition = 'none';
+
+      // Fade in tag + title
+      if (tag) { tag.style.opacity = '1'; tag.style.transform = 'translateY(0)'; }
+      if (title) { title.style.opacity = '1'; title.style.transform = 'translateY(0)'; }
+      await wait(300);
+
+      // Grow bars with stagger + tooltip
+      for (let i = 0; i < bars.length; i++) {
+        bars[i].style.height = heights[i];
+        bars[i].style.transition = 'height 0.6s cubic-bezier(0.33, 1, 0.68, 1)';
+
+        // Tooltip
+        if (tooltip) {
+          tooltip.textContent = labels[i] + ' : ROI ' + rois[i];
+          const rect = bars[i].getBoundingClientRect();
+          const mwRect = mw.getBoundingClientRect();
+          tooltip.style.left = (rect.left - mwRect.left + rect.width / 2 - 40) + 'px';
+          tooltip.style.top = (rect.top - mwRect.top - 30) + 'px';
+          tooltip.classList.add('show');
+        }
+        await wait(120);
+        if (tooltip) tooltip.classList.remove('show');
+      }
+
+      // Show meta
+      if (meta) { meta.style.opacity = '1'; }
+
+      // Pulse bars
+      for (let pulse = 0; pulse < 3; pulse++) {
+        bars.forEach(b => { b.style.transition = 'height 0.5s ease'; b.style.height = (parseInt(b.style.height) * 0.92) + '%'; });
+        await wait(400);
+        bars.forEach((b, i) => { b.style.height = heights[i]; });
+        await wait(400);
+      }
+
+      // Wait then retract
+      await wait(3000);
+      bars.forEach(b => { b.style.height = '0'; b.style.transition = 'height 0.8s ease'; });
+      if (tag) { tag.style.opacity = '0'; tag.style.transform = 'translateY(8px)'; }
+      if (title) { title.style.opacity = '0'; title.style.transform = 'translateY(8px)'; }
+      if (meta) { meta.style.opacity = '0'; }
+      await wait(1200);
+    }
+  }
+
+  // ============================================================
+  // MOCK 3 — CLAUDE CODE (terminal) — Typewriter + file tree
+  // ============================================================
+  async function animateClaudeCode(mw) {
+    const lines = mw.querySelectorAll('.mock-cc-line');
+    if (!lines.length) return;
+
+    while (true) {
+      lines.forEach(l => { l.style.opacity = '0'; l.style.transition = 'none'; });
+
+      // Line 1: type command
+      const l0 = lines[0];
+      if (l0) {
+        l0.style.opacity = '1';
+        const fullText = l0.textContent;
+        const prompt = l0.querySelector('.mock-cc-prompt');
+        if (prompt) {
+          const rest = document.createElement('span');
+          rest.className = 'mock-cc-c';
+          l0.innerHTML = '';
+          l0.appendChild(prompt);
+          l0.appendChild(rest);
+          const text = fullText.replace(/^\$\s*/, '');
+          for (let i = 0; i < text.length; i++) {
+            rest.textContent += text[i];
+            await wait(30 + Math.random() * 20);
+          }
+        }
+      }
+      await wait(600);
+
+      // Line 2: loading
+      if (lines[1]) { lines[1].style.opacity = '1'; lines[1].style.transition = 'opacity 0.3s'; await wait(800); }
+
+      // Lines 3-5: checkmarks appearing
+      for (let i = 2; i <= 4; i++) {
+        if (lines[i]) {
+          lines[i].style.opacity = '1';
+          lines[i].style.transition = 'opacity 0.3s';
+          await wait(300);
+        }
+      }
+
+      // Line 6: final with cursor
+      if (lines[5]) {
+        lines[5].style.opacity = '1';
+        lines[5].style.transition = 'opacity 0.3s';
+        await wait(2000);
+      }
+
+      // Fade out
+      lines.forEach(l => { l.style.transition = 'opacity 0.4s'; l.style.opacity = '0'; });
+      await wait(800);
+      await wait(2000);
+    }
+  }
+
+  // ============================================================
+  // MOCK 4 — ARCHITECTURE (agents) — Flowing data + activity graphs
+  // ============================================================
+  async function animateArchitecture(mw) {
+    const cells = mw.querySelectorAll('.mock-arch-cell');
+    const svg = mw.querySelector('.mock-arch-svg');
+    const archEl = mw.querySelector('.mock-arch');
+    if (!cells.length) return;
+
+    // Add mini activity graphs to each cell
+    cells.forEach(cell => {
+      if (!cell.querySelector('.mini-graph')) {
+        const mg = document.createElement('div');
+        mg.className = 'mini-graph';
+        for (let i = 0; i < 5; i++) {
+          const bar = document.createElement('div');
+          bar.className = 'mini-graph-bar';
+          bar.style.height = (4 + Math.random() * 12) + 'px';
+          bar.style.opacity = '0.5';
+          mg.appendChild(bar);
+        }
+        const status = cell.querySelector('.mock-arch-status');
+        if (status) status.after(mg);
+        else cell.appendChild(mg);
+      }
+    });
+
+    while (true) {
+      // Scale in cells clockwise
+      cells.forEach(c => { c.style.opacity = '0'; c.style.transform = 'scale(0.9)'; c.style.transition = 'none'; });
+      if (svg) {
+        svg.querySelectorAll('.arch-line').forEach(l => { l.setAttribute('opacity', '0'); });
+        const dot = svg.querySelector('.arch-flow-dot');
+        if (dot) dot.setAttribute('opacity', '0');
+      }
+
+      for (let i = 0; i < cells.length; i++) {
+        await wait(200);
+        cells[i].style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        cells[i].style.opacity = '1';
+        cells[i].style.transform = 'scale(1)';
+      }
+      await wait(300);
+
+      // Show SVG connection lines
+      if (svg) {
+        svg.querySelectorAll('.arch-line').forEach((l, i) => {
+          setTimeout(() => l.setAttribute('opacity', '0.5'), i * 150);
+        });
+        await wait(600);
+        const dot = svg.querySelector('.arch-flow-dot');
+        if (dot) dot.setAttribute('opacity', '1');
+      }
+
+      // Add pulse to statuses
+      cells.forEach(c => {
+        const s = c.querySelector('.mock-arch-status');
+        if (s) s.classList.add('pulse');
+      });
+
+      // Animate mini graphs for several cycles
+      for (let cycle = 0; cycle < 8; cycle++) {
+        cells.forEach(cell => {
+          const bars = cell.querySelectorAll('.mini-graph-bar');
+          bars.forEach(b => { b.style.height = (3 + Math.random() * 13) + 'px'; });
+        });
+        await wait(500);
+      }
+
+      // Fade out
+      cells.forEach(c => { c.style.transition = 'opacity 0.5s'; c.style.opacity = '0'; });
+      if (svg) {
+        svg.querySelectorAll('.arch-line').forEach(l => l.setAttribute('opacity', '0'));
+        const dot = svg.querySelector('.arch-flow-dot');
+        if (dot) dot.setAttribute('opacity', '0');
+      }
+      await wait(1000);
+    }
+  }
+
+  // ============================================================
+  // MOCK 5 — VISION SYSTÈME (timeline) — Thinking dots + checkmarks
+  // ============================================================
+  async function animateBackEnd(mw) {
+    const rows = mw.querySelectorAll('.mock-be-row');
+    const tag = mw.querySelector('.mock-vision-tag');
+    if (!rows.length) return;
+
+    // Add checkmark elements
+    rows.forEach(row => {
+      const badge = row.querySelector('.mock-be-badge');
+      if (badge && !badge.querySelector('.check-relief')) {
+        const check = document.createElement('span');
+        check.className = 'check-relief';
+        check.innerHTML = '<svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg>';
+        badge.prepend(check);
+      }
+    });
+
+    while (true) {
+      // Reset
+      rows.forEach(r => { r.style.opacity = '0'; r.style.transform = 'translateX(-12px)'; r.style.transition = 'none'; });
+      if (tag) { tag.style.opacity = '0'; tag.style.transform = 'translateY(6px)'; tag.style.transition = 'all 0.3s'; }
+
+      // Reset badges
+      rows.forEach((r, i) => {
+        const badge = r.querySelector('.mock-be-badge');
+        const check = r.querySelector('.check-relief');
+        if (badge) {
+          badge.textContent = i === 0 ? '✓ Fait' : 'À venir';
+          badge.style.background = i === 0 ? 'rgba(37,99,184,0.15)' : 'rgba(255,255,255,0.05)';
+          badge.style.color = i === 0 ? 'var(--teal)' : 'rgba(255,255,255,0.5)';
+          if (check && i === 0) { badge.prepend(check); }
+        }
+      });
+
+      // Show tag
+      if (tag) { tag.style.opacity = '1'; tag.style.transform = 'translateY(0)'; await wait(300); }
+
+      // Cascade rows
+      for (let i = 0; i < rows.length; i++) {
+        await wait(300);
+        rows[i].style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        rows[i].style.opacity = '1';
+        rows[i].style.transform = 'translateX(0)';
+
+        // Row 1 already "Fait" — show checkmark
+        if (i === 0) {
+          const check = rows[i].querySelector('.check-relief');
+          if (check) { await wait(200); check.classList.add('show'); }
+        }
+
+        // Row 2: thinking dots then "En cours"
+        if (i === 1) {
+          const badge = rows[i].querySelector('.mock-be-badge');
+          if (badge) {
+            const dots = document.createElement('span');
+            dots.className = 'thinking-dots';
+            dots.innerHTML = '<span></span><span></span><span></span>';
+            badge.textContent = '';
+            badge.style.background = 'rgba(37,99,184,0.1)';
+            badge.style.color = 'rgba(255,255,255,0.6)';
+            badge.appendChild(dots);
+            await wait(1200);
+            badge.textContent = 'En cours';
+            badge.style.background = 'rgba(37,99,184,0.15)';
+            badge.style.color = 'var(--teal)';
+            badge.classList.add('pulse');
+          }
+        }
+      }
+
+      await wait(3000);
+
+      // Fade out
+      rows.forEach(r => { r.style.transition = 'opacity 0.4s'; r.style.opacity = '0'; });
+      if (tag) { tag.style.opacity = '0'; tag.style.transform = 'translateY(6px)'; }
+      await wait(800);
+    }
+  }
+
+  // ============================================================
+  // INTERSECTION OBSERVER — start animations when visible
+  // ============================================================
+  const animMap = new Map();
+
+  // Terminal hero
+  const terminal = document.querySelector('.terminal');
+  if (terminal) {
+    animMap.set(terminal, animateTerminal);
+  }
+
+  // Solution mocks
+  document.querySelectorAll('.sol-mock-window').forEach((mw, i) => {
+    const fns = [animateVision, animateClaudeCode, animateArchitecture, animateBackEnd];
+    if (fns[i]) animMap.set(mw, () => fns[i](mw));
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fn = animMap.get(entry.target);
+        if (fn) {
+          observer.unobserve(entry.target);
+          fn();
+        }
+      }
+    });
+  }, { threshold: 0.2 });
+
+  animMap.forEach((fn, el) => observer.observe(el));
+
+})();
+</script>
 </body>
 </html>
