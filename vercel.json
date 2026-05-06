@@ -1,4 +1,5 @@
 {
   "framework": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "buildCommand": "node build-blog.js"
 }
