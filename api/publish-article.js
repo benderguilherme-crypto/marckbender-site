@@ -1,15 +1,17 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Methode non autorisee' });
 
-  const { filename, content } = req.body;
+  const { filename, content, isImage } = req.body;
   if (!filename || !content) return res.status(400).json({ error: 'Donnees manquantes' });
 
   const TOKEN = process.env.GITHUB_TOKEN;
   const REPO = process.env.GITHUB_REPO || 'benderguilherme-crypto/marckbender-site';
   const BRANCH = 'main';
-  const PATH = `articles/${filename}`;
 
   if (!TOKEN) return res.status(500).json({ error: 'GITHUB_TOKEN non configure' });
+
+  // Image upload to public/images/
+  const PATH = isImage ? filename.replace('../', '') : `articles/${filename}`;
 
   try {
     // Check if file already exists to get its SHA (for updates)
@@ -24,8 +26,8 @@ export default async function handler(req, res) {
 
     // Create or update the file
     const body = {
-      message: `Blog: ${sha ? 'Update' : 'Publish'} ${filename}`,
-      content: Buffer.from(content).toString('base64'),
+      message: isImage ? `Upload image: ${filename}` : `Blog: ${sha ? 'Update' : 'Publish'} ${filename}`,
+      content: isImage ? content : Buffer.from(content).toString('base64'),
       branch: BRANCH,
     };
     if (sha) body.sha = sha;
@@ -42,7 +44,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Erreur publication GitHub' });
     }
 
-    return res.status(200).json({ success: true, message: 'Article publie' });
+    return res.status(200).json({ success: true, message: isImage ? 'Image uploadee' : 'Article publie' });
   } catch (err) {
     console.error('Erreur:', err);
     return res.status(500).json({ error: 'Erreur serveur' });

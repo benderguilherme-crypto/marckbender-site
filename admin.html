@@ -49,6 +49,25 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
 .btn-primary { background: var(--steel-gradient); color: white; box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 4px 16px rgba(37,99,184,0.4); }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 8px 24px rgba(37,99,184,0.5); }
 .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.toolbar-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-body); transition: all 0.15s; }
+.toolbar-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* Image modal */
+.img-modal-overlay { position: fixed; inset: 0; background: rgba(10,22,40,0.6); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.img-modal-overlay.show { opacity: 1; pointer-events: auto; }
+.img-modal { background: white; border-radius: 16px; padding: 32px; max-width: 480px; width: 90%; box-shadow: 0 32px 80px -20px rgba(10,22,40,0.4); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.img-modal-overlay.show .img-modal { transform: scale(1); }
+.img-modal h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+.img-modal p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+.img-modal-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.img-modal-tab { flex: 1; padding: 10px; border: 2px solid var(--border-strong); border-radius: 10px; background: white; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; font-family: var(--font-body); transition: all 0.15s; }
+.img-modal-tab.active { border-color: var(--teal); color: var(--teal); background: rgba(37,99,184,0.04); }
+.img-modal-input { width: 100%; padding: 12px 16px; border: 2px solid var(--border-strong); border-radius: 10px; font-size: 14px; font-family: var(--font-body); outline: none; margin-bottom: 8px; transition: border-color 0.2s; }
+.img-modal-input:focus { border-color: var(--teal); }
+.img-modal-preview { text-align: center; margin: 16px 0; min-height: 60px; }
+.img-modal-preview img { max-width: 100%; max-height: 200px; border-radius: 10px; }
+.img-modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+.img-modal-actions .btn { flex: 1; text-align: center; }
 
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -155,7 +174,24 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
 
   <div class="editor-body">
     <div class="editor-pane">
-      <div class="editor-pane-header">Markdown</div>
+      <div class="editor-pane-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>Markdown</span>
+        <div style="display:flex;gap:6px;">
+          <button class="toolbar-btn" id="btn-img" title="Inserer une image">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            Image
+          </button>
+          <button class="toolbar-btn" id="btn-bold" title="Gras">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
+          </button>
+          <button class="toolbar-btn" id="btn-italic" title="Italique">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg>
+          </button>
+          <button class="toolbar-btn" id="btn-heading" title="Titre">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h8"/><path d="M4 18V6"/><path d="M12 18V6"/><path d="M17 12l3-2v8"/></svg>
+          </button>
+        </div>
+      </div>
       <textarea class="editor-textarea" id="field-content" placeholder="Ecris ton article en markdown ici...&#10;&#10;## Mon sous-titre&#10;&#10;Mon paragraphe...&#10;&#10;**gras** *italique*"></textarea>
     </div>
     <div class="editor-pane">
@@ -172,6 +208,32 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- Image modal -->
+<div class="img-modal-overlay" id="img-modal">
+  <div class="img-modal">
+    <h3>Inserer une image</h3>
+    <p>Colle l'URL d'une image ou uploade un fichier.</p>
+    <div class="img-modal-tabs">
+      <button class="img-modal-tab active" id="img-tab-url">URL</button>
+      <button class="img-modal-tab" id="img-tab-upload">Upload</button>
+    </div>
+    <div id="img-panel-url">
+      <input class="img-modal-input" id="img-url-input" placeholder="https://exemple.com/photo.jpg">
+    </div>
+    <div id="img-panel-upload" class="hidden">
+      <input type="file" accept="image/*" id="img-file-input" style="display:none">
+      <button class="btn btn-secondary" style="width:100%;margin-bottom:8px;" id="img-choose-file">Choisir un fichier</button>
+      <div id="img-file-name" style="font-size:13px;color:var(--text-muted);text-align:center;"></div>
+    </div>
+    <div class="img-modal-preview" id="img-preview"></div>
+    <input class="img-modal-input" id="img-alt-input" placeholder="Description de l'image (optionnel)">
+    <div class="img-modal-actions">
+      <button class="btn btn-secondary" id="img-cancel">Annuler</button>
+      <button class="btn btn-primary" id="img-insert">Inserer</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const ADMIN_PASS = 'Marck2026!';
@@ -388,6 +450,134 @@ function showToast(msg, type) {
   setTimeout(() => toastEl.classList.add('show'), 10);
   setTimeout(() => toastEl.classList.remove('show'), 3500);
 }
+
+// --- Toolbar: Bold, Italic, Heading ---
+function insertAtCursor(textBefore, textAfter) {
+  const ta = fieldContent;
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const sel = ta.value.substring(start, end);
+  ta.value = ta.value.substring(0, start) + textBefore + sel + textAfter + ta.value.substring(end);
+  ta.selectionStart = start + textBefore.length;
+  ta.selectionEnd = start + textBefore.length + sel.length;
+  ta.focus();
+  previewEl.innerHTML = mdToHtml(ta.value);
+}
+
+document.getElementById('btn-bold').addEventListener('click', () => insertAtCursor('**', '**'));
+document.getElementById('btn-italic').addEventListener('click', () => insertAtCursor('*', '*'));
+document.getElementById('btn-heading').addEventListener('click', () => insertAtCursor('\n## ', '\n'));
+
+// --- Image modal ---
+const imgModal = document.getElementById('img-modal');
+const imgUrlInput = document.getElementById('img-url-input');
+const imgAltInput = document.getElementById('img-alt-input');
+const imgPreview = document.getElementById('img-preview');
+const imgTabUrl = document.getElementById('img-tab-url');
+const imgTabUpload = document.getElementById('img-tab-upload');
+const imgPanelUrl = document.getElementById('img-panel-url');
+const imgPanelUpload = document.getElementById('img-panel-upload');
+const imgFileInput = document.getElementById('img-file-input');
+const imgChooseFile = document.getElementById('img-choose-file');
+const imgFileName = document.getElementById('img-file-name');
+let uploadedFile = null;
+
+document.getElementById('btn-img').addEventListener('click', () => {
+  imgModal.classList.add('show');
+  imgUrlInput.value = '';
+  imgAltInput.value = '';
+  imgPreview.textContent = '';
+  uploadedFile = null;
+  imgFileName.textContent = '';
+  imgUrlInput.focus();
+});
+
+document.getElementById('img-cancel').addEventListener('click', () => imgModal.classList.remove('show'));
+imgModal.addEventListener('click', (e) => { if (e.target === imgModal) imgModal.classList.remove('show'); });
+
+imgTabUrl.addEventListener('click', () => {
+  imgTabUrl.classList.add('active'); imgTabUpload.classList.remove('active');
+  imgPanelUrl.classList.remove('hidden'); imgPanelUpload.classList.add('hidden');
+});
+imgTabUpload.addEventListener('click', () => {
+  imgTabUpload.classList.add('active'); imgTabUrl.classList.remove('active');
+  imgPanelUpload.classList.remove('hidden'); imgPanelUrl.classList.add('hidden');
+});
+
+// URL preview
+imgUrlInput.addEventListener('input', () => {
+  if (imgUrlInput.value.trim()) {
+    imgPreview.textContent = '';
+    const img = document.createElement('img');
+    img.src = imgUrlInput.value.trim();
+    img.onerror = () => { imgPreview.textContent = 'Image introuvable'; };
+    imgPreview.appendChild(img);
+  } else { imgPreview.textContent = ''; }
+});
+
+// File upload
+imgChooseFile.addEventListener('click', () => imgFileInput.click());
+imgFileInput.addEventListener('change', () => {
+  const file = imgFileInput.files[0];
+  if (!file) return;
+  uploadedFile = file;
+  imgFileName.textContent = file.name;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    imgPreview.textContent = '';
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    imgPreview.appendChild(img);
+  };
+  reader.readAsDataURL(file);
+});
+
+// Insert image
+document.getElementById('img-insert').addEventListener('click', async () => {
+  const alt = imgAltInput.value.trim() || 'image';
+  let url = '';
+
+  // If file uploaded, push to GitHub first
+  if (uploadedFile && imgTabUpload.classList.contains('active')) {
+    imgModal.classList.remove('show');
+    showToast('Upload en cours...', 'success');
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64 = e.target.result.split(',')[1];
+      const ext = uploadedFile.name.split('.').pop();
+      const imgName = `img-${Date.now()}.${ext}`;
+      try {
+        const res = await fetch('/api/publish-article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filename: `../public/images/${imgName}`, content: base64, isImage: true, originalName: uploadedFile.name })
+        });
+        if (res.ok) {
+          url = `/images/${imgName}`;
+          insertAtCursor(`\n![${alt}](${url})\n`, '');
+          showToast('Image inseree !', 'success');
+        } else {
+          // Fallback: insert base64 directly
+          url = e.target.result;
+          insertAtCursor(`\n![${alt}](${url})\n`, '');
+          showToast('Image inseree (base64)', 'success');
+        }
+      } catch {
+        url = e.target.result;
+        insertAtCursor(`\n![${alt}](${url})\n`, '');
+        showToast('Image inseree (base64)', 'success');
+      }
+    };
+    reader.readAsDataURL(uploadedFile);
+    return;
+  }
+
+  // URL mode
+  url = imgUrlInput.value.trim();
+  if (!url) { showToast('Colle une URL ou upload un fichier', 'error'); return; }
+  insertAtCursor(`\n![${alt}](${url})\n`, '');
+  imgModal.classList.remove('show');
+});
 
 checkAuth();
 </script>
