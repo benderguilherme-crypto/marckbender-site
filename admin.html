@@ -551,7 +551,7 @@ document.getElementById('img-insert').addEventListener('click', async () => {
         const res = await fetch('/api/publish-article', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ filename: `../public/images/${imgName}`, content: base64, isImage: true, originalName: uploadedFile.name })
+          body: JSON.stringify({ filename: `images/${imgName}`, content: base64, isImage: true, originalName: uploadedFile.name })
         });
         if (res.ok) {
           url = `/images/${imgName}`;
