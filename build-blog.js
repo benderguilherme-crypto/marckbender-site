@@ -25,6 +25,7 @@ function mdToHtml(md) {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:16px 0;">')
     .replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
     .replace(/^- (.+)$/gm, '<li>$1</li>')
     .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>')
@@ -94,6 +95,7 @@ articles.forEach(a => {
   .article blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 32px 0; background: rgba(37,99,184,0.04); border-radius: 0 8px 8px 0; }
   .article blockquote p { margin-bottom: 0; font-style: italic; }
   .article code { background: rgba(10,22,40,0.06); padding: 2px 6px; border-radius: 4px; font-size: 15px; font-family: 'SF Mono', Monaco, monospace; }
+  .article img { max-width: 100%; border-radius: 12px; margin: 24px 0; box-shadow: 0 8px 24px -8px rgba(10,22,40,0.15); }
   .article pre { background: var(--marine); color: rgba(255,255,255,0.85); padding: 24px; border-radius: 12px; overflow-x: auto; margin: 32px 0; }
   .article pre code { background: none; padding: 0; color: inherit; }
   .nl-box { background: var(--marine); border-radius: 16px; padding: 40px; text-align: center; margin: 60px 0; }
