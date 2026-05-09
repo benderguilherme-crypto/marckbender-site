@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx serve *)",
+      "Bash(vercel --prod)",
+      "Bash(vercel deploy *)",
+      "Bash(curl -s \"https://marckbender-site-jkwv.vercel.app/blog/6-entreprises-avec-l-ia-qui-n-ont-encore-aucune-concurrence.html\")",
+      "Bash(git commit -m 'Widen blog articles to 1000px, full-width markdown editor, contact popup *)",
+      "Bash(curl -s \"https://marckbender-site-jkwv.vercel.app/blog/\")",
+      "Bash(node build-blog.js)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(curl -s \"https://api.github.com/repos/benderguilherme-crypto/marckbender-site/contents/articles/2026-05-09-6-entreprises-avec-l-ia-qui-n-ont-encore-aucune-concurrence.md\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/benderguilherme-crypto/marckbender-site/main/articles/2026-05-09-6-entreprises-avec-l-ia-qui-n-ont-encore-aucune-concurrence.md\")",
+      "Bash(git commit -m 'Remove old articles, sync with GitHub *)"
+    ]
+  }
+}

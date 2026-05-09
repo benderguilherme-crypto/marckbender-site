@@ -90,6 +90,7 @@ articles.forEach(a => {
   .article p { font-size: 18px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
   .article strong { color: var(--marine); font-weight: 600; }
   .article em { font-family: var(--font-display); font-style: italic; }
+  .text-lg { font-size: 22px; }
   .article ul, .article ol { margin-bottom: 24px; padding-left: 24px; }
   .article li { font-size: 17px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
   .article blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 32px 0; background: rgba(37,99,184,0.04); border-radius: 0 8px 8px 0; }
