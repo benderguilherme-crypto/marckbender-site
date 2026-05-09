@@ -52,7 +52,7 @@ Autre exemple que j'ai vécu de l'intérieur : quand j'ai vendu mon entreprise, 
 
 
 
-<span class="text-lg"> **2. Company Brain**</span>
+<span class="text-lg">**2. Company Brain**</span>
 
 
 Pendant longtemps, le goulot d'étranglement pour utiliser l'IA en entreprise, c'était le modèle. Aujourd'hui les modèles sont suffisamment bons. **Le nouveau goulot d'étranglement, c'est le contexte.**
