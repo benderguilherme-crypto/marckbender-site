@@ -81,7 +81,7 @@ articles.forEach(a => {
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
   .nav-cta { background: var(--marine); color: white; font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 100px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .article { padding: 140px 6% 80px; max-width: 720px; margin: 0 auto; }
+  .article { padding: 140px 6% 80px; max-width: 1000px; margin: 0 auto; }
   .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--teal-soft); font-weight: 600; text-decoration: none; margin-bottom: 40px; }
   .article-meta { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
   .article h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 40px; }

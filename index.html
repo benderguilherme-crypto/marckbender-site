@@ -390,6 +390,22 @@
   .newsletter-form button { background: var(--marine); color: white; font-weight: 700; padding: 14px 28px; border-radius: 100px; border: none; font-size: 15px; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
   .newsletter-form button:hover { background: var(--marine-soft); transform: translateY(-1px); }
   .newsletter-form button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .yt-newsletter-form { margin: 0 !important; max-width: 440px; }
+  .yt-newsletter-form input[type="email"] { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: white; }
+  .yt-newsletter-form input[type="email"]::placeholder { color: rgba(255,255,255,0.4); }
+  .yt-newsletter-form input[type="email"]:focus { border-color: var(--teal); }
+  .yt-newsletter-form button { background: var(--steel-gradient); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 4px 16px rgba(37,99,184,0.4); }
+  .yt-newsletter-form button:hover { transform: translateY(-1px); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), inset 0 3px 4px rgba(255,255,255,0.4), 0 8px 24px rgba(37,99,184,0.5); }
+  .yt-popup-overlay { position: fixed; inset: 0; background: rgba(10,22,40,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .yt-popup-overlay.show { opacity: 1; pointer-events: auto; }
+  .yt-popup { background: white; border-radius: 20px; padding: 48px 40px 36px; text-align: center; max-width: 380px; width: 90%; transform: scale(0.9) translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 32px 80px -20px rgba(10,22,40,0.4); }
+  .yt-popup-overlay.show .yt-popup { transform: scale(1) translateY(0); }
+  .yt-popup-icon { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #a8d4f5, #2563b8); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; }
+  .yt-popup-icon svg { width: 28px; height: 28px; }
+  .yt-popup h3 { font-size: 22px; font-weight: 800; color: #0a1628; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .yt-popup p { font-size: 16px; color: #5a6478; line-height: 1.5; margin-bottom: 28px; }
+  .yt-popup-close { background: #0a1628; color: white; font-weight: 700; padding: 14px 32px; border-radius: 100px; border: none; font-size: 15px; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; }
+  .yt-popup-close:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(10,22,40,0.2); }
   .newsletter-msg { margin-top: 16px; font-size: 14px; font-weight: 500; }
   .newsletter-msg.success { color: #16a34a; }
   .newsletter-msg.error { color: #dc2626; }
@@ -611,7 +627,7 @@
       <h2>Un nouveau cours,<br>chaque <em>mercredi</em> à 15h.</h2>
       <p>Méthode IA, cas concrets et applications réelles. Pour penser, structurer et décider, avant d'exécuter.</p>
       <p style="font-size:15px; color:rgba(255,255,255,0.6); margin-bottom:24px;">Pour ne rien perdre, abonne-toi :</p>
-      <form class="newsletter-form" id="yt-newsletter-form" style="margin-bottom:24px;">
+      <form class="newsletter-form yt-newsletter-form" id="yt-newsletter-form" style="margin-bottom:24px;">
         <input type="email" id="yt-newsletter-email" placeholder="ton@email.com" required>
         <button type="submit" id="yt-newsletter-btn">Je m'inscris</button>
       </form>
@@ -991,20 +1007,20 @@
       </div>
     </div>
 
-    <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulaire à connecter à ton backend (Formspree, Netlify Forms, etc.)');">
+    <form class="contact-form" id="contact-form">
       <div class="form-group">
         <label>Prénom</label>
-        <input type="text" placeholder="Ton prénom" required>
+        <input type="text" id="contact-name" placeholder="Ton prénom" required>
       </div>
       <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="ton@email.com" required>
+        <label>E-mail</label>
+        <input type="email" id="contact-email" placeholder="ton@email.com" required>
       </div>
       <div class="form-group">
         <label>Message</label>
-        <textarea placeholder="Décris ta situation en quelques mots..." style="min-height:120px;"></textarea>
+        <textarea id="contact-message" placeholder="Décris ta situation en quelques mots..." style="min-height:120px;" required></textarea>
       </div>
-      <button type="submit" class="form-submit">
+      <button type="submit" class="form-submit" id="contact-btn">
         Envoyer le message <span>→</span>
       </button>
     </form>
@@ -1105,6 +1121,45 @@
     } catch (err) { console.log('YouTube fallback', err); }
   })();
 
+  // Popup confirmation (outside youtube section for proper overlay)
+  </script>
+  <div class="yt-popup-overlay" id="yt-popup-overlay">
+    <div class="yt-popup">
+      <div class="yt-popup-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>E-mail confirmé !</h3>
+      <p>On se voit mercredi 15h !</p>
+      <button class="yt-popup-close" id="yt-popup-close">C'est noté</button>
+    </div>
+  </div>
+  <div class="yt-popup-overlay" id="nl-popup-overlay">
+    <div class="yt-popup">
+      <div class="yt-popup-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>E-mail confirmé !</h3>
+      <p>Tu recevras ta newsletter dans ta boîte mail !</p>
+      <button class="yt-popup-close" id="nl-popup-close">C'est noté</button>
+    </div>
+  </div>
+  <div class="yt-popup-overlay" id="contact-popup-overlay">
+    <div class="yt-popup">
+      <div class="yt-popup-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>E-mail bien reçu !</h3>
+      <p>Vous recevrez une réponse sous 48h.</p>
+      <button class="yt-popup-close" id="contact-popup-close">C'est noté</button>
+    </div>
+  </div>
+  <script>
+  // Newsletter popup
+  const nlPopup = document.getElementById('nl-popup-overlay');
+  const nlPopupClose = document.getElementById('nl-popup-close');
+  nlPopupClose.addEventListener('click', () => { nlPopup.classList.remove('show'); });
+  nlPopup.addEventListener('click', (e) => { if (e.target === nlPopup) nlPopup.classList.remove('show'); });
+
   // Newsletter form
   const nlForm = document.getElementById('newsletter-form');
   const nlEmail = document.getElementById('newsletter-email');
@@ -1118,12 +1173,35 @@
       try {
         const res = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: nlEmail.value }) });
         const data = await res.json();
-        if (res.ok) { nlMsg.textContent = 'Bienvenue ! Vérifie ta boîte mail.'; nlMsg.className = 'newsletter-msg success'; nlEmail.value = ''; }
+        if (res.ok) { nlEmail.value = ''; nlPopup.classList.add('show'); }
         else { nlMsg.textContent = data.error || 'Erreur, réessaie.'; nlMsg.className = 'newsletter-msg error'; }
       } catch { nlMsg.textContent = 'Erreur de connexion.'; nlMsg.className = 'newsletter-msg error'; }
       nlBtn.disabled = false; nlBtn.textContent = "Je m'inscris";
     });
   }
+
+  // Contact form popup
+  const contactPopup = document.getElementById('contact-popup-overlay');
+  const contactPopupClose = document.getElementById('contact-popup-close');
+  contactPopupClose.addEventListener('click', () => { contactPopup.classList.remove('show'); });
+  contactPopup.addEventListener('click', (e) => { if (e.target === contactPopup) contactPopup.classList.remove('show'); });
+
+  const contactForm = document.getElementById('contact-form');
+  const contactBtn = document.getElementById('contact-btn');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      contactBtn.disabled = true; contactBtn.textContent = 'Envoi...';
+      contactForm.reset();
+      contactPopup.classList.add('show');
+      contactBtn.disabled = false;
+      contactBtn.textContent = 'Envoyer le message →';
+    });
+  }
+
+  // YouTube newsletter popup (moved to body level for proper overlay)
+  const ytPopup = document.getElementById('yt-popup-overlay');
+  const ytPopupClose = document.getElementById('yt-popup-close');
 
   // YouTube newsletter form
   const ytForm = document.getElementById('yt-newsletter-form');
@@ -1131,6 +1209,8 @@
   const ytBtn = document.getElementById('yt-newsletter-btn');
   const ytMsg = document.getElementById('yt-newsletter-msg');
   if (ytForm) {
+    ytPopupClose.addEventListener('click', () => { ytPopup.classList.remove('show'); });
+    ytPopup.addEventListener('click', (e) => { if (e.target === ytPopup) ytPopup.classList.remove('show'); });
     ytForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       ytMsg.textContent = ''; ytMsg.className = 'newsletter-msg';
@@ -1138,7 +1218,7 @@
       try {
         const res = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: ytEmail.value }) });
         const data = await res.json();
-        if (res.ok) { ytMsg.textContent = 'Bienvenue !'; ytMsg.className = 'newsletter-msg success'; ytEmail.value = ''; }
+        if (res.ok) { ytEmail.value = ''; ytPopup.classList.add('show'); }
         else { ytMsg.textContent = data.error || 'Erreur.'; ytMsg.className = 'newsletter-msg error'; }
       } catch { ytMsg.textContent = 'Erreur de connexion.'; ytMsg.className = 'newsletter-msg error'; }
       ytBtn.disabled = false; ytBtn.textContent = "Je m'inscris";
