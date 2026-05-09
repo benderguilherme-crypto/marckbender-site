@@ -6,7 +6,7 @@ excerpt: "Les opportunités que l'IA a ouvertes et que presque personne n'a enco
 image: ""
 ---
 
-Marck Bender   |   9 mai 2026
+**Marck Bender   |   9 mai 2026**
 
 C'est peut-être le meilleur moment de l'histoire pour entreprendre. Et je ne dis pas ça à la légère.
 
@@ -18,17 +18,16 @@ C'est pourquoi j'adore suivre le Request for Startups que **Y Combinator** (l'ac
 
 ![image](/images/img-1778367008989.png)
 
-https://www.ycombinator.com/rfs
+<div style="text-align:center">https://www.ycombinator.com/rfs</div>
 
 J'ai pris la liste de l'été et du printemps 2026, j'ai sélectionné celles que je trouve les plus réalisables (sans hard tech, sans besoin de capex astronomique) et j'ai mis de côté **6 idées que je ferais moi-même si j'avais le temps.**
 
 Laisse-moi te dire lesquelles.
 
-**
-## 
-## 1. Les services natifs IA
 
-**
+<span class="text-lg">**1. Les services natifs IA**</span>
+
+
 La première thèse est probablement celle que je préfère le plus.
 
 L'idée est simple : au lieu de prendre quelque chose, de l'automatiser et de vendre cette automatisation comme un SaaS, tu automatises et tu **vends comme un service**. Autrement dit : tu utilises l'automatisation pour toi-même délivrer le service mieux que tes concurrents.
@@ -52,8 +51,8 @@ La référence qui m'a le plus marquée : un de mes connaissances était managin
 Autre exemple que j'ai vécu de l'intérieur : quand j'ai vendu mon entreprise, la due diligence (la partie bureaucratique du M&A où l'acheteur évalue des milliers de documents) a été réalisée par un cabinet externe qui a passé des mois à examiner document par document. Aujourd'hui tu ferais ça avec beaucoup moins de personnes avec un bon usage de l'IA.
 
 
-## 
-## **2. Company Brain**
+
+<span class="text-lg"> **2. Company Brain**</span>
 
 
 Pendant longtemps, le goulot d'étranglement pour utiliser l'IA en entreprise, c'était le modèle. Aujourd'hui les modèles sont suffisamment bons. **Le nouveau goulot d'étranglement, c'est le contexte.**
@@ -77,8 +76,7 @@ Deux références :
 Les deux sont des versions personnelles du concept. L'opportunité est de construire la version à l'échelle de toute l'entreprise.
 
 
-## 
-## **3. Les Hedge Funds natifs IA**
+<span class="text-lg">**3. Les Hedge Funds natifs IA**</span>
 
 
 Cette thèse m'**obsède.**
@@ -94,7 +92,7 @@ Exemple : sans IA, tu ne peux pas lire toutes les transcriptions d'earnings call
 Trois projets à surveiller :
 
 ![image](/images/img-1778367744360.png)
-https://alpaca.markets
+<div style="text-align:center">https://alpaca.markets</div>
 
 **- Alpaca :** API d'achat et de vente d'actions. Tu y branches un agent directement. (Attention : nécessite une résidence fiscale aux États-Unis, pas encore disponible en France.)
 **- TradingAgents :** open source sur GitHub, **66 000 stars,** framework d'agents pour le trading financier.
@@ -109,8 +107,8 @@ Deux des 10 projets les plus consultés sur GitHub aujourd'hui sont dans la fina
 C'est là que je te montre le chemin complet pour créer et lancer des produits avec l'IA, même sans savoir coder.https://www.youtube.com/@MarckBender
 
 
-## 
-## **4. Les SaaS Challengers**
+ 
+<span class="text-lg">**4. Les SaaS Challengers**</span>
 
 
 
@@ -130,11 +128,8 @@ Trois opportunités s'ouvrent alors :
 
 Et tu es protégée parce que les incumbents **ne feront pas ça.** Imagine Salesforce lancer une version 10x moins chère de son propre outil, ou passer en open source. Ils cannibaliseraient leur produit principal. Ça n'arrivera pas. C'est pourquoi cette fenêtre est ouverte.
 
-**
-## 
-## 5. Les logiciels pour Agents
 
-**
+**<span class="text-lg">5. Les logiciels pour Agents</span>**
 
 C'est l'une de celles que je trouve les plus sous-estimées.
 
@@ -150,16 +145,14 @@ La référence la plus intéressante que j'ai vue récemment : **Stripe a lancé
 
 
 ![image](/images/img-1778368200384.png)
-https://stripe.com/blog/giving-agents-the-ability-to-pay
+<div style="text-align:center">https://stripe.com/blog/giving-agents-the-ability-to-pay</div>
 
 
 Maintenant pense à tout ce qui passe sur ta carte de crédit chaque mois. Chaque SaaS, chaque outil, chaque onglet ouvert dans ton Chrome. À quoi ressemblerait la version de ce logiciel pour agents ? **Chaque réponse à cette question peut être un business.**
 
-**
-## 
-## 6. Les agences natives IA
 
-**
+**<span class="text-lg">6. Les agences natives IA</span>**
+
 
 Dernière thèse, et celle-ci me touche personnellement parce que je viens du monde de la publicité.
 
@@ -179,11 +172,9 @@ Les conséquences sont énormes :
 
 Les agences du futur ressembleront bien plus à des **logiciels** qu'à des services. Plus scalables que n'importe quelle agence de publicité ne l'a jamais été.
 
-**
-## 
-## En résumé
 
-**
+**<span class="text-lg">En résumé</span>**
+
 Pour conclure, les 6 opportunités à nouveau :
 
 **1.Services natifs IA** — automatise et vends du service (pas du SaaS) pour viser le marché de 17 000 milliards de dollars
