@@ -18,7 +18,9 @@ function parseFrontmatter(content) {
 }
 
 function mdToHtml(md) {
-  let html = md
+  const htmlBlocks = [];
+  let text = md.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+\/?>/gi, m => { htmlBlocks.push(m); return `%%HB${htmlBlocks.length - 1}%%`; });
+  text = text
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
@@ -26,6 +28,7 @@ function mdToHtml(md) {
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code>$1</code>')
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:16px 0;">')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">$1</a>')
     .replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
     .replace(/^- (.+)$/gm, '<li>$1</li>')
     .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>')
@@ -33,7 +36,9 @@ function mdToHtml(md) {
     .replace(/\n\n/g, '</p><p>')
     .replace(/^(?!<)/, '<p>')
     .replace(/(?!>)$/, '</p>');
-  return html;
+  htmlBlocks.forEach((h, i) => { text = text.replace(`%%HB${i}%%`, h); });
+  text = text.replace(/(?<!href=")(?<!src=")https?:\/\/[^\s<>"')\]]+/g, url => `<a href="${url}" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">${url}</a>`);
+  return text;
 }
 
 function readingTime(text) {
@@ -130,7 +135,7 @@ articles.forEach(a => {
 </nav>
 <article class="article">
   <a href="/blog" class="article-back">← Retour aux articles</a>
-  <div class="article-meta">${new Date(a.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} · ${a.readingTime} min de lecture</div>
+  <div class="article-meta">${new Date(a.date + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} · ${a.readingTime} min de lecture</div>
   <h1>${a.title}</h1>
   ${a.html}
   <div class="nl-box">
