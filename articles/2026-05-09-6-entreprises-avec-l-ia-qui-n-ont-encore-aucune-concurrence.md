@@ -52,7 +52,7 @@ Autre exemple que j'ai vécu de l'intérieur : quand j'ai vendu mon entreprise, 
 
 
 
-<span class="text-lg">**2. Company Brain**</span>
+**<span class="text-lg">2. Company Brain</span>**
 
 
 Pendant longtemps, le goulot d'étranglement pour utiliser l'IA en entreprise, c'était le modèle. Aujourd'hui les modèles sont suffisamment bons. **Le nouveau goulot d'étranglement, c'est le contexte.**
@@ -76,7 +76,7 @@ Deux références :
 Les deux sont des versions personnelles du concept. L'opportunité est de construire la version à l'échelle de toute l'entreprise.
 
 
-<span class="text-lg">**3. Les Hedge Funds natifs IA**</span>
+**<span class="text-lg">3. Les Hedge Funds natifs IA</span>**
 
 
 Cette thèse m'**obsède.**
@@ -108,7 +108,7 @@ C'est là que je te montre le chemin complet pour créer et lancer des produits 
 
 
  
-<span class="text-lg">**4. Les SaaS Challengers**</span>
+**<span class="text-lg">4. Les SaaS Challengers</span>**
 
 
 
