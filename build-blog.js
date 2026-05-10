@@ -18,14 +18,17 @@ function parseFrontmatter(content) {
 }
 
 function mdToHtml(md) {
+  // Process bold/italic FIRST so they work inside HTML tags too
+  let text = md
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // Then protect HTML blocks from other markdown processing
   const htmlBlocks = [];
-  let text = md.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+\/?>/gi, m => { htmlBlocks.push(m); return `%%HB${htmlBlocks.length - 1}%%`; });
+  text = text.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+\/?>/gi, m => { htmlBlocks.push(m); return `%%HB${htmlBlocks.length - 1}%%`; });
   text = text
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code>$1</code>')
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:16px 0;">')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">$1</a>')
