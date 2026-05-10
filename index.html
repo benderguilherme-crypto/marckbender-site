@@ -47,6 +47,15 @@
   .nav-link-secondary { font-size: 14px; color: var(--text); text-decoration: none; font-weight: 500; }
   .nav-cta { background: var(--marine); color: white; font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 100px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
   .nav-cta:hover { background: var(--marine-soft); transform: translateY(-1px); }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--marine); border-radius: 2px; transition: all 0.3s; }
+  .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 24px 5%; z-index: 999; transform: translateY(-10px); opacity: 0; transition: all 0.3s ease; }
+  .mobile-menu.show { display: block; transform: translateY(0); opacity: 1; }
+  .mobile-menu a { display: block; font-size: 18px; font-weight: 600; color: var(--marine); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:last-child { border-bottom: none; }
 
   /* === HERO === */
   .hero { padding: 140px 6% 80px; min-height: 92vh; display: flex; align-items: center; position: relative; overflow: hidden; }
@@ -546,6 +555,7 @@
   @media (max-width: 700px) {
     nav { padding: 0 5%; height: 64px; }
     .nav-links, .nav-link-secondary { display: none; }
+    .nav-hamburger { display: flex; }
     section.sec, .bigidea, .stats, .bio, .philo, .offres, .youtube-sec, .contact, .solutions { padding-left: 5%; padding-right: 5%; }
     .hero { padding: 110px 5% 60px; }
     .bigidea-box { padding: 50px 30px; }
@@ -580,8 +590,17 @@
   </ul>
   <div class="nav-actions">
     <a href="#newsletter" class="nav-cta">S'inscrire <span>→</span></a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#methode">Méthode</a>
+  <a href="#solutions">Solutions</a>
+  <a href="/blog">Blog</a>
+  <a href="#youtube">YouTube</a>
+  <a href="#contact">Contact</a>
+  <a href="#newsletter">S'inscrire</a>
+</div>
 
 <!-- ============== HERO ============== -->
 <section class="hero">
@@ -1074,6 +1093,22 @@
 
 <script>
 // === MAIN SCRIPTS (scroll reveal, youtube, newsletter, nav) ===
+  // Mobile menu
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('show');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('show');
+      });
+    });
+  }
+
   // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
