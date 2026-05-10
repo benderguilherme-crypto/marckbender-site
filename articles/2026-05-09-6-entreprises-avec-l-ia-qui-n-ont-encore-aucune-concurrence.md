@@ -3,7 +3,7 @@ title: "6 entreprises avec l'IA qui n'ont encore aucune concurrence"
 date: 2026-05-09
 slug: 6-entreprises-avec-l-ia-qui-n-ont-encore-aucune-concurrence
 excerpt: "Les opportunités que l'IA a ouvertes et que presque personne n'a encore vues."
-image: "/images/img-1778373083122.png"
+image: ""
 ---
 
 **Marck Bender   |   9 mai 2026**
