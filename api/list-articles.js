@@ -1,4 +1,8 @@
+import { checkAuth } from './_auth.js';
+
 export default async function handler(req, res) {
+  if (!checkAuth(req)) return res.status(401).json({ error: 'Non autorise' });
+
   const TOKEN = process.env.GITHUB_TOKEN;
   const REPO = process.env.GITHUB_REPO || 'benderguilherme-crypto/marckbender-site';
   const BRANCH = 'main';
@@ -17,7 +21,6 @@ export default async function handler(req, res) {
       .filter(f => f.name.endsWith('.md'))
       .map(f => ({ filename: f.name, title: f.name, date: '', slug: f.name.replace('.md', '') }));
 
-    // Parse frontmatter for each article
     const detailed = await Promise.all(articles.map(async (a) => {
       try {
         const fileRes = await fetch(`https://api.github.com/repos/${REPO}/contents/articles/${a.filename}?ref=${BRANCH}`, {
@@ -34,7 +37,7 @@ export default async function handler(req, res) {
     detailed.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     return res.status(200).json({ articles: detailed });
   } catch (err) {
-    console.error('Erreur:', err);
+    console.error('Erreur:', err.message);
     return res.status(500).json({ error: 'Erreur serveur' });
   }
 }

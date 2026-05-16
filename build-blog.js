@@ -40,6 +40,10 @@ function mdToHtml(md) {
     .replace(/^(?!<)/, '<p>')
     .replace(/(?!>)$/, '</p>');
   htmlBlocks.forEach((h, i) => { text = text.replace(`%%HB${i}%%`, h); });
+  // Sanitize dangerous HTML — strip scripts, event handlers, javascript: URLs
+  text = text.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  text = text.replace(/\bon\w+\s*=\s*["'][^"']*["']/gi, '');
+  text = text.replace(/javascript\s*:/gi, '');
   text = text.replace(/(?<!href=")(?<!src=")https?:\/\/[^\s<>"')\]]+/g, url => `<a href="${url}" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">${url}</a>`);
   return text;
 }

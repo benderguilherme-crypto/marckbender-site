@@ -77,25 +77,10 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
 .form-input { padding: 12px 16px; border: 2px solid var(--border-strong); border-radius: 12px; font-size: 15px; font-family: var(--font-body); outline: none; transition: border-color 0.2s; }
 .form-input:focus { border-color: var(--teal); }
 
-.editor-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 32px; border: 2px solid var(--border-strong); border-radius: 16px; overflow: hidden; min-height: 600px; }
+.editor-body { margin-bottom: 32px; border: 2px solid var(--border-strong); border-radius: 16px; overflow: hidden; }
 .editor-pane { display: flex; flex-direction: column; }
 .editor-pane-header { padding: 12px 16px; background: var(--marine); color: white; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.editor-pane:nth-child(1) { border-right: 1px solid var(--border); }
-.editor-textarea { flex: 1; padding: 24px; border: none; font-size: 15px; font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; line-height: 1.7; resize: none; outline: none; color: var(--marine); background: white; min-height: 600px; }
-.preview { flex: 1; padding: 24px; overflow-y: auto; background: white; }
-.preview .text-lg { font-size: 22px; }
-.preview h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; }
-.preview h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin: 32px 0 12px; }
-.preview h3 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
-.preview p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
-.preview strong { color: var(--marine); font-weight: 600; }
-.preview em { font-family: var(--font-display); font-style: italic; }
-.preview ul, .preview ol { margin-bottom: 16px; padding-left: 20px; }
-.preview li { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 6px; }
-.preview blockquote { border-left: 3px solid var(--teal); padding: 12px 20px; margin: 24px 0; background: rgba(37,99,184,0.04); border-radius: 0 8px 8px 0; }
-.preview blockquote p { margin-bottom: 0; font-style: italic; }
-.preview code { background: rgba(10,22,40,0.06); padding: 2px 6px; border-radius: 4px; font-size: 14px; }
-.preview img { max-width: 100%; border-radius: 12px; margin: 20px 0; box-shadow: 0 8px 24px -8px rgba(10,22,40,0.15); }
+.editor-textarea { padding: 24px; border: none; font-size: 16px; font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; line-height: 1.7; resize: none; outline: none; color: var(--marine); background: white; width: 100%; min-height: 600px; box-sizing: border-box; }
 
 /* Articles list */
 .articles-list { margin-top: 40px; }
@@ -173,6 +158,15 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
       <label class="form-label">Extrait</label>
       <input class="form-input" id="field-excerpt" placeholder="Resume en une phrase">
     </div>
+    <div class="form-group full">
+      <label class="form-label">Image de couverture</label>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button class="toolbar-btn" id="btn-cover" type="button" style="background:var(--marine);color:white;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;">Uploader une image</button>
+        <input type="file" accept="image/*" id="cover-file-input" style="display:none">
+        <span id="cover-preview" style="font-size:14px;color:var(--text-muted);"></span>
+      </div>
+      <input type="hidden" id="field-image" value="">
+    </div>
   </div>
 
   <div class="editor-body">
@@ -210,13 +204,14 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
           <button class="toolbar-btn" id="btn-large" title="Texte plus grand">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
           </button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" id="btn-link" title="Inserer un lien">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Lien
+          </button>
         </div>
       </div>
       <textarea class="editor-textarea" id="field-content" placeholder="Ecris ton article en markdown ici...&#10;&#10;## Mon sous-titre&#10;&#10;Mon paragraphe...&#10;&#10;**gras** *italique*"></textarea>
-    </div>
-    <div class="editor-pane">
-      <div class="editor-pane-header">Apercu</div>
-      <div class="preview" id="preview"></div>
     </div>
   </div>
 
@@ -256,7 +251,12 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,247,0.9);
 </div>
 
 <script>
-const ADMIN_PASS = 'Marck2026!';
+let authToken = sessionStorage.getItem('mb_token') || '';
+
+// En-tête d'authentification pour les appels API
+function authHeaders(extra = {}) {
+  return { ...extra, 'Authorization': 'Bearer ' + authToken };
+}
 
 const loginSection = document.getElementById('login-section');
 const editorSection = document.getElementById('editor-section');
@@ -278,7 +278,7 @@ const articlesListEl = document.getElementById('articles-list');
 
 // --- Auth ---
 function checkAuth() {
-  if (sessionStorage.getItem('mb_admin') === '1') { showEditor(); return; }
+  if (authToken) { showEditor(); return; }
   showLogin();
 }
 function showLogin() { loginSection.classList.remove('hidden'); editorSection.classList.add('hidden'); navStatus.textContent = ''; }
@@ -286,11 +286,31 @@ function showEditor() { loginSection.classList.add('hidden'); editorSection.clas
 
 loginBtn.addEventListener('click', doLogin);
 loginPass.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-navLogout.addEventListener('click', () => { sessionStorage.removeItem('mb_admin'); showLogin(); });
+navLogout.addEventListener('click', () => { authToken = ''; sessionStorage.removeItem('mb_token'); showLogin(); });
 
-function doLogin() {
-  if (loginPass.value === ADMIN_PASS) { sessionStorage.setItem('mb_admin', '1'); showEditor(); }
-  else { loginError.style.display = 'block'; loginPass.value = ''; loginPass.focus(); }
+async function doLogin() {
+  const pass = loginPass.value;
+  if (!pass) return;
+  loginBtn.textContent = 'Connexion...';
+  try {
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + pass }
+    });
+    if (res.ok) {
+      authToken = pass;
+      sessionStorage.setItem('mb_token', pass);
+      showEditor();
+    } else {
+      loginError.style.display = 'block';
+      loginPass.value = '';
+      loginPass.focus();
+    }
+  } catch {
+    loginError.style.display = 'block';
+    loginPass.value = '';
+  }
+  loginBtn.textContent = 'Connexion';
 }
 
 // --- Sanitize markdown output for safe rendering ---
@@ -299,7 +319,10 @@ function escapeHtml(str) {
 }
 
 function mdToHtml(md) {
-  let html = escapeHtml(md);
+  const placeholders = [];
+  let text = md.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+\/?>/gi, m => { placeholders.push(m); return `%%PH${placeholders.length - 1}%%`; });
+  let html = escapeHtml(text);
+  placeholders.forEach((tag, i) => { html = html.replace(`%%PH${i}%%`, tag); });
   html = html
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
@@ -322,6 +345,45 @@ fieldContent.addEventListener('input', () => {
   previewEl.innerHTML = mdToHtml(fieldContent.value);
 });
 
+// --- Cover image upload ---
+const coverBtn = document.getElementById('btn-cover');
+const coverInput = document.getElementById('cover-file-input');
+const coverPreview = document.getElementById('cover-preview');
+const coverField = document.getElementById('field-image');
+coverBtn.addEventListener('click', () => coverInput.click());
+coverInput.addEventListener('change', async () => {
+  const file = coverInput.files[0];
+  if (!file) return;
+  coverBtn.textContent = 'Upload...';
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const ext = file.name.split('.').pop();
+    const imgName = `img-${Date.now()}.${ext}`;
+    try {
+      const res = await fetch('/api/publish-article', {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ filename: `images/${imgName}`, content: base64, isImage: true, originalName: file.name })
+      });
+      if (res.ok) {
+        coverField.value = `/images/${imgName}`;
+        coverPreview.textContent = 'Image ajoutee !';
+        coverBtn.textContent = 'Changer l\'image';
+      } else {
+        coverField.value = e.target.result;
+        coverPreview.textContent = 'Image ajoutee (base64)';
+        coverBtn.textContent = 'Changer l\'image';
+      }
+    } catch {
+      coverField.value = e.target.result;
+      coverPreview.textContent = 'Image ajoutee (base64)';
+      coverBtn.textContent = 'Changer l\'image';
+    }
+  };
+  reader.readAsDataURL(file);
+});
+
 // --- Slug ---
 function slugify(text) {
   return text.toLowerCase()
@@ -338,12 +400,13 @@ btnPublish.addEventListener('click', async () => {
   const title = fieldTitle.value.trim();
   const date = fieldDate.value;
   const excerpt = fieldExcerpt.value.trim();
+  const image = document.getElementById('field-image').value.trim();
   const content = fieldContent.value.trim();
 
   if (!title || !content) { showToast('Remplis le titre et le contenu', 'error'); return; }
 
   const slug = slugify(title);
-  const md = `---\ntitle: "${title}"\ndate: ${date}\nslug: ${slug}\nexcerpt: "${excerpt}"\nimage: ""\n---\n\n${content}`;
+  const md = `---\ntitle: "${title}"\ndate: ${date}\nslug: ${slug}\nexcerpt: "${excerpt}"\nimage: "${image}"\n---\n\n${content}`;
 
   btnPublish.disabled = true;
   btnPublish.textContent = 'Publication...';
@@ -351,14 +414,14 @@ btnPublish.addEventListener('click', async () => {
   try {
     const res = await fetch('/api/publish-article', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ filename: `${date}-${slug}.md`, content: md })
     });
     const data = await res.json();
     if (res.ok) {
       showToast('Article publie ! Redeploiement en cours...', 'success');
       resetForm();
-      loadArticles();
+      setTimeout(() => loadArticles(), 3000);
     } else {
       showToast(data.error || 'Erreur', 'error');
     }
@@ -372,7 +435,7 @@ btnPublish.addEventListener('click', async () => {
 // --- Load articles ---
 async function loadArticles() {
   try {
-    const res = await fetch('/api/list-articles');
+    const res = await fetch('/api/list-articles', { headers: authHeaders() });
     const data = await res.json();
     if (data.articles) {
       articlesListEl.textContent = '';
@@ -414,7 +477,7 @@ async function loadArticles() {
 
 async function editArticle(filename) {
   try {
-    const res = await fetch(`/api/get-article?file=${encodeURIComponent(filename)}`);
+    const res = await fetch(`/api/get-article?file=${encodeURIComponent(filename)}`, { headers: authHeaders() });
     const data = await res.json();
     if (data.raw) {
       const { meta, body } = parseFrontmatter(data.raw);
@@ -434,7 +497,7 @@ async function deleteArticle(filename) {
   try {
     const res = await fetch('/api/delete-article', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ filename })
     });
     if (res.ok) { showToast('Article supprime', 'success'); loadArticles(); }
@@ -492,6 +555,18 @@ document.getElementById('btn-align-center').addEventListener('click', () => inse
 document.getElementById('btn-align-right').addEventListener('click', () => insertAtCursor('<div style="text-align:right">', '</div>'));
 document.getElementById('btn-list').addEventListener('click', () => insertAtCursor('\n- ', '\n- '));
 document.getElementById('btn-large').addEventListener('click', () => insertAtCursor('<span class="text-lg">', '</span>'));
+document.getElementById('btn-link').addEventListener('click', () => {
+  const ta = fieldContent;
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const selected = ta.value.substring(start, end);
+  if (!selected) { showToast('Selectionne d\'abord le texte', 'error'); return; }
+  const url = prompt('Colle le lien URL :');
+  if (!url) return;
+  const link = `<a href="${url}" target="_blank" rel="noopener">${selected}</a>`;
+  ta.setRangeText(link, start, end, 'end');
+  ta.focus();
+});
 
 // --- Image modal ---
 const imgModal = document.getElementById('img-modal');
