@@ -6,7 +6,7 @@ excerpt: "Les opportunités que l'IA a ouvertes et que presque personne n'a enco
 image: ""
 ---
 
-**Marck Bender   |   9 mai 2026**
+**Bender IA   |   9 mai 2026**
 
 C'est peut-être le meilleur moment de l'histoire pour entreprendre. Et je ne dis pas ça à la légère.
 

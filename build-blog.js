@@ -67,11 +67,11 @@ if (fs.existsSync(ARTICLES_DIR)) {
 articles.forEach(a => {
   if (!a.slug) return;
   const page = `<!DOCTYPE html>
-<html lang="fr">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${a.title} — Marck Bender</title>
+<title>${a.title} — Bender IA</title>
 <meta name="description" content="${a.excerpt || ''}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,7 +92,16 @@ articles.forEach(a => {
   .nav-logo { font-weight: 800; font-size: 18px; letter-spacing: -0.03em; color: var(--marine); text-decoration: none; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
-  .nav-cta { background: var(--marine); color: white; font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 100px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .nav-links a.active { color: var(--marine); font-weight: 600; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--marine); border-radius: 2px; transition: all 0.3s; }
+  .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 24px 5%; z-index: 999; }
+  .mobile-menu.show { display: block; }
+  .mobile-menu a { display: block; font-size: 18px; font-weight: 600; color: var(--marine); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:last-child { border-bottom: none; }
   .article { padding: 140px 6% 80px; max-width: 1000px; margin: 0 auto; }
   .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--teal-soft); font-weight: 600; text-decoration: none; margin-bottom: 40px; }
   .article-meta { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
@@ -101,6 +110,7 @@ articles.forEach(a => {
   .article h3 { font-size: 22px; font-weight: 700; margin: 36px 0 12px; }
   .article p { font-size: 18px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
   .article strong { color: var(--marine); font-weight: 600; }
+  .article a { overflow-wrap: anywhere; }
   .article em { font-family: var(--font-display); font-style: italic; }
   .text-lg { font-size: 22px; display: block; margin-bottom: 16px; }
   .article ul, .article ol { margin-bottom: 24px; padding-left: 24px; }
@@ -118,46 +128,70 @@ articles.forEach(a => {
   .nl-box input[type="email"] { flex: 1; padding: 14px 20px; border: 2px solid rgba(255,255,255,0.15); border-radius: 100px; font-size: 15px; font-family: var(--font-body); background: rgba(255,255,255,0.08); color: white; outline: none; }
   .nl-box input::placeholder { color: rgba(255,255,255,0.4); }
   .nl-box button { background: var(--steel-gradient); color: white; font-weight: 700; padding: 14px 28px; border-radius: 100px; border: none; font-size: 15px; cursor: pointer; white-space: nowrap; }
-  footer { background: var(--marine); color: white; padding: 60px 6% 30px; }
-  .footer-inner { max-width: 1300px; margin: 0 auto; }
-  .footer-logo { font-weight: 800; font-size: 22px; letter-spacing: -0.03em; margin-bottom: 16px; }
-  .footer-bottom { padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer { background: var(--marine); color: white; padding: 70px 6% 32px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .footer-logo { font-weight: 800; font-size: 22px; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .footer-tagline { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+  .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 28px; margin-bottom: 40px; }
+  .footer-links a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; }
+  .footer-links a:hover { color: white; }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
   .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
-  @media (max-width: 700px) { nav { padding: 0 5%; height: 64px; } .nav-links { display: none; } .nl-box form { flex-direction: column; } .nl-box button { width: 100%; } }
+  @media (max-width: 700px) { nav { padding: 0 5%; height: 64px; } .nav-links { display: none; } .nav-hamburger { display: flex; } .nl-box form { flex-direction: column; } .nl-box button { width: 100%; } }
 </style>
 </head>
 <body>
 <nav>
-  <a href="/" class="nav-logo">Marck Bender</a>
+  <a href="/" class="nav-logo">Bender IA</a>
   <ul class="nav-links">
-    <li><a href="/#methode">Méthode</a></li>
-    <li><a href="/#solutions">Solutions</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="/#youtube">YouTube</a></li>
-    <li><a href="/#contact">Contact</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="/blog" class="active">Guias</a></li>
+    <li><a href="/#ia-para-voce">IA para você</a></li>
+    <li><a href="/sobre.html">Sobre</a></li>
+    <li><a href="/#contact">Contratar</a></li>
   </ul>
-  <a href="/#newsletter" class="nav-cta">S'inscrire <span>→</span></a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Início</a>
+  <a href="/blog">Guias</a>
+  <a href="/#ia-para-voce">IA para você</a>
+  <a href="/sobre.html">Sobre</a>
+  <a href="/#contact">Contratar</a>
+</div>
 <article class="article">
-  <a href="/blog" class="article-back">← Retour aux articles</a>
-  <div class="article-meta">${new Date(a.date + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} · ${a.readingTime} min de lecture</div>
+  <a href="/blog" class="article-back">← Voltar para os guias</a>
+  <div class="article-meta">${new Date(a.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })} · ${a.readingTime} min de leitura</div>
   <h1>${a.title}</h1>
   ${a.html}
   <div class="nl-box">
-    <h3>Ne rate rien</h3>
-    <p>Reçois chaque samedi mes tests, erreurs et découvertes sur l'IA appliquée au business.</p>
-    <form id="nl-form"><input type="email" placeholder="ton@email.com" required><button type="submit">Je m'inscris</button></form>
+    <h3>Receba os próximos guias no seu e-mail.</h3>
+    <p>Conteúdos práticos, testes honestos e aplicações úteis de IA.</p>
+    <form id="nl-form"><input type="email" placeholder="Seu melhor e-mail" required><button type="submit">Quero receber</button></form>
   </div>
 </article>
-<footer><div class="footer-inner"><div class="footer-logo">Marck Bender</div><div class="footer-bottom"><span class="footer-copy">© 2026 Marck Bender</span><div class="footer-legal"><a href="#">Mentions légales</a><a href="#">Politique de confidentialité</a></div></div></div></footer>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Bender IA</div>
+    <p class="footer-tagline">Experiência real. IA que você pode aplicar.</p>
+    <div class="footer-links">
+      <a href="/">Início</a>
+      <a href="/blog">Guias</a>
+      <a href="/#ia-para-voce">IA para você</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/#contact">Contratar</a>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Telos Conect Serviços Ltda. Todos os direitos reservados.</span></div>
+  </div>
+</footer>
 <script>
 const f=document.getElementById('nl-form'),e=f.querySelector('input'),b=f.querySelector('button');
-f.addEventListener('submit',async ev=>{ev.preventDefault();b.disabled=true;b.textContent='Inscription...';
+f.addEventListener('submit',async ev=>{ev.preventDefault();b.disabled=true;b.textContent='Enviando...';
 try{const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e.value})});
-if(r.ok){b.textContent='Bienvenue !';e.value='';}else b.textContent="Je m'inscris";}catch{b.textContent="Je m'inscris";}
-b.disabled=false;setTimeout(()=>{b.textContent="Je m'inscris";},3000);});
+if(r.ok){b.textContent='Inscrição confirmada!';e.value='';}else b.textContent='Tente novamente';}catch{b.textContent='Tente novamente';}
+b.disabled=false;setTimeout(()=>{b.textContent='Quero receber';},3000);});
+const h=document.getElementById('nav-hamburger'),m=document.getElementById('mobile-menu');
+if(h&&m){h.addEventListener('click',()=>{h.classList.toggle('active');m.classList.toggle('show');});}
 </script>
 </body>
 </html>`;
@@ -165,7 +199,10 @@ b.disabled=false;setTimeout(()=>{b.textContent="Je m'inscris";},3000);});
   console.log(`Generated: /blog/${a.slug}.html`);
 });
 
-// Update blog index.html with article list
+// Update blog index.html with article list.
+// CONTRAT : blog/index.html est la source de vérité du branding de la page liste "Guias" (pt-BR).
+// Le build ne remplace QUE le bloc `const ARTICLES = [...]` via la regex ci-dessous —
+// ne jamais élargir ce remplacement, sinon le branding Guias serait écrasé au prochain build.
 const indexArticles = articles.map(a => `{
     title: ${JSON.stringify(a.title)},
     date: ${JSON.stringify(a.date)},

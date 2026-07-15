@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre — Bender IA | Experiência real. IA que você pode aplicar.</title>
+<meta name="description" content="Há 13 anos melhorando processos e decisões em empresas. Hoje, testo ferramentas, construo soluções e ensino inteligência artificial de forma prática, útil e sem hype.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f5f7;
+    --bg-dark: #0a1628;
+    --marine: #0a1628;
+    --marine-soft: #1a2942;
+    --teal: #2563b8;
+    --teal-soft: #1a4d8c;
+    --teal-glow: rgba(37,99,184,0.25);
+    --steel-light: #7bb8e8;
+    --steel-gradient: linear-gradient(135deg, #a8d4f5 0%, #5a9fdb 25%, #2563b8 60%, #1a4d8c 100%);
+    --text: #0a1628;
+    --text-muted: #5a6478;
+    --text-light: #8a92a3;
+    --border: rgba(10,22,40,0.08);
+    --border-strong: rgba(10,22,40,0.12);
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  ::selection { background: var(--teal); color: var(--marine); }
+
+  /* === NAV === */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,245,247,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; transition: all 0.3s; }
+  .nav-logo { font-family: var(--font-body); font-weight: 800; font-size: 18px; letter-spacing: -0.03em; color: var(--marine); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { position: relative; font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--marine); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--steel-gradient); border-radius: 1px; transition: width 0.3s ease; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--marine); font-weight: 600; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--marine); border-radius: 2px; transition: all 0.3s; }
+  .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 24px 5%; z-index: 999; transform: translateY(-10px); opacity: 0; transition: all 0.3s ease; }
+  .mobile-menu.show { display: block; transform: translateY(0); opacity: 1; }
+  .mobile-menu a { display: block; font-size: 18px; font-weight: 600; color: var(--marine); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* === BOUTONS === */
+  .btn-primary { position: relative; overflow: hidden; background: var(--marine); color: white; font-weight: 600; font-size: 15px; padding: 14px 24px; border-radius: 100px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--marine-soft); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(10,22,40,0.15); }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+  .btn-primary::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%); transition: left 0.6s ease; }
+  .btn-primary:hover::after { left: 120%; }
+  .btn-text { background: transparent; color: var(--marine); font-weight: 600; font-size: 15px; padding: 14px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: gap 0.2s; }
+  .btn-text:hover { gap: 12px; }
+
+  .sec-eyebrow { display: inline-flex; font-size: 16px; color: var(--teal-soft); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; }
+
+  /* === HERO SOBRE === */
+  .sobre-hero { padding: 170px 6% 90px; text-align: center; }
+  .sobre-hero-inner { max-width: 800px; margin: 0 auto; }
+  .sobre-hero h1 { font-size: clamp(36px, 5vw, 62px); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--marine); margin-bottom: 28px; }
+  .sobre-hero h1 em { font-family: var(--font-display); font-style: italic; font-weight: 400; position: relative; }
+  .sobre-hero h1 em::after { content: ''; position: absolute; bottom: 6px; left: 0; width: 100%; height: 8px; background: var(--teal); opacity: 0.35; z-index: -1; border-radius: 4px; }
+  .sobre-hero-text { font-size: clamp(18px, 16px + 0.5vw, 22px); color: var(--marine-soft); line-height: 1.55; margin-bottom: 14px; }
+  .sobre-hero-sub { font-size: 17px; color: var(--text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto; }
+
+  /* === PARCOURS === */
+  .parcours { padding: 90px 6% 100px; background: white; }
+  .parcours-inner { max-width: 1200px; margin: 0 auto; }
+  .parcours h2 { text-align: center; font-size: clamp(28px, 3.6vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--marine); margin-bottom: 56px; }
+  .parcours h2 em { font-family: var(--font-display); font-style: italic; font-weight: 400; }
+  .parcours-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .parcours-card { position: relative; overflow: hidden; display: flex; flex-direction: column; background: var(--marine); border-radius: 24px; padding: 44px 36px; color: white; min-height: 320px; box-shadow: 0 20px 60px -30px rgba(10,22,40,0.4); transition: transform 0.3s, box-shadow 0.3s; }
+  .parcours-card:hover { transform: translateY(-4px); box-shadow: 0 32px 80px -30px rgba(10,22,40,0.5); }
+  .parcours-card::before { content: ''; position: absolute; top: -120px; right: -120px; width: 340px; height: 340px; background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%); pointer-events: none; }
+  .parcours-num { font-size: clamp(36px, 3vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1; background: var(--steel-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 20px; position: relative; z-index: 2; }
+  .parcours-card h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; position: relative; z-index: 2; }
+  .parcours-card p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 28px; position: relative; z-index: 2; }
+  .parcours-destaque { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 14px; font-weight: 600; color: var(--steel-light); line-height: 1.6; position: relative; z-index: 2; }
+
+  /* === POR QUE BENDER IA === */
+  .porque { padding: 100px 6% 90px; }
+  .porque-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .porque h2 { font-size: clamp(28px, 3.6vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--marine); margin-bottom: 28px; }
+  .porque h2 em { font-family: var(--font-display); font-style: italic; font-weight: 400; }
+  .porque p { font-size: 18px; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+
+  /* === FRASE EM DESTAQUE === */
+  .frase-band { background: var(--marine); color: white; padding: 90px 6%; text-align: center; position: relative; overflow: hidden; }
+  .frase-band::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(37,99,184,0.18) 0%, transparent 70%); }
+  .frase-band p { font-size: clamp(26px, 3.5vw, 44px); font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+  .frase-band em { font-family: var(--font-display); font-style: italic; font-weight: 400; color: var(--teal); }
+
+  /* === COMECE POR AQUI === */
+  .comece { padding: 100px 6% 110px; background: white; text-align: center; }
+  .comece-inner { max-width: 640px; margin: 0 auto; }
+  .comece h2 { font-size: clamp(28px, 3.6vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--marine); margin-bottom: 20px; }
+  .comece h2 em { font-family: var(--font-display); font-style: italic; font-weight: 400; }
+  .comece-text { font-size: 18px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; }
+  .comece-sep { width: 56px; height: 1px; background: var(--border-strong); margin: 44px auto; }
+  .comece-text2 { font-size: 16px; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* === FOOTER === */
+  footer { background: var(--marine); color: white; padding: 70px 6% 32px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .footer-logo { font-weight: 800; font-size: 22px; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .footer-tagline { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+  .footer-verified { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 480px; margin: -18px auto 32px; }
+  .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 28px; margin-bottom: 40px; }
+  .footer-links a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: white; }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 1024px) {
+    .parcours-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
+    .parcours-card { min-height: 0; }
+  }
+  @media (max-width: 700px) {
+    nav { padding: 0 5%; height: 64px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .sobre-hero { padding: 130px 5% 70px; }
+    .parcours, .porque, .comece { padding-left: 5%; padding-right: 5%; }
+    .parcours-card { padding: 36px 28px; }
+    .frase-band { padding: 70px 5%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav>
+  <a href="/" class="nav-logo">Bender IA</a>
+  <ul class="nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/#guias">Guias</a></li>
+    <li><a href="/#ia-para-voce">IA para você</a></li>
+    <li><a href="/sobre.html" class="active">Sobre</a></li>
+    <li><a href="/#contact">Contratar</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Início</a>
+  <a href="/#guias">Guias</a>
+  <a href="/#ia-para-voce">IA para você</a>
+  <a href="/sobre.html">Sobre</a>
+  <a href="/#contact">Contratar</a>
+</div>
+
+<!-- ============== HERO ============== -->
+<section class="sobre-hero">
+  <div class="sobre-hero-inner">
+    <div class="sec-eyebrow">Sobre</div>
+    <h1>Experiência real antes da <em>inteligência artificial</em>.</h1>
+    <p class="sobre-hero-text">Há 13 anos, trabalho melhorando processos, decisões e resultados em empresas.</p>
+    <p class="sobre-hero-sub">Hoje, uso essa experiência para testar ferramentas, construir soluções e ensinar inteligência artificial de forma prática, útil e sem hype.</p>
+  </div>
+</section>
+
+<!-- ============== PARCOURS ============== -->
+<section class="parcours">
+  <div class="parcours-inner">
+    <h2>Da gestão à <em>inteligência artificial</em></h2>
+    <div class="parcours-grid">
+      <div class="parcours-card">
+        <div class="parcours-num">13 anos</div>
+        <h3>Consultoria e processos</h3>
+        <p>Melhorando processos, operações e decisões em empresas.</p>
+        <div class="parcours-destaque">Mais de 150 M€ em economias geradas por projetos de consultoria.</div>
+      </div>
+      <div class="parcours-card">
+        <div class="parcours-num">30 M€</div>
+        <h3>Marketing e negócios digitais</h3>
+        <p>Gerenciados em mídia paga, conectando estratégia, aquisição e resultado.</p>
+        <div class="parcours-destaque">Mais de 8 M€ gerados em lançamentos digitais.</div>
+      </div>
+      <div class="parcours-card">
+        <h3>Construção com IA</h3>
+        <p>Hoje, transformo essa experiência em produtos, sistemas e aplicações concretas de inteligência artificial.</p>
+        <div class="parcours-destaque">Testo, construo e compartilho o que realmente funciona.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== POR QUE BENDER IA ============== -->
+<section class="porque">
+  <div class="porque-inner">
+    <h2>Por que <em>Bender IA</em>?</h2>
+    <p>Aprender IA não deveria significar correr atrás de cada ferramenta nova que aparece.</p>
+    <p>Meu trabalho é testar, filtrar e transformar inteligência artificial em aplicações que façam sentido para o trabalho, para os negócios e para projetos reais.</p>
+    <p>Aqui, você vai encontrar conteúdo prático, testes honestos e soluções construídas de verdade.</p>
+  </div>
+</section>
+
+<!-- ============== FRASE EM DESTAQUE ============== -->
+<section class="frase-band">
+  <p>A ferramenta muda.<br>O <em>critério</em> permanece.</p>
+</section>
+
+<!-- ============== COMECE POR AQUI ============== -->
+<section class="comece">
+  <div class="comece-inner">
+    <h2>Comece por <em>aqui</em></h2>
+    <p class="comece-text">Explore os guias para aprender e aplicar inteligência artificial de forma prática.</p>
+    <a href="/#guias" class="btn-primary">Explorar os guias <span class="arrow">→</span></a>
+    <div class="comece-sep"></div>
+    <p class="comece-text2">Tem um projeto ou desafio específico?</p>
+    <a href="/#contact" class="btn-text">Falar com a Telos →</a>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Bender IA</div>
+    <p class="footer-tagline">Experiência real. IA que você pode aplicar.</p>
+    <p class="footer-verified">A Telos Conect foi verificada pela Meta como fornecedora de tecnologia para integrações com o Instagram.</p>
+    <div class="footer-links">
+      <a href="/">Início</a>
+      <a href="/#guias">Guias</a>
+      <a href="/#ia-para-voce">IA para você</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/#contact">Contratar</a>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Telos Conect Serviços Ltda. Todos os direitos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile — même comportement que la homepage
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('show');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('show');
+      });
+    });
+  }
+  // Ombre de la nav au scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.pageYOffset > 50 ? '0 1px 20px rgba(10,22,40,0.06)' : 'none';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 entreprises avec l'IA qui n'ont encore aucune concurrence — Bender IA</title>
+<meta name="description" content="Les opportunités que l'IA a ouvertes et que presque personne n'a encore vues.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f5f7; --marine: #0a1628; --marine-soft: #1a2942; --teal: #2563b8;
+    --teal-soft: #1a4d8c; --text-muted: #5a6478; --text-light: #8a92a3;
+    --border: rgba(10,22,40,0.08); --border-strong: rgba(10,22,40,0.12);
+    --steel-gradient: linear-gradient(135deg, #a8d4f5 0%, #5a9fdb 25%, #2563b8 60%, #1a4d8c 100%);
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--marine); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,245,247,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+  .nav-logo { font-weight: 800; font-size: 18px; letter-spacing: -0.03em; color: var(--marine); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
+  .nav-links a.active { color: var(--marine); font-weight: 600; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--marine); border-radius: 2px; transition: all 0.3s; }
+  .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 24px 5%; z-index: 999; }
+  .mobile-menu.show { display: block; }
+  .mobile-menu a { display: block; font-size: 18px; font-weight: 600; color: var(--marine); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .article { padding: 140px 6% 80px; max-width: 1000px; margin: 0 auto; }
+  .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--teal-soft); font-weight: 600; text-decoration: none; margin-bottom: 40px; }
+  .article-meta { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
+  .article h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 40px; }
+  .article h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin: 48px 0 16px; }
+  .article h3 { font-size: 22px; font-weight: 700; margin: 36px 0 12px; }
+  .article p { font-size: 18px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
+  .article strong { color: var(--marine); font-weight: 600; }
+  .article a { overflow-wrap: anywhere; }
+  .article em { font-family: var(--font-display); font-style: italic; }
+  .text-lg { font-size: 22px; display: block; margin-bottom: 16px; }
+  .article ul, .article ol { margin-bottom: 24px; padding-left: 24px; }
+  .article li { font-size: 17px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
+  .article blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 32px 0; background: rgba(37,99,184,0.04); border-radius: 0 8px 8px 0; }
+  .article blockquote p { margin-bottom: 0; font-style: italic; }
+  .article code { background: rgba(10,22,40,0.06); padding: 2px 6px; border-radius: 4px; font-size: 15px; font-family: 'SF Mono', Monaco, monospace; }
+  .article img { max-width: 100%; border-radius: 12px; margin: 24px 0; box-shadow: 0 8px 24px -8px rgba(10,22,40,0.15); }
+  .article pre { background: var(--marine); color: rgba(255,255,255,0.85); padding: 24px; border-radius: 12px; overflow-x: auto; margin: 32px 0; }
+  .article pre code { background: none; padding: 0; color: inherit; }
+  .nl-box { background: var(--marine); border-radius: 16px; padding: 40px; text-align: center; margin: 60px 0; }
+  .nl-box h3 { color: white; font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+  .nl-box p { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 24px; }
+  .nl-box form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+  .nl-box input[type="email"] { flex: 1; padding: 14px 20px; border: 2px solid rgba(255,255,255,0.15); border-radius: 100px; font-size: 15px; font-family: var(--font-body); background: rgba(255,255,255,0.08); color: white; outline: none; }
+  .nl-box input::placeholder { color: rgba(255,255,255,0.4); }
+  .nl-box button { background: var(--steel-gradient); color: white; font-weight: 700; padding: 14px 28px; border-radius: 100px; border: none; font-size: 15px; cursor: pointer; white-space: nowrap; }
+  footer { background: var(--marine); color: white; padding: 70px 6% 32px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .footer-logo { font-weight: 800; font-size: 22px; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .footer-tagline { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+  .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 28px; margin-bottom: 40px; }
+  .footer-links a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; }
+  .footer-links a:hover { color: white; }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+  @media (max-width: 700px) { nav { padding: 0 5%; height: 64px; } .nav-links { display: none; } .nav-hamburger { display: flex; } .nl-box form { flex-direction: column; } .nl-box button { width: 100%; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Bender IA</a>
+  <ul class="nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/blog" class="active">Guias</a></li>
+    <li><a href="/#ia-para-voce">IA para você</a></li>
+    <li><a href="/sobre.html">Sobre</a></li>
+    <li><a href="/#contact">Contratar</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Início</a>
+  <a href="/blog">Guias</a>
+  <a href="/#ia-para-voce">IA para você</a>
+  <a href="/sobre.html">Sobre</a>
+  <a href="/#contact">Contratar</a>
+</div>
+<article class="article">
+  <a href="/blog" class="article-back">← Voltar para os guias</a>
+  <div class="article-meta">9 de maio de 2026 · 10 min de leitura</div>
+  <h1>6 entreprises avec l'IA qui n'ont encore aucune concurrence</h1>
+  <p>
+<strong>Bender IA   |   9 mai 2026</strong></p><p>C'est peut-être le meilleur moment de l'histoire pour entreprendre. Et je ne dis pas ça à la légère.</p><p>Avant, le goulot d'étranglement, c'était de construire le produit. Tu avais une idée, mais il te fallait un demi-million d'euros, une équipe de six développeurs et huit mois pour avoir un MVP sur pied. Aujourd'hui, avec l'IA, ce problème a disparu.
+Sauf qu'un autre est apparu : <strong>savoir quoi construire.</strong></p><p>C'est pourquoi j'adore suivre le Request for Startups que <strong>Y Combinator</strong> (l'accélérateur de startups le plus célèbre et le plus performant au monde) publie tous les trois mois. Ils listent les types de business qu'ils veulent voir construits. Et comme il y a beaucoup de gens très connectés là-dedans — investisseurs, fondateurs, gens qui vivent la Silicon Valley — cette liste devient un vrai thermomètre de ce qui a une réelle chance de marcher.</p><p>
+<img src="/images/img-1778367008989.png" alt="image" style="max-width:100%;border-radius:12px;margin:16px 0;"></p><p><div style="text-align:center"><a href="https://www.ycombinator.com/rfs" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">https://www.ycombinator.com/rfs</a></div></p><p>J'ai pris la liste de l'été et du printemps 2026, j'ai sélectionné celles que je trouve les plus réalisables (sans hard tech, sans besoin de capex astronomique) et j'ai mis de côté <strong>6 idées que je ferais moi-même si j'avais le temps.</strong></p><p>Laisse-moi te dire lesquelles.</p><p>
+<span class="text-lg"><strong>1. Les services natifs IA</strong></span>
+
+
+La première thèse est probablement celle que je préfère le plus.
+
+L'idée est simple : au lieu de prendre quelque chose, de l'automatiser et de vendre cette automatisation comme un SaaS, tu automatises et tu <strong>vends comme un service</strong>. Autrement dit : tu utilises l'automatisation pour toi-même délivrer le service mieux que tes concurrents.</p><p>Pour être plus concret : imagine que tu maîtrises la comptabilité. Par la voie SaaS, tu créerais un logiciel pour comptables et tu le vendrais aux comptables (ton client, c'est le comptable). Par la voie du service, tu automatises la comptabilité et tu la vends directement au client final. Ton ancien client devient ton concurrent.</p><p>Et pourquoi je trouve ça génial ?</p><p><strong>Le marché des services est absurdement plus grand que celui du SaaS.</strong> On parle de <strong>17 000 milliards de dollars contre 465 milliards.</strong> Le SaaS, qui semble énorme isolément, est environ 20 fois plus petit que le marché des services. En positionnant ton activité comme un service (même avec tout un appareil technologique derrière), tu vises un marché <strong>BEAUCOUP</strong> plus grand.</p><p>Autres avantages :</p><p><strong>- Moins de risque de churn.</strong> Un SaaS que personne n'utilise, on annule. Un service, tu le livres, donc le client en a toujours profité.</p><p><strong>- Tu fais payer beaucoup plus cher.</strong> Tu ne vends pas une licence logicielle, tu vends un résultat. Ça peut être 10 €/mois de SaaS contre 200 €/mois de service.</p><p><strong>- Marge énorme.</strong> Si ton concurrent a besoin de 10 personnes pour livrer et toi d'une seule, ta marge est incomparable.</p><p>La référence qui m'a le plus marquée : un de mes connaissances était managing director d'un cabinet d'avocats à Paris avec 300 personnes. Il a démissionné pour monter son propre cabinet avec <strong>seulement 4 avocats</strong>, tous équipés d'IA de bout en bout, en proposant de délivrer ce que ce cabinet de 300 personnes délivrait.</p><p>Autre exemple que j'ai vécu de l'intérieur : quand j'ai vendu mon entreprise, la due diligence (la partie bureaucratique du M&A où l'acheteur évalue des milliers de documents) a été réalisée par un cabinet externe qui a passé des mois à examiner document par document. Aujourd'hui tu ferais ça avec beaucoup moins de personnes avec un bon usage de l'IA.</p><p></p><p><strong><span class="text-lg">2. Company Brain</span></strong>
+
+
+Pendant longtemps, le goulot d'étranglement pour utiliser l'IA en entreprise, c'était le modèle. Aujourd'hui les modèles sont suffisamment bons. <strong>Le nouveau goulot d'étranglement, c'est le contexte.</strong></p><p>Les modèles ne connaissent pas ton business. Pour que l'IA fasse quelque chose d'utile dans ton entreprise, elle a besoin de contexte : comment vous faites l'onboarding, quel est le processus de recrutement, comment vous répondez à un incident de sécurité, etc.</p><p>Ce contexte est aujourd'hui éparpillé partout : dans la tête des dirigeants, sur Slack, WhatsApp, dans des fils de mails, sur Notion, dans des PDF internes. Tout ça a été fait pour des <strong>humains</strong>, pas pour des agents.</p><p>Le <strong>Company Brain</strong> est la source unique de vérité de toute la connaissance de ton entreprise : un endroit centralisé où l'IA peut consommer du contexte à la demande. L'idée est de transformer cette connaissance en un ensemble <strong>de prompts, de skills et de connecteurs</strong> pour que l'IA accède à ce dont elle a besoin, au moment où elle en a besoin.
+Elle ne reçoit pas tout d'un coup : tu lui dis "à chaque fois que tu fais un remboursement, lis le manuel de remboursement. À chaque fois que tu écris une newsletter, lis la skill de newsletter."</p><p>Pourquoi c'est un business gigantesque ?<strong> Les systems of records.</strong> Le CRM est le system of records des clients. Le HCM est celui des RH. L'ERP celui des finances. GitHub celui du code. Et dès que tu stockes une information vitale d'une entreprise, le switching cost (le coût de migration vers un autre système) est extrêmement élevé. Quiconque a vécu une migration de CRM sait à quel cauchemar ça ressemble.</p><p>Dans ma tête, le <strong>Company Brain est le system of records des manuels des agents</strong> qui travaillent dans ton entreprise. Il a donc un moat. Donc c'est un grand business.</p><p>Deux références :</p><p><strong>- Second Brain de Karpathy</strong> (founding team d'OpenAI, créateur du terme "vibe coding"). Il a lancé un projet open source sur GitHub en suivant la méthodologie de Tiago Forte pour capturer, organiser, distiller et exprimer l'information. Ça a explosé sur X.
+<strong>- G-Brain de Garry Tan</strong> (CEO de Y Combinator). Projet open source proposé comme le "second brain du fondateur", il stocke les personnes de l'entreprise, les projets, les objectifs, les décisions.</p><p>Les deux sont des versions personnelles du concept. L'opportunité est de construire la version à l'échelle de toute l'entreprise.</p><p>
+<strong><span class="text-lg">3. Les Hedge Funds natifs IA</span></strong>
+
+
+Cette thèse m'<strong>obsède.</strong></p><p>Contexte rapide : dans les années 80, les fonds ont commencé à utiliser l'ordinateur pour l'analyse de marché. Ça a donné naissance à toute une discipline appelée le <strong>quant trading </strong>(utiliser les mathématiques et les algorithmes pour prendre des décisions d'investissement). On est maintenant à un nouveau point d'inflexion avec l'IA.</p><p>Et c'est intéressant : les grands fonds aujourd'hui adoptent l'IA <strong>très lentement.</strong> J'ai eu une longue conversation avec un ami et il m'a dit que dans beaucoup de fonds, la conformité bloque même ChatGPT. C'est un autre monde.</p><p>Mais le point principal : l'avantage compétitif NE viendra PAS de l'utilisation de l'IA pour optimiser des stratégies existantes (tout le monde le fera). L'avantage vient de <strong>créer des stratégies d'investissement qui n'existent que parce que l'IA existe.</strong></p><p>Exemple : sans IA, tu ne peux pas lire toutes les transcriptions d'earnings calls de centaines d'entreprises, les croiser avec des données Glassdoor, LinkedIn, des tickers boursiers, des faits significatifs réglementaires, en temps réel. Ce volume et cette corrélation débloquent des stratégies totalement nouvelles.</p><p>Trois projets à surveiller :</p><p><img src="/images/img-1778367744360.png" alt="image" style="max-width:100%;border-radius:12px;margin:16px 0;">
+<div style="text-align:center"><a href="https://alpaca.markets" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">https://alpaca.markets</a></div></p><p><strong>- Alpaca :</strong> API d'achat et de vente d'actions. Tu y branches un agent directement. (Attention : nécessite une résidence fiscale aux États-Unis, pas encore disponible en France.)
+<strong>- TradingAgents :</strong> open source sur GitHub, <strong>66 000 stars,</strong> framework d'agents pour le trading financier.
+<strong>- DeerFlow :</strong> agent autonome pour la recherche financière, 23 000 stars.</p><p>Deux des 10 projets les plus consultés sur GitHub aujourd'hui sont dans la finance. <strong>Le signal est clair.</strong></p><p><strong>Passe de "j'ai une idée" à "je construis"</strong></p><p>99% des personnes qui lisent cette newsletter ne vont absolument rien construire. Si tu veux faire partie du 1% qui va concrétiser, ta place est sur <strong>ma chaîne YouTube.</strong></p><p>C'est là que je te montre le chemin complet pour créer et lancer des produits avec l'IA, même sans savoir coder.<a href="https://www.youtube.com/@MarckBender" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">https://www.youtube.com/@MarckBender</a></p><p>
+ 
+<strong><span class="text-lg">4. Les SaaS Challengers</span></strong>
+
+
+
+Dans la Silicon Valley, on ne parle que d'une chose : <strong>"Le SaaS est mort."</strong></p><p>Et les chiffres ne mentent pas. La croissance des revenus des entreprises SaaS a chuté de <strong>58 % entre 2021 et le premier trimestre 2025.</strong> En 2020, 60 % des entreprises SaaS étaient valorisées à 10x leurs revenus ou plus. Aujourd'hui, elles ne sont plus que <strong>5 %.</strong> Le ciel s'est assombri.</p><p>Pourquoi ? Il y a quatre ans, faire du logiciel était extrêmement cher. Tu n'aurais jamais envisagé de construire ton propre CRM, tu achetais celui qui existait. Aujourd'hui, faire du logiciel est devenu tellement bon marché que l'équation <strong>"acheter vs construire" </strong>a complètement changé.</p><p>Trois opportunités s'ouvrent alors :</p><p><strong>1.Prendre un SaaS existant et vendre une version 10x moins chère.</strong> Stratégie pour casser les genoux de l'incumbent. Honnêtement, je n'aime pas me battre sur les prix, mais ça fonctionne.</p><p><strong>2.Créer la version AI-native de ce produit</strong>. Attention : AI-native, c'est TRÈS différent de "vieux produit auquel on a greffé de l'IA". Ce sont des choses opposées.</p><p><strong>3.Faire de l'open source + vendre le service/l'hébergement.</strong> C'est mon préférée. Firecrawl <strong>a plus de 600 000 clients,</strong> le code est entièrement open source, et ils gagnent de l'argent en hébergeant le projet pour leurs clients.</p><p>Et tu es protégée parce que les incumbents <strong>ne feront pas ça.</strong> Imagine Salesforce lancer une version 10x moins chère de son propre outil, ou passer en open source. Ils cannibaliseraient leur produit principal. Ça n'arrivera pas. C'est pourquoi cette fenêtre est ouverte.</p><p>
+<strong><span class="text-lg">5. Les logiciels pour Agents</span></strong>
+
+C'est l'une de celles que je trouve les plus sous-estimées.
+
+La plupart des gens aujourd'hui construisent des produits en pensant que ce sont <strong>d'autres humains</strong> qui vont les utiliser. Sauf que de plus en plus, ceux qui utiliseront nos produits ne seront pas des humains — ce seront des agents. Aujourd'hui même j'ai laissé Claude utiliser une plateforme que j'utilise pour découvrir des vidéos qui explosent sur LinkedIn. C'est Claude qui a cliqué sur les boutons, pas moi.</p><p><strong>Et un agent n'opère pas un produit de la même façon qu'un humain :</strong></p><p>L'humain veut une belle interface, un tutoriel, un wizard d'onboarding.
+L'agent veut de la documentation, des skills, du MCP, une CLI (ligne de commande), une API.
+Ce sont des choses radicalement différentes. C'est pourquoi il faut des logiciels construits <strong>spécifiquement</strong> pour les agents.</p><p>La référence la plus intéressante que j'ai vue récemment : <strong>Stripe a lancé Link — un "wallet de paiement pour agent".</strong> Quand Open Claude est sorti, des gens laissaient l'agent faire des achats directement avec leur carte de crédit (de la folie). Link crée une couche sécurisée : tu définis ce que l'agent peut acheter et combien, sans perdre le contrôle.</p><p>
+<img src="/images/img-1778368200384.png" alt="image" style="max-width:100%;border-radius:12px;margin:16px 0;">
+<div style="text-align:center"><a href="https://stripe.com/blog/giving-agents-the-ability-to-pay" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">https://stripe.com/blog/giving-agents-the-ability-to-pay</a></div></p><p>
+Maintenant pense à tout ce qui passe sur ta carte de crédit chaque mois. Chaque SaaS, chaque outil, chaque onglet ouvert dans ton Chrome. À quoi ressemblerait la version de ce logiciel pour agents ? <strong>Chaque réponse à cette question peut être un business.</strong></p><p>
+<strong><span class="text-lg">6. Les agences natives IA</span></strong>
+
+
+Dernière thèse, et celle-ci me touche personnellement parce que je viens du monde de la publicité.
+
+Historiquement, les agences ont toujours été un cauchemar à faire évoluer. À chaque nouveau client, tu embauches du monde. Tu perds un client, tu licencies. Marge très faible, beaucoup de travail manuel, beaucoup de déclinaison artisanale de la stratégie.
+
+Et le logiciel que les agences utilisent aujourd'hui (Canva, Photoshop, After Effects) est vendu avec l'espoir que c'est <strong>le client qui fera le travail.</strong> On te vend After Effects en espérant que tu vas animer toi-même. C'est du travail refilé au client.</p><p>L'agence AI-native inverse ça : <strong>tu fais le travail avec le logiciel et tu livres le résultat prêt à l'emploi.</strong> Le client paie pour la livraison, pas pour l'outil.</p><p>Les conséquences sont énormes :</p><p><strong>- Beaucoup moins de personnes.</strong> Une vidéo que j'ai postée en Reels la semaine dernière aurait nécessité environ 3 personnes avant. Je l'ai faite seule en 3 heures.</p><p><strong>- Marge de logiciel, en livrant du service.</strong> Facturer 1 000 € ce qui te coûtait 800 € avant et qui te coûte désormais 100 €. Marge très élevée.</p><p><strong>- Un tout autre niveau de service.</strong> Un de mes abonnés a regardé mes vidéos sur les landing pages, créé une LP pour un client, pris rendez-vous, <strong>arrivé avec le site tout prêt et a signé pour 2 500 €.</strong> Avant, tu n'aurais jamais fait un site sans savoir si la personne allait signer.</p><p>Les agences du futur ressembleront bien plus à des <strong>logiciels</strong> qu'à des services. Plus scalables que n'importe quelle agence de publicité ne l'a jamais été.</p><p>
+<strong><span class="text-lg">En résumé</span></strong>
+
+Pour conclure, les 6 opportunités à nouveau :
+
+<strong>1.Services natifs IA</strong> — automatise et vends du service (pas du SaaS) pour viser le marché de 17 000 milliards de dollars</p><p><strong>2.Company Brain</strong> — source unique de vérité du contexte pour les agents, avec le moat d'un system of records</p><p><strong>3.Hedge Funds natifs IA</strong> — stratégies d'investissement qui n'existent que parce que l'IA existe</p><p><strong>4.SaaS Challengers</strong> — open source + service, ou versions AI-native, ou 10x moins chers que les incumbents</p><p><strong>5.Logiciels pour agents</strong> — produits pensés pour que des agents les opèrent, pas des humains</p><p><strong>6.Agences natives IA</strong> — marge de logiciel en livrant du service, un tout autre niveau de service</p><p>Et non, <strong>tu n'as pas besoin d'être dev pour construire l'un de ces business.</strong> La différence entre ceux qui vont construire les prochains business à un milliard et ceux qui vont rester sur le carreau ne tient pas au fait de savoir programmer, mais à savoir voir là où l'IA est en train de changer structurellement chaque marché.</p><p>Maintenant, c'est à toi de jouer. 🚀</p>
+  <div class="nl-box">
+    <h3>Receba os próximos guias no seu e-mail.</h3>
+    <p>Conteúdos práticos, testes honestos e aplicações úteis de IA.</p>
+    <form id="nl-form"><input type="email" placeholder="Seu melhor e-mail" required><button type="submit">Quero receber</button></form>
+  </div>
+</article>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Bender IA</div>
+    <p class="footer-tagline">Experiência real. IA que você pode aplicar.</p>
+    <div class="footer-links">
+      <a href="/">Início</a>
+      <a href="/blog">Guias</a>
+      <a href="/#ia-para-voce">IA para você</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/#contact">Contratar</a>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Telos Conect Serviços Ltda. Todos os direitos reservados.</span></div>
+  </div>
+</footer>
+<script>
+const f=document.getElementById('nl-form'),e=f.querySelector('input'),b=f.querySelector('button');
+f.addEventListener('submit',async ev=>{ev.preventDefault();b.disabled=true;b.textContent='Enviando...';
+try{const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e.value})});
+if(r.ok){b.textContent='Inscrição confirmada!';e.value='';}else b.textContent='Tente novamente';}catch{b.textContent='Tente novamente';}
+b.disabled=false;setTimeout(()=>{b.textContent='Quero receber';},3000);});
+const h=document.getElementById('nav-hamburger'),m=document.getElementById('mobile-menu');
+if(h&&m){h.addEventListener('click',()=>{h.classList.toggle('active');m.classList.toggle('show');});}
+</script>
+</body>
+</html>
