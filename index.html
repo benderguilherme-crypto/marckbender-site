@@ -185,7 +185,7 @@
   .guia-link { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--teal-soft); transition: gap 0.2s; }
   .guia-card:hover .guia-link { gap: 10px; }
   .guias-cta { text-align: center; margin-bottom: 72px; }
-  .guias-subscribe { max-width: 680px; margin: 0 auto; background: white; border: 1px solid var(--border); border-radius: 20px; padding: 44px 40px; text-align: center; }
+  .guias-subscribe { max-width: 680px; margin: 0 auto; background: white; border: 1px solid var(--border); border-radius: 20px; padding: 44px 40px; text-align: center; scroll-margin-top: 96px; }
   .guias-subscribe h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin-bottom: 8px; }
   .guias-subscribe p { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; }
   @media (max-width: 1024px) {
@@ -325,6 +325,14 @@
   .contratar-inner h2 em { font-family: var(--font-display); font-style: italic; font-weight: 400; }
   .contratar-text { font-size: 19px; color: var(--marine-soft); line-height: 1.65; margin-bottom: 12px; }
   .contratar-sub { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 36px; }
+  .projeto-form { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+  .projeto-form input[type="email"] { padding: 14px 20px; border: 2px solid var(--border-strong); border-radius: 100px; font-size: 15px; font-family: var(--font-body); background: white; outline: none; transition: border-color 0.2s; }
+  .projeto-form textarea { padding: 16px 20px; border: 2px solid var(--border-strong); border-radius: 20px; font-size: 15px; font-family: var(--font-body); background: white; outline: none; resize: vertical; min-height: 140px; line-height: 1.6; transition: border-color 0.2s; }
+  .projeto-form input[type="email"]:focus, .projeto-form textarea:focus { border-color: var(--teal); }
+  .projeto-form button { align-self: center; display: inline-flex; align-items: center; gap: 8px; background: var(--marine); color: white; font-weight: 700; padding: 15px 30px; border-radius: 100px; border: none; font-size: 15px; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; }
+  .projeto-form button:hover { background: var(--marine-soft); transform: translateY(-1px); }
+  .projeto-form button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   .contact-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
   .contact-text .sec-eyebrow { margin-bottom: 20px; }
   .contact-text h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: var(--marine); margin-bottom: 24px; }
@@ -405,7 +413,7 @@
     <li><a href="#contact">Contratar</a></li>
   </ul>
   <div class="nav-actions">
-    <a href="#guias" class="nav-cta">Inscreva-se <span>→</span></a>
+    <a href="#inscreva" class="nav-cta">Inscreva-se <span>→</span></a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -415,7 +423,7 @@
   <a href="#ia-para-voce">IA para você</a>
   <a href="/sobre.html">Sobre</a>
   <a href="#contact">Contratar</a>
-  <a href="#guias">Inscreva-se</a>
+  <a href="#inscreva">Inscreva-se</a>
 </div>
 
 <!-- ============== HERO ============== -->
@@ -502,7 +510,7 @@
     <div class="guias-cta">
       <a href="/blog" class="btn-primary">Ver todos os guias <span class="arrow">→</span></a>
     </div>
-    <div class="guias-subscribe">
+    <div class="guias-subscribe" id="inscreva">
       <h3>Receba os próximos guias no seu e-mail.</h3>
       <p>Conteúdos práticos, testes honestos e aplicações úteis de IA.</p>
       <form class="newsletter-form" id="guias-newsletter-form">
@@ -591,10 +599,16 @@
 <section class="contact" id="contact">
   <div class="contratar-inner">
     <div class="sec-eyebrow">Contratar</div>
-    <h2>Vamos falar sobre o seu <em>projeto</em>?</h2>
-    <p class="contratar-text">Tem um processo para melhorar, uma solução para construir ou um desafio específico envolvendo inteligência artificial?</p>
-    <p class="contratar-sub">Conte o que você precisa. A Telos analisa o contexto e avalia a melhor forma de ajudar.</p>
-    <a href="mailto:contact@marckbender.com" class="btn-primary">Falar sobre meu projeto <span class="arrow">→</span></a>
+    <h2>Conte o que você quer <em>construir</em>.</h2>
+    <p class="contratar-sub">Não precisa preparar um briefing. Escreva como você explicaria o projeto em uma conversa.</p>
+    <form class="projeto-form" id="projeto-form">
+      <input type="email" id="projeto-email" placeholder="Seu melhor e-mail" autocomplete="email" required>
+      <textarea id="projeto-mensagem" placeholder="O que você quer criar, melhorar ou automatizar?" rows="5" minlength="20" maxlength="3000" required></textarea>
+      <!-- Honeypot anti-robots : invisible pour les visiteurs, rempli uniquement par les bots -->
+      <input type="text" id="projeto-website" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" id="projeto-btn">Enviar projeto <span class="arrow">→</span></button>
+    </form>
+    <div class="newsletter-msg" id="projeto-msg"></div>
   </div>
 </section>
 
@@ -655,6 +669,19 @@
     const nav = document.querySelector('nav');
     nav.style.boxShadow = window.pageYOffset > 50 ? '0 1px 20px rgba(10,22,40,0.06)' : 'none';
   });
+
+  // CTA "Inscreva-se" — après le défilement fluide vers #inscreva, focus dans le champ e-mail.
+  // preventScroll évite que le focus interrompe l'animation de scroll en cours.
+  const focusNewsletterEmail = (delay) => {
+    setTimeout(() => {
+      const input = document.getElementById('guias-newsletter-email');
+      if (input) input.focus({ preventScroll: true });
+    }, delay);
+  };
+  document.querySelectorAll('a[href="#inscreva"]').forEach(a => {
+    a.addEventListener('click', () => focusNewsletterEmail(700));
+  });
+  if (location.hash === '#inscreva') focusNewsletterEmail(800);
 
   // YouTube latest video
   (async function() {
@@ -745,6 +772,46 @@
         gMsg.className = 'newsletter-msg error';
       }
       gBtn.disabled = false; gBtn.textContent = 'Quero receber';
+    });
+  }
+
+  // Formulaire "Enviar projeto" — envoi vers /api/send-project, sur la même page.
+  // Le bouton désactivé pendant l'envoi empêche les doubles soumissions.
+  const pForm = document.getElementById('projeto-form');
+  if (pForm) {
+    const pEmail = document.getElementById('projeto-email');
+    const pMensagem = document.getElementById('projeto-mensagem');
+    const pHoneypot = document.getElementById('projeto-website');
+    const pBtn = document.getElementById('projeto-btn');
+    const pMsg = document.getElementById('projeto-msg');
+    pForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (pBtn.disabled) return;
+      pMsg.textContent = ''; pMsg.className = 'newsletter-msg';
+      const message = pMensagem.value.trim();
+      if (message.length < 20) {
+        pMsg.textContent = 'Conte um pouco mais sobre o projeto (mínimo 20 caracteres).';
+        pMsg.className = 'newsletter-msg error';
+        return;
+      }
+      const btnLabel = pBtn.innerHTML;
+      pBtn.disabled = true; pBtn.textContent = 'Enviando...';
+      try {
+        const res = await fetch('/api/send-project', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: pEmail.value, message, website: pHoneypot.value }) });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          pForm.reset();
+          pMsg.textContent = 'Projeto enviado! Você recebe uma resposta em breve.';
+          pMsg.className = 'newsletter-msg success';
+        } else {
+          pMsg.textContent = data.error || 'Não foi possível enviar. Tente novamente.';
+          pMsg.className = 'newsletter-msg error';
+        }
+      } catch {
+        pMsg.textContent = 'Erro de conexão. Tente novamente.';
+        pMsg.className = 'newsletter-msg error';
+      }
+      pBtn.disabled = false; pBtn.innerHTML = btnLabel;
     });
   }
 </script>

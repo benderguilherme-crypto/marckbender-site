@@ -50,8 +50,8 @@
   .guias-intro { font-size: clamp(18px, 16px + 0.4vw, 21px); color: var(--marine-soft); line-height: 1.6; margin-bottom: 12px; }
   .guias-sub { font-size: 16px; color: var(--text-muted); line-height: 1.7; max-width: 620px; margin: 0 auto; }
 
-  /* === GRILLE === */
-  .blog-grid { max-width: 1200px; margin: 0 auto; padding: 40px 6% 120px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  /* === GRILLE — cartes em destaque (3 premiers articles) === */
+  .blog-grid { max-width: 1200px; margin: 0 auto; padding: 40px 6% 100px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 380px)); justify-content: center; gap: 32px; }
   .blog-card { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
   .blog-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: 0 20px 50px -20px rgba(10,22,40,0.15); }
   .blog-card-img { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--marine) 0%, var(--marine-soft) 100%); }
@@ -64,6 +64,16 @@
   .blog-card-link::after { content: '→'; }
 
   .blog-empty { text-align: center; padding: 80px 6% 120px; color: var(--text-muted); font-size: 18px; }
+
+  /* === LISTE COMPACTE — articles suivants, sans miniature (masquée si vide) === */
+  .blog-list-wrap { max-width: 860px; margin: 0 auto; padding: 0 6% 120px; }
+  .blog-list-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin-bottom: 12px; }
+  .blog-row { display: flex; align-items: baseline; gap: 20px; padding: 20px 4px; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .blog-row:first-of-type { border-top: 1px solid var(--border); }
+  .blog-row-date { font-size: 13px; color: var(--text-light); font-weight: 500; white-space: nowrap; min-width: 120px; }
+  .blog-row-title { flex: 1; font-size: 17px; font-weight: 700; color: var(--marine); line-height: 1.4; transition: color 0.2s; }
+  .blog-row::after { content: '→'; color: var(--teal-soft); font-weight: 600; }
+  .blog-row:hover .blog-row-title { color: var(--teal-soft); }
 
   /* === FOOTER === */
   footer { background: var(--marine); color: white; padding: 70px 6% 32px; }
@@ -84,6 +94,10 @@
     .nav-hamburger { display: flex; }
     .guias-header { padding: 130px 5% 50px; }
     .blog-grid { padding-left: 5%; padding-right: 5%; }
+    .blog-list-wrap { padding-left: 5%; padding-right: 5%; }
+    .blog-row { flex-direction: column; gap: 4px; padding: 16px 4px; }
+    .blog-row-date { min-width: 0; }
+    .blog-row::after { display: none; }
   }
 </style>
 </head>
@@ -123,6 +137,12 @@
 </div>
 <div class="blog-empty" id="blog-empty" style="display:none;">Nenhum guia por enquanto. Volte em breve.</div>
 
+<!-- ============== LISTE COMPACTE (affichée seulement s'il reste des articles après les 3 en destaque) ============== -->
+<div class="blog-list-wrap" id="blog-list-wrap" style="display:none;">
+  <h2 class="blog-list-title">Mais guias</h2>
+  <div id="blog-list"></div>
+</div>
+
 <!-- ============== FOOTER ============== -->
 <footer>
   <div class="footer-inner">
@@ -155,12 +175,19 @@ const ARTICLES = [
 
 const grid = document.getElementById('blog-grid');
 const empty = document.getElementById('blog-empty');
+const listWrap = document.getElementById('blog-list-wrap');
+const list = document.getElementById('blog-list');
+
+// Les 3 premiers articles (déjà triés du plus récent au plus ancien par le build)
+// deviennent des cartes en destaque ; les suivants alimentent la liste compacte.
+const featured = ARTICLES.slice(0, 3);
+const rest = ARTICLES.slice(3);
 
 if (ARTICLES.length === 0) {
   grid.style.display = 'none';
   empty.style.display = 'block';
 } else {
-  ARTICLES.forEach(a => {
+  featured.forEach(a => {
     const card = document.createElement('a');
     card.href = `/blog/${a.slug}.html`;
     card.style.textDecoration = 'none';
@@ -207,6 +234,28 @@ if (ARTICLES.length === 0) {
     card.appendChild(body);
     grid.appendChild(card);
   });
+
+  // Liste compacte — chaque ligne est un lien <a> entièrement cliquable
+  if (rest.length > 0) {
+    listWrap.style.display = 'block';
+    rest.forEach(a => {
+      const row = document.createElement('a');
+      row.className = 'blog-row';
+      row.href = `/blog/${a.slug}.html`;
+
+      const dateEl = document.createElement('span');
+      dateEl.className = 'blog-row-date';
+      dateEl.textContent = new Date(a.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      const titleEl = document.createElement('span');
+      titleEl.className = 'blog-row-title';
+      titleEl.textContent = a.title;
+
+      row.appendChild(dateEl);
+      row.appendChild(titleEl);
+      list.appendChild(row);
+    });
+  }
 }
 
 // Menu mobile — même comportement que la homepage

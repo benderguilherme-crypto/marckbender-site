@@ -63,6 +63,11 @@ if (fs.existsSync(ARTICLES_DIR)) {
   });
 }
 
+// Tri par date de publication décroissante — garantit que les 3 premiers de ARTICLES
+// sont bien les plus récents (les cartes "em destaque" de blog/index.html), même si
+// un fichier .md ne commence pas par sa date.
+articles.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+
 // Generate individual article pages
 articles.forEach(a => {
   if (!a.slug) return;
