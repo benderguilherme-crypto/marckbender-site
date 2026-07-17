@@ -1,0 +1,59 @@
+/* Painel de Guias — estética Bender IA, sem CDN (pilha de fontes do sistema) */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f5f7;
+  --marine: #0a1628;
+  --marine-soft: #1a2942;
+  --teal: #2563b8;
+  --teal-soft: #1a4d8c;
+  --text-muted: #5a6478;
+  --text-light: #8a92a3;
+  --border: rgba(10, 22, 40, 0.08);
+  --border-strong: rgba(10, 22, 40, 0.12);
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+}
+
+html { -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: var(--marine); font-family: var(--font-body); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+
+.hidden { display: none !important; }
+
+.state { min-height: 100vh; }
+
+/* === Carregamento === */
+#state-loading { display: flex; align-items: center; justify-content: center; }
+.loading-text { color: var(--text-light); font-size: 15px; }
+
+/* === Login === */
+#state-login { display: flex; align-items: center; justify-content: center; padding: 24px; }
+.card { width: 100%; max-width: 420px; background: white; border: 1px solid var(--border); border-radius: 20px; padding: 44px 40px; text-align: center; box-shadow: 0 20px 50px -20px rgba(10, 22, 40, 0.15); }
+.brand { font-weight: 800; font-size: 18px; letter-spacing: -0.03em; color: var(--marine); }
+.card .brand { margin-bottom: 24px; }
+h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 8px; }
+h1 em { font-family: var(--font-display); font-style: italic; font-weight: 400; color: var(--teal); }
+.subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+
+#login-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.field-label { font-size: 13px; font-weight: 700; color: var(--marine); }
+#login-password { padding: 14px 20px; border: 2px solid var(--border-strong); border-radius: 100px; font-size: 15px; font-family: var(--font-body); background: white; outline: none; transition: border-color 0.2s; }
+#login-password:focus { border-color: var(--teal); }
+#login-btn { background: var(--marine); color: white; font-weight: 700; font-size: 15px; font-family: var(--font-body); padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer; transition: all 0.2s; }
+#login-btn:hover { background: var(--marine-soft); transform: translateY(-1px); }
+#login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.msg-error { margin-top: 16px; font-size: 14px; font-weight: 500; color: #dc2626; }
+
+/* === Painel autenticado === */
+.panel-header { display: flex; align-items: center; justify-content: space-between; padding: 0 6%; height: 72px; background: rgba(245, 245, 247, 0.85); border-bottom: 1px solid var(--border); }
+.btn-ghost { background: none; border: 1px solid var(--border-strong); color: var(--marine); font-weight: 600; font-size: 14px; font-family: var(--font-body); padding: 9px 20px; border-radius: 100px; cursor: pointer; transition: all 0.2s; }
+.btn-ghost:hover { border-color: var(--teal); color: var(--teal-soft); }
+.panel-main { max-width: 860px; margin: 0 auto; padding: 64px 6%; }
+.panel-status { font-size: 14px; font-weight: 600; color: var(--teal-soft); margin: 12px 0 32px; }
+.panel-placeholder { background: white; border: 1px dashed var(--border-strong); border-radius: 16px; padding: 40px; color: var(--text-muted); font-size: 15px; text-align: center; }
+
+@media (max-width: 700px) {
+  .card { padding: 36px 24px; }
+  .panel-main { padding: 48px 5%; }
+}

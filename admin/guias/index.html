@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self'">
+<title>Painel de Guias — Bender IA</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Estado inicial: nada é exibido antes de conhecer o estado da sessão -->
+<div id="state-loading" class="state">
+  <p class="loading-text" aria-live="polite">Verificando sessão…</p>
+</div>
+
+<!-- Estado não autenticado -->
+<div id="state-login" class="state hidden">
+  <div class="card">
+    <div class="brand">Bender IA</div>
+    <h1>Painel de <em>Guias</em></h1>
+    <p class="subtitle">Acesso restrito à administração.</p>
+    <form id="login-form">
+      <label class="field-label" for="login-password">Senha</label>
+      <input type="password" id="login-password" autocomplete="current-password" placeholder="Digite a senha" required>
+      <button type="submit" id="login-btn">Entrar</button>
+    </form>
+    <p class="msg-error hidden" id="login-error" aria-live="polite"></p>
+  </div>
+</div>
+
+<!-- Estado autenticado: estrutura inicial (upload chega na próxima etapa) -->
+<div id="state-panel" class="state hidden">
+  <header class="panel-header">
+    <div class="brand">Bender IA</div>
+    <button id="logout-btn" class="btn-ghost">Sair</button>
+  </header>
+  <main class="panel-main">
+    <h1>Painel de <em>Guias</em></h1>
+    <p class="panel-status" aria-live="polite">Sessão autenticada.</p>
+    <div class="panel-placeholder">
+      <p>O envio de novos guias (PDF, capa e geração do texto) será adicionado na próxima etapa.</p>
+    </div>
+  </main>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
