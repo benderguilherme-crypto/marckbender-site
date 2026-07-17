@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loop Engineering — Bender IA</title>
+<meta name="description" content="Como construir agentes de IA que executam, verificam, corrigem e continuam trabalhando até atingir um resultado definido.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f5f7; --marine: #0a1628; --marine-soft: #1a2942; --teal: #2563b8;
+    --teal-soft: #1a4d8c; --text-muted: #5a6478; --text-light: #8a92a3;
+    --border: rgba(10,22,40,0.08); --border-strong: rgba(10,22,40,0.12);
+    --steel-gradient: linear-gradient(135deg, #a8d4f5 0%, #5a9fdb 25%, #2563b8 60%, #1a4d8c 100%);
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--marine); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,245,247,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+  .nav-logo { font-weight: 800; font-size: 18px; letter-spacing: -0.03em; color: var(--marine); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
+  .nav-links a.active { color: var(--marine); font-weight: 600; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--marine); border-radius: 2px; transition: all 0.3s; }
+  .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 24px 5%; z-index: 999; }
+  .mobile-menu.show { display: block; }
+  .mobile-menu a { display: block; font-size: 18px; font-weight: 600; color: var(--marine); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .article { padding: 140px 6% 80px; max-width: 1000px; margin: 0 auto; }
+  .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--teal-soft); font-weight: 600; text-decoration: none; margin-bottom: 40px; }
+  .article-meta { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
+  .guia-badge { display: inline-flex; align-items: center; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-soft); border: 1px solid var(--border-strong); border-radius: 100px; padding: 7px 16px; margin-bottom: 20px; }
+  .article-cat { color: var(--teal-soft); font-weight: 700; }
+  .article-desc { font-size: 21px; color: var(--text-muted); line-height: 1.6; margin-bottom: 32px; }
+  .article-cover { width: 100%; border-radius: 16px; margin: 0 0 40px; box-shadow: 0 20px 50px -20px rgba(10,22,40,0.25); display: block; }
+  .pdf-box { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 44px 40px; text-align: center; margin: 56px 0 0; }
+  .pdf-box h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin-bottom: 8px; }
+  .pdf-box p { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; }
+  .pdf-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--marine); color: white; font-weight: 700; font-size: 15px; padding: 15px 30px; border-radius: 100px; text-decoration: none; transition: all 0.2s; }
+  .pdf-btn:hover { background: var(--marine-soft); transform: translateY(-1px); }
+  .article h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 40px; }
+  .article h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin: 48px 0 16px; }
+  .article h3 { font-size: 22px; font-weight: 700; margin: 36px 0 12px; }
+  .article p { font-size: 18px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
+  .article strong { color: var(--marine); font-weight: 600; }
+  .article a { overflow-wrap: anywhere; }
+  .article em { font-family: var(--font-display); font-style: italic; }
+  .text-lg { font-size: 22px; display: block; margin-bottom: 16px; }
+  .article ul, .article ol { margin-bottom: 24px; padding-left: 24px; }
+  .article li { font-size: 17px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
+  .article blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 32px 0; background: rgba(37,99,184,0.04); border-radius: 0 8px 8px 0; }
+  .article blockquote p { margin-bottom: 0; font-style: italic; }
+  .article code { background: rgba(10,22,40,0.06); padding: 2px 6px; border-radius: 4px; font-size: 15px; font-family: 'SF Mono', Monaco, monospace; }
+  .article img { max-width: 100%; border-radius: 12px; margin: 24px 0; box-shadow: 0 8px 24px -8px rgba(10,22,40,0.15); }
+  .article pre { background: var(--marine); color: rgba(255,255,255,0.85); padding: 24px; border-radius: 12px; overflow-x: auto; margin: 32px 0; }
+  .article pre code { background: none; padding: 0; color: inherit; }
+  .nl-box { background: var(--marine); border-radius: 16px; padding: 40px; text-align: center; margin: 60px 0; }
+  .nl-box h3 { color: white; font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+  .nl-box p { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 24px; }
+  .nl-box form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+  .nl-box input[type="email"] { flex: 1; padding: 14px 20px; border: 2px solid rgba(255,255,255,0.15); border-radius: 100px; font-size: 15px; font-family: var(--font-body); background: rgba(255,255,255,0.08); color: white; outline: none; }
+  .nl-box input::placeholder { color: rgba(255,255,255,0.4); }
+  .nl-box button { background: var(--steel-gradient); color: white; font-weight: 700; padding: 14px 28px; border-radius: 100px; border: none; font-size: 15px; cursor: pointer; white-space: nowrap; }
+  footer { background: var(--marine); color: white; padding: 70px 6% 32px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .footer-logo { font-weight: 800; font-size: 22px; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .footer-tagline { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+  .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 28px; margin-bottom: 40px; }
+  .footer-links a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; }
+  .footer-links a:hover { color: white; }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+  @media (max-width: 700px) { nav { padding: 0 5%; height: 64px; } .nav-links { display: none; } .nav-hamburger { display: flex; } .nl-box form { flex-direction: column; } .nl-box button { width: 100%; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Bender IA</a>
+  <ul class="nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/blog" class="active">Guias</a></li>
+    <li><a href="/#ia-para-voce">IA para você</a></li>
+    <li><a href="/sobre.html">Sobre</a></li>
+    <li><a href="/#contact">Contratar</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Início</a>
+  <a href="/blog">Guias</a>
+  <a href="/#ia-para-voce">IA para você</a>
+  <a href="/sobre.html">Sobre</a>
+  <a href="/#contact">Contratar</a>
+</div>
+<article class="article">
+  <a href="/blog" class="article-back">← Voltar para os guias</a>
+  <div class="guia-badge">Guia gratuito do Bender IA</div>
+  <div class="article-meta"><span class="article-cat">Agentes de IA</span> · 8 de julho de 2026 · 7 min de leitura</div>
+  <h1>Loop Engineering</h1>
+  <p class="article-desc">Como construir agentes de IA que executam, verificam, corrigem e continuam trabalhando até atingir um resultado definido.</p>
+  <img class="article-cover" src="/public/images/guias/loop-engineering-cover.png" alt="">
+  <p>
+Nos últimos anos, uma das habilidades mais valorizadas em inteligência artificial foi escrever bons prompts: dar contexto, explicar a tarefa, definir o formato e corrigir a resposta até chegar ao resultado desejado. Essa habilidade continua importante, mas uma mudança mais profunda já começou. O prompt não está desaparecendo — ele está deixando de ser uma instrução isolada e passando a fazer parte de um sistema maior.</p><p>Em vez de conversar com a IA a cada nova etapa, você pode construir um processo no qual o agente encontra o trabalho, executa, verifica o resultado, corrige os erros, registra o progresso e continua até atingir uma condição previamente definida. É isso que vem sendo chamado de <strong>loop engineering</strong>: projetar processos em que a IA executa, verifica e continua até alcançar um resultado definido.</p><p><h2>O prompt mudou de função</h2></p><p>No uso tradicional, você entrega uma instrução e espera uma resposta. Depois analisa, identifica um problema, envia uma correção e aguarda de novo. Imagine revisar vinte páginas de um site: você pede a revisão da primeira, confere, aprova e passa para a próxima. A IA executa uma parte do trabalho, mas você continua no centro da operação, decidindo cada passo — o que falta, qual a próxima tarefa, quando o projeto terminou.</p><p>O loop altera essa dinâmica. Em vez de dizer o que o agente deve fazer a cada momento, você define antecipadamente como o processo inteiro deve funcionar.</p><p>A diferença central é simples: <strong>no prompt tradicional, você controla cada tarefa. No loop, você constrói o sistema que controla as tarefas.</strong></p><p><h2>Como funciona um loop de IA</h2></p><p>Um loop é um ciclo de execução que se repete até uma condição ser atendida. Em vez de receber uma tarefa única e parar, o agente recebe um objetivo, regras de funcionamento e critérios de conclusão. Um loop confiável costuma seguir cinco movimentos:</p><p><ul><li><strong>Encontrar o próximo trabalho.</strong> O agente precisa saber onde procurar o que falta: uma pasta, uma lista de tarefas, um arquivo <code>TODO.md</code>, um quadro de projetos ou um sistema conectado.</li><li><strong>Executar uma tarefa.</strong> Ele escolhe um item e o executa. É preferível concluir um item por vez em vez de mexer em tudo ao mesmo tempo — isso facilita a verificação e reduz conflitos.</li><li><strong>Verificar o resultado.</strong> O trabalho não está pronto só porque o agente produziu algo. É preciso evidência de que o resultado atende aos critérios: os testes passaram, o link abriu, o texto respeitou o limite, a compilação terminou sem erros.</li><li><strong>Corrigir o que falhou.</strong> Quando a verificação indica que ainda está errado, o agente identifica o problema e tenta de novo. A própria falha na validação inicia o próximo ciclo, sem você precisar escrever "tente novamente".</li><li><strong>Registrar e continuar.</strong> O agente anota o que concluiu, o que ficou bloqueado e o que vem depois. Se ainda há trabalho, o ciclo recomeça. Se todos os critérios foram atendidos, o processo para e apresenta um relatório.</li></ul></p><p>O ciclo completo é: <strong>encontrar → executar → verificar → corrigir → registrar → continuar ou parar.</strong></p><p><h2>Onde usar cada comando</h2></p><p>Este guia usa o Claude Code no Terminal. É importante separar dois ambientes: o Terminal normal do seu computador (onde você digita <code>cd /caminho/do/projeto</code> e depois <code>claude</code> para abrir a sessão) e a interface do Claude Code aberta dentro dele. Comandos como <code>/goal</code> e <code>/loop</code> só funcionam <strong>dentro</strong> de uma sessão ativa do Claude Code.</p><p><ul><li><strong>`/goal` — trabalhar até alcançar uma condição.</strong> Use quando existe uma linha de chegada verificável. Você informa a condição final e o Claude continua ao longo de vários turnos sem você escrever "continue". Ao fim de cada turno, um modelo avaliador separado checa se a condição foi atendida; caso contrário, começa outro turno. A condição precisa ser demonstrável: "deixe o projeto perfeito" é ruim; "todos os testes passam e <code>git status</code> está limpo" é verificável.</li><li><strong>`/loop` — repetir uma tarefa em intervalos.</strong> Use quando o processo não avança até uma conclusão, mas deve se repetir de tempos em tempos: acompanhar uma implantação, verificar se um site voltou ao ar, consultar uma fila. As tarefas de <code>/loop</code> pertencem à sessão atual e exigem que a máquina esteja disponível.</li><li><strong>Rotinas — quando o processo precisa rodar com o computador desligado.</strong> Uma rotina combina uma instrução, um ou mais repositórios e os conectores necessários. Pode ser acionada por horário, chamada de API ou evento do GitHub e roda em infraestrutura gerenciada, independente do seu computador.</li></ul></p><p><h2>Os cinco componentes que fortalecem um loop</h2></p><p>Os comandos são só o mecanismo que mantém a execução acontecendo. Para criar um sistema realmente útil, o agente também precisa de:</p><p><ul><li><strong>Automação.</strong> Define quando o processo começa ou recomeça. Reduz o esforço de iniciar cada execução, mas não melhora a qualidade sozinha — um processo ruim automatizado continua ruim, só mais rápido.</li><li><strong>Worktrees.</strong> Git worktrees permitem que cada sessão trabalhe em uma cópia isolada do projeto, em uma branch separada. Assim, um agente desenvolve uma funcionalidade enquanto outro corrige um problema, sem misturar as alterações.</li><li><strong>Skills.</strong> Uma skill é um arquivo com um procedimento reutilizável. Em vez de colar o mesmo checklist em toda conversa, você salva o procedimento uma vez e chama a skill quando precisa.</li><li><strong>Conectores (MCP).</strong> Permitem que o agente consulte serviços externos, bancos de dados e gestores de tarefas reais, não apenas arquivos locais. Configure com cuidado: dê só as permissões necessárias, principalmente quando há risco de enviar mensagens ou executar ações irreversíveis.</li><li><strong>Subagentes.</strong> O agente que executou uma tarefa nem sempre é o melhor para avaliar o próprio trabalho. Um subagente revisor, em modo somente leitura, analisa as alterações e verifica qualidade, segurança e testes de forma independente.</li></ul></p><p><h2>O elemento que conecta tudo: um objetivo verificável</h2></p><p>Nenhum desses recursos resolve o problema central de um loop mal construído: a ausência de uma definição clara de qualidade. Um agente só continua trabalhando com segurança quando existe uma forma objetiva de verificar o resultado.</p><p>Compare "melhore todos os artigos" com "revise todos os artigos da pasta <code>/blog</code>: cada título com no máximo 60 caracteres, cada descrição com no máximo 160, nenhum link com erro e o corpo do texto sem alterações; registre as contagens e o resultado de cada arquivo". A primeira depende de opinião subjetiva; a segunda define critérios que podem ser medidos.</p><p>Antes de construir qualquer loop, faça a pergunta que define o processo: <strong>qual evidência demonstra que este trabalho foi concluído corretamente?</strong> Se não houver resposta clara, a tarefa ainda não está pronta para rodar de forma autônoma.</p><p><h2>O Loop Charter na prática</h2></p><p>O <em>Loop Charter</em> não é um comando oficial — é o nome dado, neste guia, a um documento que descreve como o agente deve conduzir um processo: qual é o objetivo, onde encontrar o trabalho, como executar, como verificar, o que registrar, quais ações são proibidas e quando parar.</p><p>Ele pode ser usado de três formas: colado direto no Claude Code (bom para testar), salvo como arquivo do projeto ou transformado em skill. Uma estrutura eficiente separa três arquivos: <code>CLAUDE.md</code> com as regras permanentes do projeto, <code>LOOP-CHARTER.md</code> com o processo específico e <code>LOOP-STATE.md</code> com o progresso, os resultados e os bloqueios. O charter contém o método; o arquivo de estado contém o progresso; o <code>/goal</code> mantém a execução ativa até a linha de chegada.</p><p>O arquivo de estado cria continuidade. Sem ele, cada execução corre o risco de começar do zero, revisar itens já concluídos ou repetir uma tentativa que já falhou. Lido no início de cada execução, ele evita retrabalho — não precisa ser sofisticado, só claro e atualizado.</p><p><h2>Quando não usar loops, e como começar</h2></p><p>Nem toda tarefa precisa de um sistema autônomo. Escrever um e-mail ou resumir um documento curto é mais rápido com um prompt simples. Loops fazem sentido quando o trabalho é repetitivo, tem vários itens, segue regras estáveis e possui critérios verificáveis. Há também um custo: um loop que executa, verifica e corrige consome mais turnos e tokens que uma resposta única. Comece com poucos itens, acompanhe a primeira execução e defina limites.</p><p>A segurança é outra limitação. Um loop com permissão para excluir arquivos, publicar conteúdo ou modificar produção pode ampliar um erro rapidamente. As primeiras versões devem rodar com o menor conjunto possível de permissões. A regra central: <strong>um loop sem verificação não automatiza qualidade — apenas automatiza erros.</strong></p><p><h2>Conclusão prática</h2></p><p>Escolha um processo pequeno e incômodo que você já faz manualmente. Defina o resultado final, estabeleça três ou quatro critérios objetivos, limite a execução e acompanhe o primeiro teste. Só depois que o comportamento estiver previsível, transforme o charter em skill, adicione um subagente revisor, conecte ferramentas ou coloque o processo em uma rotina.</p><p>A sequência mais segura é: <strong>observar manualmente → testar com poucos itens → verificar → corrigir o processo → ampliar a autonomia.</strong></p><p>O avanço mais importante no uso de agentes de IA não está em abandonar os prompts, mas em parar de depender de um novo prompt a cada etapa. <em>Prompt engineering</em> ensina a dar boas instruções. <em>Loop engineering</em> ensina a construir um sistema que sabe quando executar, como verificar, quando corrigir e em qual momento parar.
+</p>
+  <div class="pdf-box">
+    <h3>Quer guardar este material para consultar depois?</h3>
+    <p>Baixe a versão em PDF deste guia.</p>
+    <a class="pdf-btn" href="/public/guias/loop-engineering.pdf" download>Baixar este guia em PDF ↓</a>
+  </div>
+  <div class="nl-box">
+    <h3>Receba os próximos guias no seu e-mail.</h3>
+    <p>Conteúdos práticos, testes honestos e aplicações úteis de IA.</p>
+    <form id="nl-form"><input type="email" placeholder="Seu melhor e-mail" required><button type="submit">Quero receber</button></form>
+  </div>
+</article>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Bender IA</div>
+    <p class="footer-tagline">Experiência real. IA que você pode aplicar.</p>
+    <div class="footer-links">
+      <a href="/">Início</a>
+      <a href="/blog">Guias</a>
+      <a href="/#ia-para-voce">IA para você</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/#contact">Contratar</a>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Telos Conect Serviços Ltda. Todos os direitos reservados.</span></div>
+  </div>
+</footer>
+<script>
+const f=document.getElementById('nl-form'),e=f.querySelector('input'),b=f.querySelector('button');
+f.addEventListener('submit',async ev=>{ev.preventDefault();b.disabled=true;b.textContent='Enviando...';
+try{const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e.value})});
+if(r.ok){b.textContent='Inscrição confirmada!';e.value='';}else b.textContent='Tente novamente';}catch{b.textContent='Tente novamente';}
+b.disabled=false;setTimeout(()=>{b.textContent='Quero receber';},3000);});
+const h=document.getElementById('nav-hamburger'),m=document.getElementById('mobile-menu');
+if(h&&m){h.addEventListener('click',()=>{h.classList.toggle('active');m.classList.toggle('show');});}
+</script>
+</body>
+</html>

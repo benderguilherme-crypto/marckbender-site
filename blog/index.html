@@ -51,11 +51,12 @@
   .guias-sub { font-size: 16px; color: var(--text-muted); line-height: 1.7; max-width: 620px; margin: 0 auto; }
 
   /* === GRILLE — cartes em destaque (3 premiers articles) === */
-  .blog-grid { max-width: 1200px; margin: 0 auto; padding: 40px 6% 100px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 380px)); justify-content: center; gap: 32px; }
-  .blog-card { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+  .blog-grid { max-width: 1200px; margin: 0 auto; padding: 40px 6% 100px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); justify-content: center; gap: 32px; }
+  .blog-card { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; max-width: 420px; width: 100%; margin: 0 auto; }
   .blog-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: 0 20px 50px -20px rgba(10,22,40,0.15); }
   .blog-card-img { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--marine) 0%, var(--marine-soft) 100%); }
   .blog-card-body { padding: 24px; }
+  .blog-card-cat { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-soft); margin-bottom: 8px; }
   .blog-card-date { font-size: 13px; color: var(--text-light); font-weight: 500; margin-bottom: 8px; }
   .blog-card-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--marine); margin-bottom: 12px; line-height: 1.3; }
   .blog-card-excerpt { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
@@ -165,11 +166,44 @@
 // Articles statiques — bloc regénéré à chaque build par build-blog.js (ne pas changer le format)
 const ARTICLES = [
   {
+    title: "Fable 5: como usar de forma estratégica",
+    date: "2026-07-16",
+    slug: "fable-5-como-usar-de-forma-estrategica",
+    excerpt: "Um método prático para transformar capacidade em resultado com contexto certo, critérios claros, execução em fases e revisão independente.",
+    image: "/public/images/guias/fable-5-como-usar-de-forma-estrategica-cover.png",
+    category: "Uso estratégico"
+  },
+  {
+    title: "Agente, Skill e Workflow",
+    date: "2026-07-14",
+    slug: "agente-skill-e-workflow",
+    excerpt: "As três camadas da IA: quem decide, o que sabe fazer e como o trabalho avança em um sistema que realmente executa.",
+    image: "/public/images/guias/agente-skill-e-workflow-cover.png",
+    category: "Arquitetura de IA"
+  },
+  {
+    title: "GPT-5.6: Sol, Terra e Luna",
+    date: "2026-07-11",
+    slug: "gpt-5-6-sol-terra-e-luna",
+    excerpt: "Um guia direto para escolher entre profundidade, equilíbrio e velocidade sem pagar por inteligência que a tarefa não precisa.",
+    image: "/public/images/guias/gpt-5-6-sol-terra-e-luna-cover.png",
+    category: "Modelos de IA"
+  },
+  {
+    title: "Loop Engineering",
+    date: "2026-07-08",
+    slug: "loop-engineering",
+    excerpt: "Como construir agentes de IA que executam, verificam, corrigem e continuam trabalhando até atingir um resultado definido.",
+    image: "/public/images/guias/loop-engineering-cover.png",
+    category: "Agentes de IA"
+  },
+  {
     title: "6 entreprises avec l'IA qui n'ont encore aucune concurrence",
     date: "2026-05-09",
     slug: "6-entreprises-avec-l-ia-qui-n-ont-encore-aucune-concurrence",
     excerpt: "Les opportunités que l'IA a ouvertes et que presque personne n'a encore vues.",
-    image: ""
+    image: "",
+    category: ""
   }
 ];
 
@@ -208,6 +242,14 @@ if (ARTICLES.length === 0) {
     // Corps de la carte — textContent empêche toute injection HTML
     const body = document.createElement('div');
     body.className = 'blog-card-body';
+
+    // Catégorie affichée seulement si présente (les anciens articles n'en ont pas)
+    if (a.category) {
+      const catEl = document.createElement('div');
+      catEl.className = 'blog-card-cat';
+      catEl.textContent = a.category;
+      body.appendChild(catEl);
+    }
 
     const dateEl = document.createElement('div');
     dateEl.className = 'blog-card-date';

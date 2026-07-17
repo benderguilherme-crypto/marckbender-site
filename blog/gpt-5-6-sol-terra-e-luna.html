@@ -1,83 +1,10 @@
-#!/usr/bin/env node
-// Build script: reads /articles/*.md and generates /blog/[slug].html + updates /blog/index.html
-const fs = require('fs');
-const path = require('path');
-
-const ARTICLES_DIR = path.join(__dirname, 'articles');
-const BLOG_DIR = path.join(__dirname, 'blog');
-
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return { meta: {}, body: content };
-  const meta = {};
-  match[1].split('\n').forEach(line => {
-    const [key, ...rest] = line.split(':');
-    if (key && rest.length) meta[key.trim()] = rest.join(':').trim().replace(/^"|"$/g, '');
-  });
-  return { meta, body: match[2] };
-}
-
-function mdToHtml(md) {
-  // Process bold/italic FIRST so they work inside HTML tags too
-  let text = md
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>');
-  // Then protect HTML blocks from other markdown processing
-  const htmlBlocks = [];
-  text = text.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+\/?>/gi, m => { htmlBlocks.push(m); return `%%HB${htmlBlocks.length - 1}%%`; });
-  text = text
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/`(.+?)`/g, '<code>$1</code>')
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:16px 0;">')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">$1</a>')
-    .replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>')
-    .replace(/<\/ul>\s*<ul>/g, '')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(?!<)/, '<p>')
-    .replace(/(?!>)$/, '</p>');
-  htmlBlocks.forEach((h, i) => { text = text.replace(`%%HB${i}%%`, h); });
-  // Sanitize dangerous HTML — strip scripts, event handlers, javascript: URLs
-  text = text.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  text = text.replace(/\bon\w+\s*=\s*["'][^"']*["']/gi, '');
-  text = text.replace(/javascript\s*:/gi, '');
-  text = text.replace(/(?<!href=")(?<!src=")https?:\/\/[^\s<>"')\]]+/g, url => `<a href="${url}" target="_blank" rel="noopener" style="color:var(--teal-soft);font-weight:600;">${url}</a>`);
-  return text;
-}
-
-function readingTime(text) {
-  const words = text.split(/\s+/).length;
-  return Math.max(1, Math.round(words / 220));
-}
-
-// Read all articles
-const articles = [];
-if (fs.existsSync(ARTICLES_DIR)) {
-  fs.readdirSync(ARTICLES_DIR).filter(f => f.endsWith('.md')).sort().reverse().forEach(f => {
-    const raw = fs.readFileSync(path.join(ARTICLES_DIR, f), 'utf-8');
-    const { meta, body } = parseFrontmatter(raw);
-    articles.push({ ...meta, body, html: mdToHtml(body), readingTime: readingTime(body) });
-  });
-}
-
-// Tri par date de publication décroissante — garantit que les 3 premiers de ARTICLES
-// sont bien les plus récents (les cartes "em destaque" de blog/index.html), même si
-// un fichier .md ne commence pas par sa date.
-articles.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
-
-// Generate individual article pages
-articles.forEach(a => {
-  if (!a.slug) return;
-  const page = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${a.title} — Bender IA</title>
-<meta name="description" content="${a.excerpt || ''}">
+<title>GPT-5.6: Sol, Terra e Luna — Bender IA</title>
+<meta name="description" content="Um guia direto para escolher entre profundidade, equilíbrio e velocidade sem pagar por inteligência que a tarefa não precisa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -175,17 +102,19 @@ articles.forEach(a => {
 </div>
 <article class="article">
   <a href="/blog" class="article-back">← Voltar para os guias</a>
-  ${a.pdf ? `<div class="guia-badge">Guia gratuito do Bender IA</div>` : ''}
-  <div class="article-meta">${a.category ? `<span class="article-cat">${a.category}</span> · ` : ''}${new Date(a.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })} · ${a.readingTime} min de leitura</div>
-  <h1>${a.title}</h1>
-  ${a.pdf && a.excerpt ? `<p class="article-desc">${a.excerpt}</p>` : ''}
-  ${a.image ? `<img class="article-cover" src="${a.image}" alt="">` : ''}
-  ${a.html}
-  ${a.pdf ? `<div class="pdf-box">
+  <div class="guia-badge">Guia gratuito do Bender IA</div>
+  <div class="article-meta"><span class="article-cat">Modelos de IA</span> · 11 de julho de 2026 · 5 min de leitura</div>
+  <h1>GPT-5.6: Sol, Terra e Luna</h1>
+  <p class="article-desc">Um guia direto para escolher entre profundidade, equilíbrio e velocidade sem pagar por inteligência que a tarefa não precisa.</p>
+  <img class="article-cover" src="/public/images/guias/gpt-5-6-sol-terra-e-luna-cover.png" alt="">
+  <p>
+A diferença entre conhecer os modelos e saber escolhê-los é transformar novidade em método. A família GPT-5.6 não foi organizada como um único modelo que tenta servir para tudo: ela separa três níveis de capacidade — <strong>Sol, Terra e Luna</strong>. Este guia mostra como essa arquitetura muda a decisão de uso.</p><p><h2>Não são três versões do mesmo botão</h2></p><p>O número indica a geração. Os nomes indicam quanto poder, velocidade e custo você escolhe para a tarefa.</p><p><ul><li><strong>Geração</strong> — o "5.6" identifica a família tecnológica. Quando a geração muda, a base de capacidades também avança.</li><li><strong>Nível de capacidade</strong> — Sol, Terra e Luna organizam a escolha entre mais profundidade, melhor equilíbrio ou menor custo por execução.</li><li><strong>Decisão operacional</strong> — a pergunta deixa de ser "qual é o modelo mais inteligente?" e passa a ser "quanta inteligência esta tarefa realmente precisa?".</li></ul></p><p><strong>Regra Bender IA:</strong> usar sempre o modelo mais poderoso não é estratégia. É apenas pagar o preço máximo antes de entender o problema.</p><p><h2>O que os três modelos compartilham</h2></p><p>Antes de comparar diferenças, vale entender que Sol, Terra e Luna partem da mesma geração e de uma base técnica ampla:</p><p><ul><li><strong>1.050.000 tokens de contexto</strong> — capacidade de entrada por solicitação na API.</li><li><strong>128.000 tokens de saída</strong> — limite máximo de resposta em uma única execução.</li><li><strong>Corte de conhecimento em 16 de fevereiro de 2026</strong> — data de referência informada na documentação.</li><li><strong>Entrada de texto + imagem</strong> — os três recebem texto e imagens como contexto.</li></ul></p><p>Os três também suportam raciocínio, chamadas de função, saídas estruturadas e ferramentas como busca na web, busca em arquivos, geração de imagens, execução de código e MCP na Responses API. No ChatGPT padrão, Sol aparece conforme o plano; Terra e Luna estão disponíveis no ChatGPT Work, no Codex e na API.</p><p><h2>A diferença aparece em três variáveis</h2></p><p>Profundidade, custo e volume. A escolha correta depende da combinação, não de uma classificação absoluta.</p><p><ul><li><strong>Sol</strong> — mais capacidade. US$ 5 de entrada e US$ 30 de saída por milhão de tokens. Para decisões complexas, pesquisa profunda, programação avançada e tarefas em que errar custa caro.</li><li><strong>Terra</strong> — melhor equilíbrio. US$ 2,50 de entrada e US$ 15 de saída. Para trabalho diário, análise, produção de conteúdo, ferramentas internas e operações em volume moderado.</li><li><strong>Luna</strong> — velocidade e escala. US$ 1 de entrada e US$ 6 de saída. Para tarefas simples, previsíveis, repetitivas e sensíveis a custo ou latência.</li></ul></p><p><strong>Leitura estratégica:</strong> o custo não é apenas o preço por token. Inclua também o custo de revisar erros, repetir tarefas, esperar pela resposta e corrigir decisões ruins.</p><p><h2>Sol: quando profundidade é proteção</h2></p><p>Sol é o modelo para trabalhos em que a qualidade final vale mais do que economizar alguns segundos. Quando uma resposta errada pode custar horas, dinheiro ou decisões importantes, a capacidade extra deixa de ser luxo e passa a ser proteção.</p><p><strong>Use quando:</strong> problemas complexos (pesquisa profunda, estratégia, arquitetura de sistemas), programação avançada (refatorações amplas, depuração difícil, segurança) e entregáveis finais que precisam estar prontos para uso profissional.</p><p><strong>Evite quando:</strong> tarefas mecânicas, grandes volumes em que o custo acumulado importa mais do que a profundidade, e situações de baixo risco em que um erro pequeno é fácil de detectar e corrigir.</p><p><em>Exemplo de fluxo:</em> definir uma nova estratégia de produto — reunir contexto, comparar alternativas, identificar riscos, propor cenários e entregar uma recomendação argumentada. O valor está na qualidade da decisão, não na velocidade da resposta.</p><p><h2>Terra: o equilíbrio do trabalho real</h2></p><p>Terra é o modelo para a maior parte do trabalho: bom raciocínio, velocidade suficiente e custo controlado. Ele faz sentido quando a tarefa exige confiança, mas não possui complexidade ou risco suficientes para justificar o modelo mais caro.</p><p><strong>Use quando:</strong> trabalho diário (planejamento, conteúdo, análise de documentos), volume moderado (suporte, ferramentas internas, rotinas com dezenas ou centenas de execuções) e como primeira escolha quando você ainda não sabe se a tarefa precisa de Sol.</p><p><strong>Evite quando:</strong> o erro é muito caro, a tarefa é mínima demais (Luna resolve com qualidade suficiente) ou a ambiguidade é extrema.</p><p><em>Exemplo de fluxo:</em> transformar uma reunião longa em plano de ação — resumir decisões, separar responsáveis, identificar prazos e criar uma versão executiva.</p><p><h2>Luna: velocidade e escala</h2></p><p>Luna foi criado para tarefas em que a repetição, a latência e o custo total importam mais do que raciocínio profundo. O melhor uso de Luna não é pedir menos qualidade: é entregar tarefas com regras claras, escopo pequeno e validação objetiva.</p><p><strong>Use quando:</strong> alta repetição (classificar, extrair, etiquetar, reformatar), baixa latência (respostas rápidas em interfaces e automações) e regras claras (o resultado correto pode ser definido com exemplos ou um esquema estruturado).</p><p><strong>Evite quando:</strong> a estratégia é aberta, o código é crítico ou a entrega vai direto ao usuário final sem revisão.</p><p><em>Exemplo de fluxo:</em> organizar centenas de mensagens recebidas — classificar assunto, detectar urgência, extrair contato, gerar resposta inicial curta e enviar casos incertos para revisão.</p><p><h2>Quatro perguntas antes de escolher</h2></p><p>O modelo certo aparece quando você mede a tarefa, em vez de escolher pela reputação do modelo.</p><p><ul><li><strong>Qual é o custo do erro?</strong> Se errar exige horas de retrabalho ou afeta clientes, suba para Sol.</li><li><strong>Quanta ambiguidade existe?</strong> Tarefas abertas exigem mais raciocínio. Regras claras favorecem Terra ou Luna.</li><li><strong>Qual é o volume?</strong> Quanto mais vezes o processo será executado, mais o preço por token e a latência influenciam a escolha.</li><li><strong>Como o resultado será validado?</strong> Uma boa validação permite usar modelos menores com mais segurança, porque erros são detectados cedo.</li></ul></p><p><strong>Heurística rápida:</strong> comece com Terra. Desça para Luna quando a tarefa estiver padronizada e validada. Suba para Sol quando a ambiguidade ou o custo do erro aumentarem.</p><p><h2>Qual modelo abrir agora?</h2></p><p><ul><li>Pesquisa profunda e estratégia → <strong>Sol</strong> — mais capacidade para investigar, comparar e sustentar decisões.</li><li>Programação complexa ou segurança → <strong>Sol</strong> — o custo de um erro justifica raciocínio e persistência maiores.</li><li>Conteúdo, análise e trabalho diário → <strong>Terra</strong> — equilibra qualidade, velocidade e custo para a maioria dos fluxos.</li><li>Suporte e documentos em volume → <strong>Terra</strong> — mantém boa compreensão sem pagar o preço máximo por execução.</li><li>Resumo, extração e classificação → <strong>Luna</strong> — regras simples, grande volume e resposta rápida.</li><li>Automação repetitiva com validação → <strong>Luna</strong> — o custo por execução passa a ser parte central do resultado.</li></ul></p><p><h2>Conclusão: a ferramenta certa no momento certo</h2></p><p>Sol, Terra e Luna não existem para disputar qual é "o melhor". Eles existem para tornar a escolha mais precisa: Sol quando a profundidade protege a qualidade da decisão, Terra quando equilíbrio e consistência movem o trabalho diário, Luna quando velocidade e escala definem a eficiência.</p><p>O diferencial não está em ter acesso ao modelo mais caro. Está em decompor o trabalho, definir critérios e usar apenas a capacidade necessária em cada etapa. Menos fascinação pela ferramenta. Mais método para transformar inteligência artificial em resultado.</p><p><em>Informações verificadas em 15 de julho de 2026 na documentação oficial da OpenAI. Preços, disponibilidade e recursos podem mudar. As recomendações de uso são uma interpretação editorial da Bender IA.</em>
+</p>
+  <div class="pdf-box">
     <h3>Quer guardar este material para consultar depois?</h3>
     <p>Baixe a versão em PDF deste guia.</p>
-    <a class="pdf-btn" href="${a.pdf}" download>Baixar este guia em PDF ↓</a>
-  </div>` : ''}
+    <a class="pdf-btn" href="/public/guias/gpt-5-6-sol-terra-e-luna.pdf" download>Baixar este guia em PDF ↓</a>
+  </div>
   <div class="nl-box">
     <h3>Receba os próximos guias no seu e-mail.</h3>
     <p>Conteúdos práticos, testes honestos e aplicações úteis de IA.</p>
@@ -216,30 +145,4 @@ const h=document.getElementById('nav-hamburger'),m=document.getElementById('mobi
 if(h&&m){h.addEventListener('click',()=>{h.classList.toggle('active');m.classList.toggle('show');});}
 </script>
 </body>
-</html>`;
-  // Retire les espaces en fin de ligne laissés par les interpolations conditionnelles vides
-  fs.writeFileSync(path.join(BLOG_DIR, `${a.slug}.html`), page.replace(/[ \t]+$/gm, ''), 'utf-8');
-  console.log(`Generated: /blog/${a.slug}.html`);
-});
-
-// Update blog index.html with article list.
-// CONTRAT : blog/index.html est la source de vérité du branding de la page liste "Guias" (pt-BR).
-// Le build ne remplace QUE le bloc `const ARTICLES = [...]` via la regex ci-dessous —
-// ne jamais élargir ce remplacement, sinon le branding Guias serait écrasé au prochain build.
-const indexArticles = articles.map(a => `{
-    title: ${JSON.stringify(a.title)},
-    date: ${JSON.stringify(a.date)},
-    slug: ${JSON.stringify(a.slug)},
-    excerpt: ${JSON.stringify(a.excerpt || '')},
-    image: ${JSON.stringify(a.image || '')},
-    category: ${JSON.stringify(a.category || '')}
-  }`).join(',\n  ');
-
-let indexHtml = fs.readFileSync(path.join(BLOG_DIR, 'index.html'), 'utf-8');
-indexHtml = indexHtml.replace(
-  /const ARTICLES = \[[\s\S]*?\];/,
-  `const ARTICLES = [\n  ${indexArticles}\n];`
-);
-fs.writeFileSync(path.join(BLOG_DIR, 'index.html'), indexHtml, 'utf-8');
-console.log('Updated: /blog/index.html');
-console.log(`Done. ${articles.length} article(s) processed.`);
+</html>
